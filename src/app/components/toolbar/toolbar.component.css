@@ -1,0 +1,74 @@
+.first i{
+    font-size: 24px;
+}
+
+
+.first-ld-md{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.first-ld-md img{
+    height:36px;
+}
+
+.first-ld-md .sidenav-button{
+    margin-left: -8px;
+}
+
+.first-ld-md .login-button{
+    margin-right: -8px;
+}
+
+
+.first-gt-sm, .second{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.first-gt-sm{
+    height: 110px;
+}
+
+.first-gt-sm img{
+    height: 56px;
+}
+
+.first-gt-sm .mat-icon, .first-gt-sm .fa{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+
+.second{
+    background-color: #073C65;
+}
+
+.second a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.second a:hover{
+    background-color: #002044;
+}
+
+.a-selected{
+    background-color: #002044;
+}
+
+fa-icon{
+    font-size: 18px;
+    margin-right:5px;
+}
+
+.sidenav-button fa-icon{
+    align-content: center;
+    margin-right: 0;
+}

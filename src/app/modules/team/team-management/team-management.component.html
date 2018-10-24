@@ -1,0 +1,105 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="30px" *ngIf="team$ | async as team">
+    <h1>Gestione {{ team.name}}</h1>
+    <!-- Members table-->
+    <mat-table [dataSource]="users" class="mat-elevation-z1" fxHide.lt-md>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{user.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="leader">
+        <mat-header-cell *matHeaderCellDef>Leader</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <fa-icon icon="check" *ngIf="user.isLeaderOf(teamId)"></fa-icon>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef>Opzioni</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <ng-container *ifRole="'aTeams'">
+            <button mat-icon-button (click)="demoteLeader(user.id)" *ngIf="user.isLeaderOf(teamId)">
+              <fa-icon icon="long-arrow-alt-down"></fa-icon>
+            </button>
+            <button mat-icon-button (click)="promoteLeader(user.id)" *ngIf="!user.isLeaderOf(teamId)">
+              <fa-icon icon="long-arrow-alt-up"></fa-icon>
+            </button>
+          </ng-container>
+          <button mat-icon-button (click)="removeMember(user.id)" *ifRole="'mTeam';ifParam:team">
+            <fa-icon icon="user-slash"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row fxFlexAlign="center" *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <!-- End of members table-->
+
+    <!-- Start of members expansion panel list-->
+    <mat-accordion *ngFor="let user of users" class="mat-elevation-z1" fxHide.gt-sm>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{user.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout fxLayoutAlign="start center">
+          ID:
+          <span fxFlex="grow"></span>
+          {{user.id}}
+        </div>
+        <div fxLayout fxLayoutAlign="start center">
+          Leader:
+          <span fxFlex="grow"></span>
+          <fa-icon icon="check" *ngIf="user.isLeaderOf(teamId)"></fa-icon>
+        </div>
+        <div fxLayout fxLayoutAlign="start center">
+          Opzioni:
+          <span fxFlex="grow"></span>
+          <ng-container *ifRole="'aTeams'">
+            <button mat-icon-button (click)="demoteLeader(user.id)" *ngIf="user.isLeaderOf(teamId)">
+              <fa-icon icon="long-arrow-alt-down"></fa-icon>
+            </button>
+            <button mat-icon-button (click)="promoteLeader(user.id)" *ngIf="!user.isLeaderOf(teamId)">
+              <fa-icon icon="long-arrow-alt-up"></fa-icon>
+            </button>
+          </ng-container>
+          <button mat-icon-button (click)="removeMember(user.id)" *ifRole="'mTeam';ifParam:team">
+            <fa-icon icon="user-slash"></fa-icon>
+          </button>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!-- End of members expansion panel list -->
+
+    <!-- Add new member form -->
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <mat-form-field ngStyle.gt-xs="min-width:500px">
+        <input type="text" placeholder="Aggiung nuovo membro" aria-label="Number" matInput [formControl]="formControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let user of foundUsers" [value]="user.name" (onSelectionChange)="newMember = user">
+            <fa-icon icon="user"></fa-icon>
+            <span> {{ user.name }}</span> |
+            <small>WCA ID: {{user.wca_id}}</small>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-icon-button (click)="addMember()">
+        <fa-icon icon="user-plus"></fa-icon>
+      </button>
+    </div>
+
+    <!-- End of new member form -->
+
+  </div>
+</div>

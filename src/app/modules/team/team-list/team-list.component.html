@@ -1,0 +1,31 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="30px">
+      <h1>Gestione dei team</h1>
+
+      <mat-table [dataSource]="teams" class="mat-elevation-z1">
+          <!-- Position Column -->
+          <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                  <a routerLink="/team/{{element.id}}/admin">
+                      {{element.name}}
+                  </a>
+              </mat-cell>
+          </ng-container>
+
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="options">
+              <mat-header-cell *matHeaderCellDef>Opzioni</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                  <a routerLink="/team/{{element.id}}/admin">
+                      <fa-icon icon="user"></fa-icon>
+                  </a>
+              </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+  </div>
+</div>

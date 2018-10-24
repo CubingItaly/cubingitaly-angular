@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="first" ngClass.lt-md="first-ld-md" ngClass.gt-sm="first-gt-sm" fxLayout="row" fxLayoutAlign="start center">
+      <button class="sidenav-button"  fxFlex="noshrink" fxHide.gt-sm (click)="sideMenuButtonClicked()" mat-icon-button>
+          <fa-icon icon="bars"></fa-icon>
+      </button>
+      <a href="https://www.cubingitaly.org"><img src="/assets/images/logo.png" fxFlex="noshrink" /></a>
+      <span fxFlex="grow"></span>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="second" fxHide.lt-md>
+      <ng-container *ngFor="let url of menuUrls">
+          <a routerLink="{{url.url}}" [ngClass]="{'a-selected': url.isSelected}" *ngIf="!url.login || (user$ | async)?.id">
+              <fa-icon [icon]="[url.iconPrefix,url.icon]"> </fa-icon> {{url.text | uppercase}}
+          </a>
+      </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>

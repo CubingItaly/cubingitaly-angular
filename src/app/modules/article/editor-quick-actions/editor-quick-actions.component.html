@@ -1,0 +1,13 @@
+<div fxLayout="column">
+  <h2>Gestione Articoli</h2>
+  <a routerLink="/articoli/edit/{{articleId}}" *ngIf="articleId && !editing"><fa-icon icon="edit"></fa-icon>
+    Modifica Articolo</a>
+  <a routerLink="/articoli/{{articleId}}" *ngIf="articleId && editing"><fa-icon icon="eye"></fa-icon>
+    Visualizza Articolo</a>
+  <ng-container *ifRole="'aArticles'">
+    <a routerLink="/articoli/new"><fa-icon icon="plus-square"></fa-icon> Nuovo
+      Articolo</a>
+    <a routerLink="/articoli/admin"><fa-icon icon="list"></fa-icon> Gestione
+      Articoli</a>
+  </ng-container>
+</div>

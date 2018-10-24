@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@ngx-share/button/styles/share-buttons';
+@import '~@ngx-share/button/styles/themes/default/default-theme';
+
+body{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #073c65;
+}
+
+@font-face{
+    font-family: 'Google Sans';
+    src: url('assets/fonts/googlesans/GoogleSans-Regular.ttf')format('truetype')
+}
+
+* {
+    font-family: 'Google Sans','GoogleSans',Roboto, Arial, sans-serif;
+    line-height: 1.4;
+}

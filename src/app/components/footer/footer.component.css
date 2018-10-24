@@ -1,0 +1,21 @@
+.mat-toolbar{
+    margin-top:40px;
+}
+
+.mat-toolbar-row{
+    background-color: #f4f4f4;
+}
+
+a{
+    color: #073C65;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-content: center;
+}
+
+
+@media screen and (max-width: 599px){
+    .mat-toolbar{
+        line-height: 28px;
+    }
+}

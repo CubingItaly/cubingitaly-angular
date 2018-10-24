@@ -1,0 +1,11 @@
+<div fxLayout fxLayoutAlign="center">
+    <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <div fxFlex.gt-sm="70%">
+        <welcome-widget></welcome-widget>
+      </div>
+      <div fxFlex.gt-sm="30%">
+        <article-list-viewer [take]="1" [category]="'news'"></article-list-viewer>
+        <competitions-widget></competitions-widget>
+      </div>
+    </div>
+  </div>

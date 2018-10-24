@@ -1,0 +1,28 @@
+.main-container{
+    height: 100vh;
+}
+
+.mat-sidenav a{
+    text-align: left;
+}
+
+.menu-sel{
+    background-color: #e4e4e4;
+}
+
+fa-icon{
+    font-size: 18px;
+    margin-right:5px;
+}
+
+.mat-sidenav-content, .mat-sidenav-container, .main-container{
+    overflow:visible!important;
+}
+
+.mat-sidenav{
+    width: 200px;
+}
+
+.a-selected{
+    background-color: #e4e4e4;
+}
