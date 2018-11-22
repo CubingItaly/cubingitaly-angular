@@ -14,6 +14,7 @@ const routes: Routes = [
   { loadChildren: 'src/app/modules/team/team.module#TeamModule', path: 'team' },
   { loadChildren: 'src/app/modules/article/article.module#ArticleModule', path: 'articoli' },
   { loadChildren: 'src/app/modules/tutorial/tutorial.module#TutorialModule', path: 'tutorial' },
+  { loadChildren: 'src/app/modules/competitions/competitions.module#CompetitionsModule', path: 'competizioni' },
   { path: 'chi-siamo', component: AboutUsComponent },
   { path: 'contatti', component: ContactComponent },
   { path: 'login', component: LoginComponent },

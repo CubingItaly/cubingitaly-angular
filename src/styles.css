@@ -3,8 +3,13 @@
 @import '~@ngx-share/button/styles/share-buttons';
 @import '~@ngx-share/button/styles/themes/default/default-theme';
 
+body,html{
+    height: 100%;
+}
+
 body{
     margin: 0;
+    background-color: #FAFAFA;
 }
 
 a{

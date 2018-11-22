@@ -13,6 +13,8 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
+import { MatIconModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -22,9 +24,11 @@ import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     SharedComponentsModule,
     FontAwesomeModule,
+    MatIconModule,
     CKEditorModule,
     HtmlViewerModule
   ],

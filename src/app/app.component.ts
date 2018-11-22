@@ -30,6 +30,9 @@ export class AppComponent {
       id: "tutorial", text: "tutorial", url: "/tutorial", isSelected: false, iconPrefix: "fas", icon: "book", login: false
     },
     {
+      id: 'competitions', text: 'Competizioni', url: "/competizioni", isSelected: false, iconPrefix: "fas", icon: "trophy", login: false
+    },
+    {
       id: "contact", text: "contatti", url: "/contatti", isSelected: false, iconPrefix: "fas", icon: "envelope", login: false
     },
     {

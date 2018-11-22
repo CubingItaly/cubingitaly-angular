@@ -9,12 +9,12 @@ import { CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit, faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown, faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit, faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown, faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper, faCopyright } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faTwitter, faTelegram, faYoutube, faTelegramPlane, faInstagram, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 library.add(faHome, faInfoCircle, faLink, faTelegramPlane, faPlusCircle, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
-  faFacebookF, faTwitter, faTelegram, faArrowCircleUp, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus);
+  faFacebookF, faTwitter, faTelegram, faArrowCircleUp, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy);
 
 
 import { registerLocaleData } from '@angular/common';
@@ -35,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -78,6 +79,7 @@ import { LoginModule } from './modules/login/login.module';
     HomepageModule,
     AboutUsModule,
     LoginModule,
+    MatIconModule,
     ContactModule,
     ShareButtonsModule.forRoot()
   ],

@@ -10,15 +10,14 @@
     background-color: #e4e4e4;
 }
 
-.menu-icon{
-    font-size: 18px;
-    margin-right:5px;
-}
-
 .main-container{
     height: 100vh;
 }
 
 .mat-sidenav-content, .mat-sidenav-container, .main-container{
     overflow:visible!important;
+}
+
+fa-icon{
+    margin-right: 10px;
 }

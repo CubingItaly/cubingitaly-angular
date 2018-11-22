@@ -13,10 +13,10 @@ export class WelcomeComponent implements OnDestroy {
   banners: string[];
   watcher: Subscription;
   bp = {
-    "(max-width: 599px)": "xs",
-    "(min-width: 600px) and (max-width: 959px)": "sm",
-    "(min-width: 960px) and (max-width: 1279px)": "md",
-    "(min-width: 1280px) and (max-width: 1919px)": "lg",
+    "(max-width: 599.99px)": "xs",
+    "(min-width: 600px) and (max-width: 959.99px)": "sm",
+    "(min-width: 960px) and (max-width: 1279.99px)": "md",
+    "(min-width: 1280px) and (max-width: 1919.99px)": "lg",
     "(min-width: 1920px)": "xl"
   }
 
