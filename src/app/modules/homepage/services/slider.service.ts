@@ -24,7 +24,6 @@ export class SliderService {
     } else {
       this.observable = this.http.get('/assets/images/banner/image-array.json')
         .pipe(share(), map(r => {
-          console.log(r);
           this.observable = null;
           this.cache = r;
           return this.cache[size];
