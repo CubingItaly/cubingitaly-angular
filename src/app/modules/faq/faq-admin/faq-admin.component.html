@@ -1,0 +1,37 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="30px">
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h1 fxFlex="grow">Gestione FAQ</h1>
+      <a fxFlex="noshrink" routerLink="/faq/new" *ifRole="'aFaq'">
+        <fa-icon icon="plus-square"></fa-icon> <span fxHide.lt-md> Nuova FAQ</span>
+      </a>
+    </div>
+
+    <ng-container *ngIf="faq">
+      <mat-table [dataSource]="faq" class="mat-elevation-z1">
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef>Titolo</mat-header-cell>
+          <mat-cell *matCellDef="let f">
+            <a routerLink="/faq/edit/{{f.id}}">{{f.title}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="options">
+          <mat-header-cell *matHeaderCellDef>Opzioni</mat-header-cell>
+          <mat-cell *matCellDef="let f">
+            <a routerLink="/faq/edit/{{f.id}}">
+              <fa-icon icon="edit"></fa-icon>
+            </a>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row fxFlexAlign="center" *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+      </mat-table>
+    </ng-container>
+
+  </div>
+</div>

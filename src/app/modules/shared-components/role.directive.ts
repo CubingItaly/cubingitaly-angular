@@ -71,6 +71,10 @@ export class RoleDirective {
         return (u.id !== undefined) && u.canPublishTutorials();
       case "ePages":
         return (u.id !== undefined) && u.canEditPages();
+      case "aFaq":
+        return (u.id !== undefined) && u.canAdminFAQs();
+        case "eFaq":
+          return (u.id !== undefined) && u.canEditFAQs();
       default:
         return false;
     }

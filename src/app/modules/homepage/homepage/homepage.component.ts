@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleManagerService } from 'src/app/services/title-manager.service';
 
 @Component({
   selector: 'app-homepage',
@@ -14,9 +15,10 @@ export class HomepageComponent implements OnInit {
     "https://farm2.staticflickr.com/1952/43592532970_2f63e2472d_o.png"
   ]
 
-  constructor() { }
+  constructor(private titleSVC: TitleManagerService) { }
 
   ngOnInit() {
+    this.titleSVC.setTitle("Cubing Italy");
   }
 
 }

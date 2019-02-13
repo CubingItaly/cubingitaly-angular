@@ -1,0 +1,27 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div fxFlex.gt-sm="70%">
+      <div *ngIf="categories && categories.length > 0">
+        <h1>Domande Frequenti</h1>
+        <p>In questa pagina è presente un elenco delle domande più frequenti relative a Cubing Italy e alle competizioni
+          in generale.</p>
+        <div *ngFor="let c of categories">
+          <h2 *ngIf="categories.length>1 && faqCategoryMap[c.id] && faqCategoryMap[c.id].length > 0">{{c.name }}</h2>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let f of faqCategoryMap[c.id], index as i">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{i+1}}. {{f.title}}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <html-viewer [content]="f.content"></html-viewer>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <div fxFlex.gt-sm="30%" fxLayoutGap="30px">
+      <faq-quick-actions *ifRole="'eFaq'"></faq-quick-actions>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@
     font-size: 14px;
     background-color: #0B5EA6;
     color:white;
+    text-align: center;
 }
 
 .date-label{
@@ -24,4 +25,8 @@ h3 a{
     text-decoration: none;
     color: #000;
     margin-top:5px;
+}
+
+.compdate{
+    min-width: 50px;
 }
