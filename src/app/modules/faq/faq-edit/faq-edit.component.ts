@@ -52,9 +52,14 @@ export class FaqEditComponent implements OnInit, OnDestroy {
 
   createFaq() {
     if (this.faq.title && this.faq.content && this.faq.category) {
-      this.FaqSvc.createFAQ(this.faq).subscribe((result: FAQModel) => {
-        let redirecUrl = "/faq/" + result.id + "/edit";
-        this.router.navigate([redirecUrl]);
+      let obs = this.createDialog("La FAQ che stai creando sarà pubblica e chiunque potrà vederla. Sei sicuro di voler procedere?");
+      obs.subscribe((result: boolean) => {
+        if (result) {
+          this.FaqSvc.createFAQ(this.faq).subscribe((result: FAQModel) => {
+            let redirecUrl = "/faq/edit/" + result.id;
+            this.router.navigate([redirecUrl]);
+          });
+        }
       });
     } else {
       throw new BadRequestError("Per poter creare una FAQ è necessario compilare tutti i campi.");

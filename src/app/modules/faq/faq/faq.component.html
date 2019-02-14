@@ -9,7 +9,7 @@
           <h2 *ngIf="categories.length>1 && faqCategoryMap[c.id] && faqCategoryMap[c.id].length > 0">{{c.name }}</h2>
           <mat-accordion>
             <mat-expansion-panel *ngFor="let f of faqCategoryMap[c.id], index as i">
-              <mat-expansion-panel-header>
+              <mat-expansion-panel-header [collapsedHeight]="'55px'">
                 <mat-panel-title>
                   {{i+1}}. {{f.title}}
                 </mat-panel-title>
