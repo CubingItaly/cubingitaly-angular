@@ -44,8 +44,8 @@
     <!-- End of members table-->
 
     <!-- Start of members expansion panel list-->
-    <mat-accordion *ngFor="let user of users" class="mat-elevation-z1" fxHide.gt-sm>
-      <mat-expansion-panel>
+    <mat-accordion  class="mat-elevation-z1" fxHide.gt-sm>
+      <mat-expansion-panel *ngFor="let user of users">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{user.name}}

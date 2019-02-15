@@ -59,8 +59,8 @@
 
       <!-- Start of articles expansion panel list-->
       <div class="accordion-container">
-        <mat-accordion *ngFor="let article of articles" class="mat-elevation-z1" fxHide.gt-sm>
-          <mat-expansion-panel>
+        <mat-accordion class="mat-elevation-z1" fxHide.gt-sm>
+          <mat-expansion-panel *ngFor="let article of articles">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{article.title}}

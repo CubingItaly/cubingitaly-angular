@@ -57,8 +57,8 @@
 
       <!-- Start of tutorials expansion panel list-->
       <div class="accordion-container">
-        <mat-accordion *ngFor="let tutorial of tutorials" class="mat-elevation-z1" fxHide.gt-sm>
-          <mat-expansion-panel>
+        <mat-accordion  class="mat-elevation-z1" fxHide.gt-sm>
+          <mat-expansion-panel *ngFor="let tutorial of tutorials">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{tutorial.title}}
