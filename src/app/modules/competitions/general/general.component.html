@@ -1,0 +1,117 @@
+<div class="general-container" fxLayout="row" *ngIf="competition">
+  <div fxLayout="column" fxFlex="50%">
+    <table>
+      <tr>
+        <th>Data</th>
+        <td>{{competition.getCompDate()}}</td>
+      </tr>
+      <tr>
+        <th>Città</th>
+        <td>{{competition.city}}</td>
+      </tr>
+      <tr *ngIf="competition.country !== 'Italia'">
+        <th>Nazione</th>
+        <td>{{competition.country}}</td>
+      </tr>
+      <tr>
+        <th>Location</th>
+        <td *ngIf="competition.locationUrl"><a href="{{competition.locationURL}}">{{competition.location}}</a></td>
+        <td *ngIf="!competition.locationUrl">{{competition.location}}</td>
+      </tr>
+      <tr>
+        <th>Indirizzo</th>
+        <td><a href="{{competition.addressURL}}">{{competition.address}}</a></td>
+      </tr>
+      <tr *ngIf="competition.locationDetails">
+        <th>Dettagli</th>
+        <td>{{competition.locationDetails}}</td>
+      </tr>
+      <tr>
+        <th>Contatti</th>
+        <td><a href="mailto:{{competition.contactEmail}}">{{competition.contactName}}</a>
+        </td>
+      </tr>
+      <tr>
+        <th>Limite partecipanti</th>
+        <td>{{competition.competitorsLimit}} concorrenti</td>
+      </tr>
+      <tr>
+        <th>Costo di iscrizione</th>
+        <td>
+          <ng-container *ngIf="competition.registrationFree">Gratuito</ng-container>
+          <ng-container *ngIf="!competition.registrationFree">{{competition.registrationFee}}€</ng-container>
+        </td>
+      </tr>
+      <tr>
+        <th>Eventi</th>
+        <td>
+          <ng-container *ngFor="let e of competition.events"><span class="cubing-icon event-{{e.id}}"></span>&nbsp;
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+
+    <!-- <div *ngIf="competition.isRegistrationOpen && !competition.isLimitReached">
+      <p class="regopen">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</p>
+    </div>
+    <div *ngIf="competition.isRegistrationOpen && competition.isLimitReached">
+      <p class="regopen">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte. Clicca qui per scoprire
+        come essere aggiunto alla lista d'attesa!</p>
+    </div>
+    <div *ngIf="!competition.isRegistrationOpen">
+      <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
+    </div>
+  -->
+
+    <div>
+      <h2>Come posso partecipare?</h2>
+      <ul>
+        <li>Per competere è necessario iscriversi. <a href="">In questa pagina</a> è spiegata la procedura.</li>
+        <li>I partecipanti alla prima competizione devono portare un documento di riconoscimento.</li>
+        <li *ngIf="competition.maxGuestsNumber">I partecipanti dovrebbero portare al massimo
+          {{competition.maxGuestsNumber}}
+          accompagnatori.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Come posso assistere?</h2>
+      <ul>
+        <li *ngIf="!competition.guestsPay">L'accesso per gli spettatori è gratuito.</li>
+        <li *ngIf="competition.guestsPay">L'accesso per gli spettatori ha un costo di {{competition.guestsFee}}€.</li>
+        <li *ngIf="competition.guestsFeeInfo">{{competition.guestsFeeInfo}}</li>
+      </ul>
+    </div>
+
+  </div>
+  <div fxLayout="column" fxFlex="50%">
+
+    <div fxLayout fxLayoutAlign="center center">
+      <img *ngIf="competition.logoURL" style="height: 250px;" src="{{competition.logoURL}}" />
+      <img *ngIf="!competition.logoURL" style="height: 250px;" src="/assets/images/logo_condivisione_quadrato.png" />
+    </div>
+
+    <div *ngIf="competition.isRegistrationOpen && !competition.isLimitReached">
+      <p class="regopen">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</p>
+    </div>
+    <div *ngIf="competition.isRegistrationOpen && competition.isLimitReached">
+      <p class="regopen">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte. Clicca qui per scoprire
+        come essere aggiunto alla lista d'attesa!</p>
+    </div>
+    <div *ngIf="!competition.isRegistrationOpen">
+      <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
+    </div>
+
+    <div >
+      <p class="regulation">Ricordati di leggere il regolamento WCA, <a href="https://www.worldcubeassociation.org/regulations/" target="black">clicca qui!</a></p>
+    </div>
+
+    <table *ngIf="competition.extraInformation">
+      <tr>
+        <th>Informazioni aggiuntive</th>
+        <td>{{competition.extraInformation}}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
