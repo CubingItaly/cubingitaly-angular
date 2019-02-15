@@ -1,0 +1,11 @@
+<div fxLayout="column">
+  <h2>Gestione FAQ</h2>
+  <mat-list class="mat-elevation-z1">
+    <mat-list-item *ifRole="'aFaq'">
+      <a routerLink="/faq/new">Nuova FAQ</a>
+    </mat-list-item>
+    <mat-list-item>
+      <a routerLink="/faq/admin">Gestione FAQ</a>
+    </mat-list-item>
+  </mat-list>
+</div>

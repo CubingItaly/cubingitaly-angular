@@ -33,6 +33,9 @@ export class AppComponent {
       id: 'competitions', text: 'Competizioni', url: "/competizioni", isSelected: false, iconPrefix: "fas", icon: "trophy", login: false
     },
     {
+      id: 'faq', text: 'FAQ', url: "/faq", isSelected: false, iconPrefix: "fas", icon: "question", login: false
+    },
+    {
       id: "contact", text: "contatti", url: "/contatti", isSelected: false, iconPrefix: "fas", icon: "envelope", login: false
     },
     {

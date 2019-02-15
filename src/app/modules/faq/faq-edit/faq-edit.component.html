@@ -1,0 +1,46 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div fxFlex.gt-sm="75%">
+      <h1 *ngIf="isNew">Nuova FAQ</h1>
+      <h1 *ngIf="!isNew">Modifica FAQ<fa-icon icon="check" style="color:green" *ngIf="updated"></fa-icon>
+      </h1>
+      <div fxLayout="column" fxLayoutGap="20px" *ngIf="faq">
+        <mat-form-field>
+          <input matInput placeholder="Titolo" [(ngModel)]="faq.title">
+        </mat-form-field>
+
+        <h2>Contenuto</h2>
+        <ckeditor [editor]="editor" [(ngModel)]="faq.content"></ckeditor>
+
+        <h2>Categoria</h2>
+        <div *ngIf="categories">
+          <mat-form-field>
+            <mat-select placeholder="Seleziona la categoria" [compareWith]="compareFn" [(ngModel)]="faq.category" >
+              <mat-option *ngFor="let c of categories" [value]="c" >
+                {{c.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <h2>Azioni</h2>
+        <div>
+          <button mat-raised-button *ngIf="!isNew" (click)="updateFaq()" color="accent">Aggiorna</button>
+          <ng-container *ifRole="'aFaq'">
+            <button mat-raised-button *ngIf="isNew" (click)="createFaq()"
+              style="background-color:rgb(52, 156, 57);">Crea</button>
+            <button mat-raised-button (click)="deleteFaq()" color="warn">Elimina</button>
+          </ng-container>
+        </div>
+
+
+      </div>
+
+    </div>
+    <div fxFlex.gt-sm="25%">
+      <div fxLayout="column">
+        <faq-quick-actions [editing]="true"></faq-quick-actions>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+.no-faq p{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-top:20px;
+}
+
+.no-faq img{
+    width: 100%;
+    margin-top: 50px;
+}
+
+.mat-expansion-panel-header{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 600px) {
+   .mat-expansion-panel-header{
+       padding-top:5px;
+       padding-bottom:5px;
+       font-size: 16px;
+       font-weight: 600;
+   }
+  }
+
+.fa-icon{
+    font-weight: 300;
+    font-size: 14px;
+}
+

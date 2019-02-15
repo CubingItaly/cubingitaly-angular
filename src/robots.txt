@@ -10,3 +10,6 @@ disallow: /tutorial/edit
 disallow: /login
 disallow: /non-trovato
 disallow: /permesso-negato
+disallow: /faq/new
+disallow: /faq/admin
+disallow: /faq/edit

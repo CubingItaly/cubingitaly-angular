@@ -3,7 +3,7 @@
     <h2>Competizioni in corso</h2>
     <ng-container *ngFor="let c of comp">
       <div fxLayout fxLayoutGap="20px" class="comp">
-        <div fxLayout="column">
+        <div fxLayout="column" class="compdate">
           <span class="month">{{c.start_date | date:"MMM" | uppercase}}</span>
           <span class="day">{{c.start_date | date:"dd"}}</span>
         </div>
@@ -20,7 +20,7 @@
     <h2>Prossime competizioni</h2>
     <ng-container *ngFor="let c of comp.slice().reverse()">
       <div fxLayout fxLayoutGap="20px" class="comp">
-        <div fxLayout="column">
+        <div fxLayout="column" class="compdate">
           <span class="month">{{c.start_date | date:"MMM" | uppercase}}</span>
           <span class="day">{{c.start_date | date:"dd"}}</span>
         </div>
