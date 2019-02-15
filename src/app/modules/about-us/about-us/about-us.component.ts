@@ -35,7 +35,6 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log("resetting");
     this.metaSVC.resetMeta();
   }
 
