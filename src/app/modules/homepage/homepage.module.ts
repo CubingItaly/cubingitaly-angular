@@ -7,13 +7,15 @@ import { CompetitionsComponent } from './competitions/competitions.component';
 import { ArticleModule } from '../article/article.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SliderService } from './services/slider.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     SlideshowModule,
     ArticleModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule
   ],
   declarations: [HomepageComponent, WelcomeComponent, CompetitionsComponent],
   providers: [SliderService],
