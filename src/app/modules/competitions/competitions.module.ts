@@ -10,9 +10,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule, MatButtonModule, MatTabsModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { CompDatePipe } from './comp-date.pipe';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe],
   imports: [
     PageModule,
     CommonModule,

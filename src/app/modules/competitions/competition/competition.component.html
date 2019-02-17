@@ -1,7 +1,7 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
   <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column">
     <h1>{{competition.name}}</h1>
-    <mat-tab-group color="accent" *ngIf="competition">
+    <mat-tab-group color="accent" *ngIf="competition" [selectedIndex]="0">
       <mat-tab label="Generale">
         <general-info [competition]="competition"></general-info>
       </mat-tab>

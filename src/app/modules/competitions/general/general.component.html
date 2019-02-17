@@ -43,6 +43,10 @@
         </td>
       </tr>
       <tr>
+        <th>Pagina WCA</th>
+        <td><a href="https://worldcubeassociation.org/competitions/{{competition.id}}" target="blank">{{competition.name}}</a></td>
+      </tr>
+      <tr>
         <th>Eventi</th>
         <td>
           <ng-container *ngFor="let e of competition.events"><span class="cubing-icon event-{{e.id}}"></span>&nbsp;
@@ -50,18 +54,6 @@
         </td>
       </tr>
     </table>
-
-    <!-- <div *ngIf="competition.isRegistrationOpen && !competition.isLimitReached">
-      <p class="regopen">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</p>
-    </div>
-    <div *ngIf="competition.isRegistrationOpen && competition.isLimitReached">
-      <p class="regopen">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte. Clicca qui per scoprire
-        come essere aggiunto alla lista d'attesa!</p>
-    </div>
-    <div *ngIf="!competition.isRegistrationOpen">
-      <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
-    </div>
-  -->
 
     <div>
       <h2>Come posso partecipare?</h2>
@@ -79,6 +71,7 @@
       <ul>
         <li *ngIf="!competition.guestsPay">L'accesso per gli spettatori è gratuito.</li>
         <li *ngIf="competition.guestsPay">L'accesso per gli spettatori ha un costo di {{competition.guestsFee}}€.</li>
+        <li *ngIf="!competition.guestsNeedToRegister">Gli spettatori non devono registrarsi.</li>
         <li *ngIf="competition.guestsFeeInfo">{{competition.guestsFeeInfo}}</li>
       </ul>
     </div>
@@ -102,8 +95,9 @@
       <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
     </div>
 
-    <div >
-      <p class="regulation">Ricordati di leggere il regolamento WCA, <a href="https://www.worldcubeassociation.org/regulations/" target="black">clicca qui!</a></p>
+    <div>
+      <p class="regulation">Ricordati di leggere il regolamento WCA, <a
+          href="https://www.worldcubeassociation.org/regulations/" target="black">clicca qui!</a></p>
     </div>
 
     <table *ngIf="competition.extraInformation">

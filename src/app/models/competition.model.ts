@@ -32,6 +32,9 @@ export class CompetitionModel {
     public country: string;
 
     @autoserialize
+    public province?: string;
+
+    @autoserialize
     public city: string;
 
     @autoserialize
@@ -96,6 +99,9 @@ export class CompetitionModel {
 
     @autoserialize
     public guestsFeeInfo?: string;
+
+    @autoserialize
+    public guestsNeedToRegister: boolean;
 
     @autoserialize
     public isLimitReached: boolean;
