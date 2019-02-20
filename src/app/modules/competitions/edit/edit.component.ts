@@ -2,13 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CompetitionModel } from 'src/app/models/competition.model';
 import { CompetitionService } from '../services/competition.service';
-import { UserService } from '../../../services/user.service';
-import { EventModel } from 'src/app/models/competition/event.model';
-import { UserModel } from 'src/app/models/user.model';
-import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
   selector: 'app-edit',
@@ -17,9 +10,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  competition: CompetitionModel;
+
+  constructor(private compSVC: CompetitionService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-
+    let compId: string = this.route.snapshot.paramMap.get("id");
+    this.compSVC.getCompetition(compId).subscribe((res: CompetitionModel) => this.competition = res);
   }
 }

@@ -1,0 +1,156 @@
+<form [formGroup]="competitionForm" fxLayout="column" fxLayoutGap="20px">
+
+  <h2>Informazioni Generali</h2>
+  <mat-form-field>
+    <input matInput type="text" [value]="competition.id" placeholder="ID della competizione" disabled>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="competition.name" formControlName="name"
+      placeholder="Nome della competizione" required>
+    <mat-hint>Il nome della competizione.</mat-hint>
+    <mat-error>È necessario inserire il nome della competizione.</mat-error>
+  </mat-form-field>
+
+  <div fxLayout=" row" fxLayout.xs="column" fxLayoutGap.gt-xs="2%">
+
+    <mat-form-field fxFlex.gt-xs="49%">
+      <input matInput [matDatepicker]="startPicker" placeholder="Inizio competizione"
+        [(ngModel)]="competition.startDate" formControlName="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+      <mat-hint>La data di inizio della competizione.</mat-hint>
+      <mat-error>È necessario inserire una data valida.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex.gt-xs="49%">
+      <input matInput [matDatepicker]="endPicker" [min]="competition.startDate" placeholder="Fine competizione"
+        [(ngModel)]="competition.endDate" formControlName="endDate" required>
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker [startAt]="competition.startDate" #endPicker></mat-datepicker>
+      <mat-hint>La data di fine della competizione.</mat-hint>
+      <mat-error>È necessario inserire una data valida.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Nazione" [(ngModel)]="competition.country" formControlName="country"
+      required>
+    <mat-hint>La nazione in cui si svolgerà la competizione, in italiano.</mat-hint>
+    <mat-error></mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Provincia" [(ngModel)]="competition.province"
+      [ngModelOptions]="{standalone: true}">
+    <mat-hint>La provincia in cui si svolge la competizione (se diversa dalla città), per esteso.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Città" [(ngModel)]="competition.city" formControlName="city" required>
+    <mat-hint>La città in cui si svolgerà la competizione.</mat-hint>
+    <mat-error>È necessario inserire la città della competizione.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Indirizzo" [(ngModel)]="competition.address" formControlName="address"
+      required>
+    <mat-hint>L'indirizzo a cui si svolgerà la competizione, con inclusi CAP, città e provincia</mat-hint>
+    <mat-error>È necessario inserire l'indirizzo della competizione.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Venue" [(ngModel)]="competition.location" formControlName="location"
+      required>
+    <mat-hint>Il nome della sede in cui si svolgerà la competizione.</mat-hint>
+    <mat-error>È necessario inserire la location della competizione.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="url" placeholder="Sito web della venue" [(ngModel)]="competition.locationURL"
+      [ngModelOptions]="{standalone:true}">
+    <mat-hint>Il sito web della location (se presente).</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Dettagli" [(ngModel)]="competition.locationDetails"
+      [ngModelOptions]="{standalone:true}">
+    <mat-hint>Eventuali dettagli necessari per la location.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="url" placeholder="Logo" [(ngModel)]="competition.logoURL"
+      [ngModelOptions]="{standalone:true}">
+    <mat-hint>Il link all'eventuale logo della competizione. Il logo deve essere caricato su un sito esterno e in
+      formato PNG con background trasparente.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Chi contattare" [(ngModel)]="competition.contactName"
+      formControlName="contactName" required>
+    <mat-hint>Il nome da mostrare come contatto (per esempio Cubing Italy).</mat-hint>
+    <mat-error>È necessario inserire il nome da mostrare per il contatto.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="email" placeholder="Email" [(ngModel)]="competition.contactEmail"
+      formControlName="contactEmail" required>
+    <mat-hint>L'indirizzo email a cui inviare le email per contattare gli organizzatori.</mat-hint>
+    <mat-error>È necessario inserire un indirizzo email valido.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="5" placeholder="Informazioni aggiuntive" [(ngModel)]="competition.extraInformation"
+      [ngModelOptions]="{standalone:true}"></textarea>
+    <mat-hint>Eventuali informazioni aggiuntive.</mat-hint>
+  </mat-form-field>
+
+  <div>
+    <h3>Eventi</h3>
+    <div fxLayout="row wrap" fxLayoutFap="20px">
+      <button class="icon" *ngFor="let e of selectedEvents" [ngClass]="{'selected-icon': e.isSelected}"
+        (click)="addEvent(e.id)"><span class="cubing-icon event-{{e.id}}"></span></button>
+    </div>
+  </div>
+
+  <mat-form-field class="user-input">
+    <mat-chip-list #delegatesChip>
+      <mat-chip *ngFor="let del of competition.delegates" [removable]="true" (removed)="removeDelegate(del.id)"
+        required>
+        {{del.name}}
+        <fa-icon icon="trash" matChipRemove></fa-icon>
+      </mat-chip>
+      <input placeholder="Delegati" #delegateInput [formControl]="delegateControl" [matAutocomplete]="delAuto"
+        [matChipInputFor]="delegatesChip" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true" required>
+    </mat-chip-list>
+    <mat-hint>I delegati della competizione. Devono avere un account utente sul sito di Cubing Italy.</mat-hint>
+    <mat-autocomplete #delAuto="matAutocomplete" (optionSelected)="addDelegate($event)">
+      <mat-option *ngFor="let del of foundDelegates" [value]="del.id">{{del.name}}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="user-input">
+    <mat-chip-list #organizersChip>
+      <mat-chip *ngFor="let org of competition.organizers" [removable]="true" (removed)="removeOrganizer(org.id)">
+        {{org.name}}
+        <fa-icon icon="trash" matChipRemove></fa-icon>
+      </mat-chip>
+      <input placeholder="Organizzatori" #organizerInput [formControl]="organizerControl" [matAutocomplete]="orgAuto"
+        [matChipInputFor]="organizersChip" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true" required>
+    </mat-chip-list>
+    <mat-hint>Gli organizzatori della competizione. Devono avere un account utente sul sito di Cubing Italy.</mat-hint>
+    <mat-autocomplete #orgAuto="matAutocomplete" (optionSelected)="addOrganizer($event)">
+      <mat-option *ngFor="let org of foundOrganizers" [value]="org.id">{{org.name}}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+
+  <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px">
+    <button mat-raised-button color="primary" (click)="updateCompetition()">Aggiorna informazioni</button>
+  </div>
+
+</form>

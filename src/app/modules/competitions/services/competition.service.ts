@@ -18,6 +18,10 @@ export class CompetitionService {
     return this.http.post<CompetitionModel>(this.apiBase, { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
   }
 
+  public updateCompetition(competition: CompetitionModel): Observable<CompetitionModel> {
+    return this.http.put<CompetitionModel>(this.apiBase + "/" + competition.id, { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
+
   public getCompetition(id: string): Observable<CompetitionModel> {
     return this.http.get<CompetitionModel>(this.apiBase + "/" + id).pipe(map(res => Deserialize(res, CompetitionModel)));
   }

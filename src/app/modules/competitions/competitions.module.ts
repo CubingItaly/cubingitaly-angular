@@ -17,9 +17,12 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { CompetitionService } from './services/competition.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NewComponent } from './new/new.component';
+import { EditGeneralComponent } from './edit-general/edit-general.component';
+import { RegistrationEditComponent } from './registration-edit/registration-edit.component';
+import { EditRegistrationComponent } from './edit-registration/edit-registration.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, RegistrationEditComponent, EditRegistrationComponent],
   imports: [
     PageModule,
     CommonModule,
