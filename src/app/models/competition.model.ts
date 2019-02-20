@@ -1,13 +1,7 @@
-import { autoserialize, autoserializeAs, inheritSerialization } from 'cerialize';
+import { autoserialize, autoserializeAs } from 'cerialize';
 import { UserModel } from './user.model';
-import { ScheduleModel } from './competition.schedule.model';
-import { EventModel } from './competition.events.model';
-/**
- *
- *
- * @export
- * @class CompetitionModel
- */
+import { EventModel } from './competition/event.model';
+
 export class CompetitionModel {
 
     @autoserialize
@@ -22,10 +16,10 @@ export class CompetitionModel {
     @autoserialize
     public isHidden: boolean;
 
-    @autoserialize
+    @autoserializeAs(Date)
     public startDate: Date;
 
-    @autoserialize
+    @autoserializeAs(Date)
     public endDate: Date;
 
     @autoserialize
@@ -53,61 +47,10 @@ export class CompetitionModel {
     public locationDetails?: string;
 
     @autoserialize
-    public coordinates: string;
+    public coordinates?: string;
 
     @autoserialize
     public logoURL?: string;
-
-    @autoserialize
-    public competitorsLimit: number;
-
-    @autoserialize
-    public registrationFree: boolean;
-
-    @autoserialize
-    public registrationFee: number;
-
-    @autoserialize
-    public newcomersFee?: number;
-
-    @autoserialize
-    public newcomersDetails?: string;
-
-    @autoserialize
-    public canRegisterAtVenue: boolean;
-
-    @autoserialize
-    public registrationAtVenue?: number;
-
-    @autoserialize
-    public atTheVenueDetails?: string;
-
-    @autoserialize
-    public registrationOpen: Date;
-
-    @autoserialize
-    public registrationClose: Date;
-
-    @autoserialize
-    public maxGuestsNumber?: number;
-
-    @autoserialize
-    public guestsPay: boolean;
-
-    @autoserialize
-    public guestsFee?: number;
-
-    @autoserialize
-    public guestsFeeInfo?: string;
-
-    @autoserialize
-    public guestsNeedToRegister: boolean;
-
-    @autoserialize
-    public isLimitReached: boolean;
-
-    @autoserialize
-    public isRegistrationOpen: boolean;
 
     @autoserialize
     public contactName: string;
@@ -115,20 +58,27 @@ export class CompetitionModel {
     @autoserialize
     public contactEmail: string;
 
-    @autoserializeAs(UserModel)
-    public delegates: UserModel[];
-
-    @autoserializeAs(UserModel)
-    public organizers: UserModel[];
-
     @autoserialize
     public extraInformation?: string;
 
-    @autoserialize
-    public paypalLink?: string;
+    @autoserializeAs(UserModel)
+    public organizers?: UserModel[];
+
+    @autoserializeAs(UserModel)
+    public delegates?: UserModel[];
 
     @autoserializeAs(EventModel)
     public events?: EventModel[];
+
+    public hasDelegate(id: number): boolean {
+        let index: number = this.delegates.findIndex((u: UserModel) => u.id === id);
+        return index >= 0;
+    }
+
+    public hasOrganizer(id: number): boolean {
+        let index: number = this.organizers.findIndex((u: UserModel) => u.id === id);
+        return index >= 0;
+    }
 
     public getCompDate(): string {
         if ((this.startDate.getDate() === this.endDate.getDate()) && (this.startDate.getMonth() === this.endDate.getMonth()) && (this.startDate.getFullYear() === this.endDate.getFullYear())) {
@@ -141,6 +91,5 @@ export class CompetitionModel {
             }
         }
     }
+
 }
-
-

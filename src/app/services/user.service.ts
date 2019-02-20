@@ -18,6 +18,10 @@ export class UserService {
     return this.http.get<UserModel[]>(this.apiBase, { params: { "name": name } }).pipe(map(res => res.map(u => Deserialize(u, UserModel))));
   }
 
+  public searchDelegates(name: string): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(this.apiBase+"/delegates", { params: { "name": name } }).pipe(map(res => res.map(u => Deserialize(u, UserModel))));
+  }
+
 
   public getUser(id: number): Observable<UserModel> {
     return this.http.get<UserModel>(this.apiBase + "/" + id).pipe(map(res => Deserialize(res, UserModel)));

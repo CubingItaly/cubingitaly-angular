@@ -1,11 +1,13 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
-  <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column">
+  <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column" *ngIf="competition">
     <h1>{{competition.name}}</h1>
-    <mat-tab-group color="accent" *ngIf="competition" [selectedIndex]="0">
+    <mat-tab-group color="accent"  [selectedIndex]="0">
       <mat-tab label="Generale">
         <general-info [competition]="competition"></general-info>
       </mat-tab>
-      <mat-tab label="Programma"> Content 2 </mat-tab>
+      <mat-tab label="Programma">
+        <schedule-info [competition]="competition"></schedule-info>
+      </mat-tab>
       <mat-tab label="Registrazione">
         <registration-info [competition]="competition"></registration-info>
       </mat-tab>

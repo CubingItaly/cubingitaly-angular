@@ -7,23 +7,39 @@ import { routes } from './competitions-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CompetitionComponent } from './competition/competition.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatTabsModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatChipsModule, MatAutocompleteModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CompDatePipe } from './comp-date.pipe';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { EditComponent } from './edit/edit.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { CompetitionService } from './services/competition.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NewComponent } from './new/new.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent],
   imports: [
     PageModule,
     CommonModule,
     RouterModule.forChild(routes),
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MatInputModule,
     MatButtonModule,
     MatTabsModule,
-  ]
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    FontAwesomeModule
+  ],
+  providers: [CompetitionService]
 })
 export class CompetitionsModule { }

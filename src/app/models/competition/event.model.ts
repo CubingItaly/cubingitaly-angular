@@ -1,10 +1,5 @@
-import { autoserialize, autoserializeAs, inheritSerialization } from 'cerialize';
-/**
- *
- *
- * @export
- * @class EventModel
- */
+import { autoserialize } from 'cerialize';
+
 export class EventModel {
 
     @autoserialize

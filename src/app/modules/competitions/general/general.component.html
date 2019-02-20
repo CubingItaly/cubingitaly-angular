@@ -7,7 +7,8 @@
       </tr>
       <tr>
         <th>Città</th>
-        <td>{{competition.city}}</td>
+        <td>{{competition.city}} <ng-container *ngIf="competition.province">({{competition.province}})</ng-container>
+        </td>
       </tr>
       <tr *ngIf="competition.country !== 'Italia'">
         <th>Nazione</th>
@@ -38,13 +39,14 @@
       <tr>
         <th>Costo di iscrizione</th>
         <td>
-          <ng-container *ngIf="competition.registrationFree">Gratuito</ng-container>
-          <ng-container *ngIf="!competition.registrationFree">{{competition.registrationFee}}€</ng-container>
+          <ng-container *ngIf="registration.registrationFree">Gratuito</ng-container>
+          <ng-container *ngIf="!registration.registrationFree">{{competition.registrationFee}}€</ng-container>
         </td>
       </tr>
       <tr>
         <th>Pagina WCA</th>
-        <td><a href="https://worldcubeassociation.org/competitions/{{competition.id}}" target="blank">{{competition.name}}</a></td>
+        <td><a href="https://worldcubeassociation.org/competitions/{{competition.id}}"
+            target="blank">{{competition.name}}</a></td>
       </tr>
       <tr>
         <th>Eventi</th>
@@ -60,7 +62,7 @@
       <ul>
         <li>Per competere è necessario iscriversi. <a href="">In questa pagina</a> è spiegata la procedura.</li>
         <li>I partecipanti alla prima competizione devono portare un documento di riconoscimento.</li>
-        <li *ngIf="competition.maxGuestsNumber">I partecipanti dovrebbero portare al massimo
+        <li *ngIf="registration.maxGuestsNumber">I partecipanti dovrebbero portare al massimo
           {{competition.maxGuestsNumber}}
           accompagnatori.</li>
       </ul>
@@ -69,10 +71,10 @@
     <div>
       <h2>Come posso assistere?</h2>
       <ul>
-        <li *ngIf="!competition.guestsPay">L'accesso per gli spettatori è gratuito.</li>
-        <li *ngIf="competition.guestsPay">L'accesso per gli spettatori ha un costo di {{competition.guestsFee}}€.</li>
-        <li *ngIf="!competition.guestsNeedToRegister">Gli spettatori non devono registrarsi.</li>
-        <li *ngIf="competition.guestsFeeInfo">{{competition.guestsFeeInfo}}</li>
+        <li *ngIf="!registration.guestsPay">L'accesso per gli spettatori è gratuito.</li>
+        <li *ngIf="registration.guestsPay">L'accesso per gli spettatori ha un costo di {{competition.guestsFee}}€.</li>
+        <li *ngIf="!registration.guestsNeedToRegister">Gli spettatori non devono registrarsi.</li>
+        <li *ngIf="registration.guestsFeeInfo">{{competition.guestsFeeInfo}}</li>
       </ul>
     </div>
 
@@ -84,14 +86,14 @@
       <img *ngIf="!competition.logoURL" style="height: 250px;" src="/assets/images/logo_condivisione_quadrato.png" />
     </div>
 
-    <div *ngIf="competition.isRegistrationOpen && !competition.isLimitReached">
+    <div *ngIf="registration.isRegistrationOpen && !registration.isLimitReached">
       <p class="regopen">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</p>
     </div>
-    <div *ngIf="competition.isRegistrationOpen && competition.isLimitReached">
+    <div *ngIf="registration.isRegistrationOpen && registration.isLimitReached">
       <p class="regopen">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte. Clicca qui per scoprire
         come essere aggiunto alla lista d'attesa!</p>
     </div>
-    <div *ngIf="!competition.isRegistrationOpen">
+    <div *ngIf="!registration.isRegistrationOpen">
       <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
     </div>
 
