@@ -133,6 +133,8 @@ export class NewComponent implements OnInit {
       } else {
         throw new BadRequestError("Per poter creare una competizione è necessario inserire delegati, organizzatori ed eventi.");
       }
+    } else {
+      throw new BadRequestError("Per creare la competizione è compilare tutti i parametri richiesti.");
     }
   }
 

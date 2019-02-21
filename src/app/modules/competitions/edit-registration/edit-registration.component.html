@@ -1,3 +1,113 @@
-<p>
-  edit-registration works!
-</p>
+<form fxLayout="column" [formGroup]="registrationForm" fxLayoutGap="20px" *ngIf="registration">
+
+  <h2>Registrazione e pagamento</h2>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="registration.competitorsLimit" [min]="0" formControlName="competitorsLimit"
+      placeholder="Limite partecipanti" type="number" [min]="20" required>
+    <mat-hint>Numero massimo di partecipanti.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+  </mat-form-field>
+
+  <div fxLayout=" row" fxLayout.xs="column" fxLayoutGap.gt-xs="2%">
+
+    <mat-form-field fxFlex.gt-xs="49%">
+      <input matInput [matDatepicker]="startPicker" [max]="competition.startDate" placeholder="Apertura iscrizioni"
+        [(ngModel)]="registration.registrationOpen" formControlName="registrationOpen" required>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+      <mat-hint>La data di apertura delle iscrizioni alla competizione.</mat-hint>
+      <mat-error>È necessario inserire una data valida.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex.gt-xs="49%">
+      <input matInput [matDatepicker]="endPicker" [min]="registration.registrationOpen" [max]="competition.startDate"
+        placeholder="Chiusura iscrizioni" [(ngModel)]="registration.registrationClose"
+        formControlName="registrationClose" required>
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker [startAt]="registration.registrationOpenn" #endPicker></mat-datepicker>
+      <mat-hint>La data di chiusura delle iscrizioni alla competizione.</mat-hint>
+      <mat-error>È necessario inserire una data valida.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <mat-checkbox [(ngModel)]="registration.isRegistrationPaid" formControlName="isRegistrationPaid">
+    Registrazione a pagamento</mat-checkbox>
+
+  <mat-form-field *ngIf="registration.isRegistrationPaid">
+    <input matInput [(ngModel)]="registration.registrationFee" formControlName="registrationFee"
+      placeholder="Costo di iscrizione" type="number" [min]="0">
+    <mat-hint>Costo di registrazione in Euro.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="registration.newcomerDiscount" formControlName="newcomerDiscount"
+    *ngIf="registration.isRegistrationPaid">
+    Sconto per i newcomer</mat-checkbox>
+
+  <mat-form-field *ngIf="registration.newcomerDiscount && registration.isRegistrationPaid">
+    <input matInput [(ngModel)]="registration.newcomerFee" formControlName="newcomerFee"
+      placeholder="Costo di iscrizione per i nuovi partecipanti" type="number">
+    <mat-hint>Costo di registrazione in Euro per i nuovi partecipanti.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="registration.newcomerDiscount && registration.isRegistrationPaid">
+    <input matInput [(ngModel)]="registration.newcomerDetails" [ngModelOptions]="{standalone:true}"
+      placeholder="Istruzioni per i newcomer" type="text">
+    <mat-hint>Eventuali istruzioni riguardo lo sconto per i newcomer.</mat-hint>
+  </mat-form-field>
+
+
+
+  <mat-checkbox [(ngModel)]="registration.registrationAtTheVenue" formControlName="registrationAtTheVenue">
+    Registrazion in loco</mat-checkbox>
+
+  <mat-form-field *ngIf="registration.registrationAtTheVenue">
+    <input matInput [(ngModel)]="registration.atTheVenueFee" formControlName="atTheVenueFee"
+      placeholder="Costo di iscrizione in loco" [min]="0" type="number">
+    <mat-hint>Costo di registrazione in Euro per le iscrizioni effettuate in loco.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="registration.registrationAtTheVenue">
+    <input matInput [(ngModel)]="registration.atTheVenueDetails" [ngModelOptions]="{standalone:true}"
+      placeholder="Istruzioni in loco" type="text">
+    <mat-hint>Eventuali istruzioni riguardo le iscrizioni in loco.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="registration.maxNumberOfGuests" formControlName="maxNumberOfGuests"
+      placeholder="Numero massimo di accompagnatori" type="number">
+    <mat-hint>Il numero massimo di accompagnatori che ogni partecipante può portare.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore o uguale a 0.</mat-error>
+  </mat-form-field>
+
+
+  <mat-checkbox [(ngModel)]="registration.guestsNeedToRegister" [ngModelOptions]="{standalone:true}">
+    Gli spettatori devono registrarsi</mat-checkbox>
+
+  <mat-checkbox [(ngModel)]="registration.guestsPay" formControlName="guestsPay">
+    Gli spettatori pagano</mat-checkbox>
+
+  <mat-form-field *ngIf="registration.guestsPay">
+    <input matInput [(ngModel)]="registration.guestsFee" formControlName="guestsFee"
+      placeholder="Costo di ingresso per gli spettatori" [min]="0" type="number">
+    <mat-hint>Costo di registrazione in Euro per accompagnatori e spettatori.</mat-hint>
+    <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="registration.guestsPay">
+    <input matInput [(ngModel)]="registration.guestsDetails" [ngModelOptions]="{standalone:true}"
+      placeholder="Istruzioni per gli spettatori" type="text">
+    <mat-hint>Eventuali istruzioni riguardo l'ingresso degli spettatori e degli accompagnatori'.</mat-hint>
+  </mat-form-field>
+
+  <h2>Metodi di pagamento</h2>
+  <mat-checkbox *ngFor="let p of paymentTypes">{{p.name}}</mat-checkbox>
+
+  <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px">
+    <button mat-raised-button color="primary" (click)="updateRegistration()">Aggiorna registrazione</button>
+  </div>
+
+</form>

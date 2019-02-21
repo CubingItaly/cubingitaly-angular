@@ -126,10 +126,10 @@
           {{del.name}}
           <fa-icon icon="trash" matChipRemove></fa-icon>
         </mat-chip>
+        <input matInput placeholder="Delegati" #delegateInput [formControl]="delegateControl"
+          [matAutocomplete]="delAuto" [matChipInputFor]="delegatesChip"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" required>
       </mat-chip-list>
-      <input matInput placeholder="Delegati" #delegateInput [formControl]="delegateControl" [matAutocomplete]="delAuto"
-        [matChipInputFor]="delegatesChip" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="true" required>
       <mat-hint>I delegati della competizione. Devono avere un account utente sul sito di Cubing Italy.</mat-hint>
       <mat-autocomplete #delAuto="matAutocomplete" (optionSelected)="addDelegate($event)">
         <mat-option *ngFor="let del of foundDelegates" [value]="del.id">{{del.name}}</mat-option>
@@ -142,10 +142,10 @@
           {{org.name}}
           <fa-icon icon="trash" matChipRemove></fa-icon>
         </mat-chip>
+        <input matInput placeholder="Organizzatori" #organizerInput [formControl]="organizerControl"
+          [matAutocomplete]="orgAuto" [matChipInputFor]="organizersChip"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" required>
       </mat-chip-list>
-      <input matInput placeholder="Organizzatori" #organizerInput [formControl]="organizerControl"
-        [matAutocomplete]="orgAuto" [matChipInputFor]="organizersChip"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" required>
       <mat-hint>Gli organizzatori della competizione. Devono avere un account utente sul sito di Cubing Italy.
       </mat-hint>
       <mat-autocomplete #orgAuto="matAutocomplete" (optionSelected)="addOrganizer($event)">

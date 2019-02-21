@@ -128,6 +128,8 @@ export class EditGeneralComponent implements OnInit {
       } else {
         throw new BadRequestError("Per poter aggiornare la competizione è necessario inserire delegati, organizzatori ed eventi.");
       }
+    } else {
+      throw new BadRequestError("Per poter aggiornare la competizione è compilare tutti i parametri richiesti.");
     }
   }
 }
