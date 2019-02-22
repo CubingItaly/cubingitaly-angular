@@ -20,7 +20,8 @@ export class EditGeneralComponent implements OnInit {
   @ViewChild('delegateInput') delegateInput: ElementRef<HTMLInputElement>;
   @ViewChild('organizerInput') organizerInput: ElementRef<HTMLInputElement>;
   @Input() competition: CompetitionModel;
-  @Output() competitionChange: EventEmitter<CompetitionModel> = new EventEmitter();
+  @Output() competitionChange: EventEmitter<CompetitionModel> = new EventEmitter<CompetitionModel>();
+  @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private eventsList: EventModel[];
   selectedEvents: { id: string, name: string, isSelected: boolean }[] = [];
@@ -124,6 +125,7 @@ export class EditGeneralComponent implements OnInit {
         this.compSVC.updateCompetition(this.competition).subscribe((res: CompetitionModel) => {
           this.competition = res;
           this.competitionChange.emit(this.competition);
+          this.actionAfterUpdate();
         });
       } else {
         throw new BadRequestError("Per poter aggiornare la competizione è necessario inserire delegati, organizzatori ed eventi.");
@@ -132,5 +134,16 @@ export class EditGeneralComponent implements OnInit {
       throw new BadRequestError("Per poter aggiornare la competizione è compilare tutti i parametri richiesti.");
     }
   }
+
+  private actionAfterUpdate() {
+    const pageTitle = document.querySelector('h1') as HTMLElement;
+    pageTitle.scrollIntoView();
+    this.updated.emit(true);
+    setTimeout(() => {
+      this.updated.emit(false);
+    }, 7000);
+  }
+
+
 }
 

@@ -1,11 +1,13 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormControl, AbstractControl, ValidatorFn, ValidationErrors, FormArray } from '@angular/forms';
 import { CompetitionService } from '../services/competition.service';
 import { RegistrationModel } from 'src/app/models/competition/registration.model';
 import { isNumber } from 'util';
 import { CompetitionModel } from 'src/app/models/competition.model';
 import { TravelMeanModel } from 'src/app/models/competition/travelmean.model';
 import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
+import { RefundPolicyModel } from 'src/app/models/competition/refundpolicy.model';
+import { BadRequestError } from 'src/app/errors/bad.request.error';
 
 @Component({
   selector: 'edit-registration-info',
@@ -17,19 +19,17 @@ export class EditRegistrationComponent implements OnInit {
   @Input() competition: CompetitionModel;
   registration: RegistrationModel;
   registrationForm: FormGroup;
+  creditCard: boolean = false;
+  cash: boolean = false;
+  paypal: boolean = false;
   paymentMeans: PaymentMeanModel[];
-  paymentTypes: { id: string; name: string; isSelected: boolean }[] = [];
+  @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private compSVC: CompetitionService) { }
 
   ngOnInit() {
     this.compSVC.getRegistration(this.competition.id).subscribe((res: RegistrationModel) => {
       this.registration = res;
-      this.compSVC.getPaymentMeans().subscribe((res: PaymentMeanModel[]) => {
-        this.paymentMeans = res;
-        this.setupPayments();
-      });
-
       this.registrationForm = new FormGroup({
         'competitorsLimit': new FormControl('', [Validators.min(20)]),
         'registrationOpen': new FormControl(''),
@@ -43,19 +43,47 @@ export class EditRegistrationComponent implements OnInit {
         'guestsPay': new FormControl(''),
         'guestsFee': new FormControl(''),
         'maxNumberOfGuests': new FormControl(''),
-        'refundAvailable': new FormControl('')
+        'paypal': new FormControl((res.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0)),
+        'cash': new FormControl((res.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0)),
+        'cc': new FormControl((res.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cc") >= 0)),
+        'paypalLink': new FormControl(''),
+        'refundAvailable': new FormControl(''),
+        'newRefundPolicy': new FormGroup({
+          'percentage': new FormControl(),
+          'deadline': new FormControl()
+        })
       },
-        { validators: [this.registrationFeeValidator(), this.newcomerFeeValidator(), this.atTheVenueFeeValidator(), this.guestsFeeValidator()] })
+        { validators: [this.registrationFeeValidator(), this.newcomerFeeValidator(), this.atTheVenueFeeValidator(), this.guestsFeeValidator(), this.atLeastOnePaymentMethod(), this.paypalMeRequired()] });
     });
+    this.compSVC.getPaymentMeans().subscribe((res: PaymentMeanModel[]) => this.paymentMeans = res);
   }
 
-  setupPayments() {
-    for (let p of this.paymentMeans) {
-      if (this.registration.paymentMeans.findIndex((t: PaymentMeanModel) => t.id === p.id)) {
-        this.paymentTypes.push({ id: p.id, name: p.name, isSelected: true });
-      } else {
-        this.paymentTypes.push({ id: p.id, name: p.name, isSelected: false });
+  atLeastOnePaymentMethod(): ValidatorFn {
+    return (control: FormGroup): ValidationErrors | null => {
+      const registrationPaid = control.get('isRegistrationPaid').value;
+      const paypal = control.get('paypal').value;
+      const creditCard = control.get('cc').value;
+      const cash = control.get('cash').value;
+      if (registrationPaid && (creditCard || paypal || cash)) {
+        return null;
+      } else if (!registrationPaid) {
+        return null;
       }
+      return { 'noPaymentMethod': true };
+    }
+  }
+
+  paypalMeRequired(): ValidatorFn {
+    return (control: FormGroup): ValidationErrors | null => {
+      const paypal = control.get('paypal').value;
+      const paypalLink = control.get('paypalLink');
+      if (paypal) {
+        if (paypalLink.value) {
+          return null;
+        }
+        return { 'missingPaypalLink': true }
+      }
+      return null;
     }
   }
 
@@ -73,6 +101,23 @@ export class EditRegistrationComponent implements OnInit {
         return null;
       }
     }
+  }
+
+  refundPolicyValidator(): boolean {
+
+    const registrationPaid = this.registration.isRegistrationPaid;
+    const refund = this.registration.refundAvailable;
+    const paypal = this.registrationForm.get('paypal').value;
+    const creditCard = this.registrationForm.get('cc').value;
+
+    if (registrationPaid) {
+      if (refund && (paypal || creditCard)) {
+        if (this.registration.refundPolicy.length === 0) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   atTheVenueFeeValidator(): ValidatorFn {
@@ -124,13 +169,56 @@ export class EditRegistrationComponent implements OnInit {
     }
   }
 
-  updateRegistration() {
-    if (this.registrationForm.valid) {
-      this.compSVC.updateRegistration(this.competition.id, this.registration).subscribe((res: RegistrationModel) => this.registration = res);
-    } else {
+  setPaymentMeans() {
+    this.registration.paymentMeans = [];
+    for (let p of this.paymentMeans) {
+      let checkbox = this.registrationForm.get(p.id).value;
+      if (checkbox) {
+        this.registration.paymentMeans.push(p);
+      }
     }
   }
 
-}
+  addPolicy() {
+    const deadline = this.registrationForm.get('newRefundPolicy').get('deadline');
+    const percentage = this.registrationForm.get('newRefundPolicy').get('percentage');
+    if (percentage && deadline) {
+      let tempPolicy = new RefundPolicyModel();
+      tempPolicy.deadline = deadline.value.toDate();
+      tempPolicy.percentage = percentage.value;
+      this.registration.refundPolicy.push(tempPolicy);
+      this.registration.refundPolicy = [...this.registration.refundPolicy];
+      deadline.setValue("");
+      percentage.setValue("");
+    } else {
+      throw new BadRequestError("È necessario inserire sia una percentuale di rimborso che una data di scadenza");
+    }
+  }
 
+  removePolicy(percentage: number, deadline: Date) {
+    this.registration.refundPolicy = this.registration.refundPolicy.filter((p: RefundPolicyModel) => p.percentage !== percentage && p.deadline !== deadline);
+  }
+
+
+  updateRegistration() {
+    if (this.registrationForm.valid && this.refundPolicyValidator()) {
+      this.setPaymentMeans();
+      this.compSVC.updateRegistration(this.competition.id, this.registration).subscribe((res: RegistrationModel) => {
+        this.registration = res;
+        this.actionAfterUpdate()
+      });
+    } else {
+      throw new BadRequestError("Per poter aggiornare la registrazione è necessario compilare tutti i campi richiesti");
+    }
+  }
+
+  private actionAfterUpdate() {
+    const pageTitle = document.querySelector('h1') as HTMLElement;
+    pageTitle.scrollIntoView();
+    this.updated.emit(true);
+    setTimeout(() => {
+      this.updated.emit(false);
+    }, 7000);
+  }
+}
 

@@ -1,12 +1,13 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
   <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column" *ngIf="competition">
-    <h1>{{competition.name}}</h1>
+    <h1>{{competition.name}} <fa-icon icon="check" style="color:green" *ngIf="updated"></fa-icon>
+    </h1>
     <mat-tab-group color="accent" [selectedIndex]="1">
       <mat-tab label="Generale">
-        <edit-general-info [(competition)]="competition"></edit-general-info>
+        <edit-general-info (updated)="updated=$event" [(competition)]="competition"></edit-general-info>
       </mat-tab>
       <mat-tab label="Registrazione">
-        <edit-registration-info [competition]="competition"></edit-registration-info>
+        <edit-registration-info (updated)="updated=$event" [competition]="competition"></edit-registration-info>
       </mat-tab>
 
     </mat-tab-group>

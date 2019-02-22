@@ -11,6 +11,7 @@ import { CompetitionService } from '../services/competition.service';
 export class EditComponent implements OnInit {
 
   competition: CompetitionModel;
+  updated: boolean;
 
   constructor(private compSVC: CompetitionService, private route: ActivatedRoute) {
   }
