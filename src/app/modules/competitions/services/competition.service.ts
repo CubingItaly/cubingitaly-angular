@@ -8,6 +8,7 @@ import { EventModel } from 'src/app/models/competition/event.model';
 import { RegistrationModel } from 'src/app/models/competition/registration.model';
 import { TravelMeanModel } from 'src/app/models/competition/travelmean.model';
 import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
+import { DirectionsModel } from 'src/app/models/competition/directions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +43,26 @@ export class CompetitionService {
   }
 
   public getTravelMeans(): Observable<TravelMeanModel[]> {
-    return this.http.get<TravelMeanModel>(this.apiBase + "/travelmeans").pipe(map((res: TravelMeanModel) => Deserialize(res, TravelMeanModel)));
+    return this.http.get<TravelMeanModel[]>(this.apiBase + "/travelmeans").pipe(map(res => Deserialize(res, TravelMeanModel)));
   }
 
   public getPaymentMeans(): Observable<PaymentMeanModel[]> {
-    return this.http.get<PaymentMeanModel>(this.apiBase + "/paymentmeans").pipe(map((res: PaymentMeanModel) => Deserialize(res, PaymentMeanModel)));
+    return this.http.get<PaymentMeanModel>(this.apiBase + "/paymentmeans").pipe(map(res => Deserialize(res, PaymentMeanModel)));
+  }
+
+  public getDirections(id: string): Observable<DirectionsModel[]> {
+    return this.http.get<DirectionsModel[]>(this.apiBase + "/" + id + "/directions").pipe(map(res => Deserialize(res, DirectionsModel)));
+  }
+
+  public createDirections(direction: DirectionsModel, comp: string): Observable<DirectionsModel> {
+    return this.http.post<DirectionsModel>(this.apiBase + "/" + comp + "/directions", { directions: direction }).pipe(map(res => Deserialize(res, DirectionsModel)));
+  }
+
+  public updateDirections(direction: DirectionsModel, comp: string): Observable<DirectionsModel> {
+    return this.http.put<DirectionsModel>(this.apiBase + "/" + comp + "/directions/"+direction.id, { directions: direction }).pipe(map(res => Deserialize(res, DirectionsModel)));
+  }
+
+  public deleteDirections(direction: number, comp: string): Observable<void> {
+    return this.http.delete<void>(this.apiBase + "/" + comp + "/directions/" + direction);
   }
 }

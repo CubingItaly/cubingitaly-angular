@@ -7,7 +7,7 @@ import { routes } from './competitions-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CompetitionComponent } from './competition/competition.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatChipsModule, MatAutocompleteModule, MatCheckboxModule, MatListModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatChipsModule, MatAutocompleteModule, MatCheckboxModule, MatListModule, MatSelectModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CompDatePipe } from './comp-date.pipe';
@@ -19,9 +19,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NewComponent } from './new/new.component';
 import { EditGeneralComponent } from './edit-general/edit-general.component';
 import { EditRegistrationComponent } from './edit-registration/edit-registration.component';
+import { EditDirectionsComponent } from './edit-directions/edit-directions.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent],
   imports: [
     PageModule,
     CommonModule,
@@ -42,7 +45,9 @@ import { EditRegistrationComponent } from './edit-registration/edit-registration
     MatAutocompleteModule,
     FontAwesomeModule,
     MatCheckboxModule,
-    MatListModule
+    MatSelectModule,
+    MatListModule,
+    CKEditorModule
   ],
   providers: [CompetitionService]
 })

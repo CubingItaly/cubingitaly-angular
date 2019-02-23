@@ -54,6 +54,7 @@ export class EditRegistrationComponent implements OnInit {
         })
       },
         { validators: [this.registrationFeeValidator(), this.newcomerFeeValidator(), this.atTheVenueFeeValidator(), this.guestsFeeValidator(), this.atLeastOnePaymentMethod(), this.paypalMeRequired()] });
+      this.sortPolicies(res.refundPolicy);
     });
     this.compSVC.getPaymentMeans().subscribe((res: PaymentMeanModel[]) => this.paymentMeans = res);
   }
@@ -187,7 +188,7 @@ export class EditRegistrationComponent implements OnInit {
       tempPolicy.deadline = deadline.value.toDate();
       tempPolicy.percentage = percentage.value;
       this.registration.refundPolicy.push(tempPolicy);
-      this.registration.refundPolicy = [...this.registration.refundPolicy];
+      this.registration.refundPolicy = this.sortPolicies(this.registration.refundPolicy);
       deadline.setValue("");
       percentage.setValue("");
     } else {
@@ -200,6 +201,17 @@ export class EditRegistrationComponent implements OnInit {
   }
 
 
+  sortPolicies(policies: RefundPolicyModel[]) {
+    return policies.sort((a: RefundPolicyModel, b: RefundPolicyModel) => {
+      if (a.percentage > b.percentage) {
+        return 1
+      } if (a.percentage < b.percentage) {
+        return -1;
+      }
+      return 0;
+    })
+  }
+
   updateRegistration() {
     if (this.registrationForm.valid && this.refundPolicyValidator()) {
       this.setPaymentMeans();
@@ -211,6 +223,7 @@ export class EditRegistrationComponent implements OnInit {
       throw new BadRequestError("Per poter aggiornare la registrazione è necessario compilare tutti i campi richiesti");
     }
   }
+
 
   private actionAfterUpdate() {
     const pageTitle = document.querySelector('h1') as HTMLElement;
