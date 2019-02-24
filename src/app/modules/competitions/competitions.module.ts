@@ -23,9 +23,11 @@ import { EditDirectionsComponent } from './edit-directions/edit-directions.compo
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
 import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.component';
+import { DirectionsComponent } from './directions/directions.component';
+import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent, DirectionsComponent],
   imports: [
     PageModule,
     CommonModule,
@@ -48,7 +50,8 @@ import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.compo
     MatCheckboxModule,
     MatSelectModule,
     MatListModule,
-    CKEditorModule
+    CKEditorModule,
+    HtmlViewerModule
   ],
   providers: [CompetitionService]
 })

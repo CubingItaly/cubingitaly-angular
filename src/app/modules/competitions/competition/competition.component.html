@@ -1,17 +1,25 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
-  <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column" *ngIf="competition">
-    <h1>{{competition.name}}</h1>
-    <mat-tab-group color="accent"  [selectedIndex]="0">
+  <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column" *ngIf="competition && registration">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <h1 fxFlex="noshrink">{{competition.name}}</h1>
+      <span fxFlex="grow"></span>
+      <a mat-icon-button routerLink="./edit">
+        <fa-icon icon="edit"></fa-icon>
+      </a>
+    </div>
+    <mat-tab-group color="accent" [selectedIndex]="2">
       <mat-tab label="Generale">
-        <general-info [competition]="competition"></general-info>
+        <general-info [competition]="competition" [registration]="registration"></general-info>
       </mat-tab>
       <mat-tab label="Programma">
-        <schedule-info [competition]="competition"></schedule-info>
+        <schedule-info *ngIf="schedule" [schedule]="schedule"></schedule-info>
       </mat-tab>
       <mat-tab label="Registrazione">
-        <registration-info [competition]="competition"></registration-info>
+        <registration-info *ngIf="registration" [competitionId]="competition.id" [registration]="registration"></registration-info>
       </mat-tab>
-      <mat-tab label="Indicazioni"> </mat-tab>
+      <mat-tab label="Indicazioni" *ngIf="directions">
+        <directions-info [directions]="directions"></directions-info>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

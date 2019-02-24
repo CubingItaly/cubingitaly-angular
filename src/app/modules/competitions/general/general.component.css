@@ -11,13 +11,13 @@ p{
     margin-top:7px;
 }
 
-th{
+tr{
+    white-space: nowrap;
     text-align: left;
-    flex: 1 0 auto;
 }
 
 td{
-    flex: 1 1 100%;
+    width:100%;
     padding-left: 10px;
 }
 
@@ -27,6 +27,7 @@ td{
     padding:15px;
     font-weight: 600;
     color:white;
+    width: 100%;
     text-align: center;
     background-color: #0b5ea6;
     border-radius: 10px;
@@ -37,14 +38,8 @@ td{
     font-size: 20px;
     padding:15px;
     font-weight: 600;
-    color:white;
-    text-align: center;
-    background-color: #0b5ea6;
     border-radius: 10px;
-}
-
-.regulation a{
-    color:#fff;
+    width: 100%;
 }
 
 .cubing-icon{

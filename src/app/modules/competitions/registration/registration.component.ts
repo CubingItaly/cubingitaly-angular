@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompetitionModel } from 'src/app/models/competition.model';
+import { RegistrationModel } from 'src/app/models/competition/registration.model';
+import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
+import { RefundPolicyModel } from 'src/app/models/competition/refundpolicy.model';
 
 @Component({
   selector: 'registration-info',
@@ -8,11 +11,31 @@ import { CompetitionModel } from 'src/app/models/competition.model';
 })
 export class RegistrationComponent implements OnInit {
 
-  @Input() competition: CompetitionModel;
-
+  @Input() registration: RegistrationModel;
+  @Input() competitionId: string;
+  isPaymentCash: boolean = false;
+  isPaymentPaypal: boolean = false;
+  isPaymentCC: boolean = false;
   constructor() { }
 
   ngOnInit() {
+    this.registration.refundPolicy.sort((a: RefundPolicyModel, b: RefundPolicyModel) => {
+      if (a.deadline > b.deadline) {
+        return 1;
+      } else if (a.deadline < b.deadline) {
+        return -1;
+      }
+      return 0;
+    })
+    if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0) {
+      this.isPaymentCash = true;
+    }
+    if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cc") >= 0) {
+      this.isPaymentCC = true;
+    }
+    if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0) {
+      this.isPaymentPaypal = true;
+    }
   }
 
 }

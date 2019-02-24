@@ -1,3 +1,7 @@
+<h2>Programma della competizone</h2>
 <p>
-  schedule works!
+  Nota bene: il programma può subire modifiche fino all'inizio della competizione e gli orari sono solamente indicativi.
 </p>
+<ng-container *ngFor="let s of schedule">
+  <schedule-viewer [schedule]="s"></schedule-viewer>
+</ng-container>

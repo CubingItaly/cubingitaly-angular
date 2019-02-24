@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompetitionModel } from 'src/app/models/competition.model';
+import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 
 @Component({
   selector: 'schedule-info',
@@ -8,7 +9,7 @@ import { CompetitionModel } from 'src/app/models/competition.model';
 })
 export class ScheduleComponent implements OnInit {
 
-  @Input() competition: CompetitionModel;
+  @Input() schedule: ScheduleModel[]
 
   constructor() { }
 

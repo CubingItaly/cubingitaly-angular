@@ -1,5 +1,5 @@
-<div class="general-container" fxLayout="row" *ngIf="competition">
-  <div fxLayout="column" fxFlex="50%">
+<div class="general-container" fxLayout="row" fxLayoutGap="2%" *ngIf="competition">
+  <div fxLayout="column" fxFlex="49%">
     <table>
       <tr>
         <th>Data</th>
@@ -16,8 +16,8 @@
       </tr>
       <tr>
         <th>Location</th>
-        <td *ngIf="competition.locationUrl"><a href="{{competition.locationURL}}">{{competition.location}}</a></td>
-        <td *ngIf="!competition.locationUrl">{{competition.location}}</td>
+        <td *ngIf="competition.locationURL"><a href="{{competition.locationURL}}">{{competition.location}}</a></td>
+        <td *ngIf="!competition.locationURL">{{competition.location}}</td>
       </tr>
       <tr>
         <th>Indirizzo</th>
@@ -34,13 +34,13 @@
       </tr>
       <tr>
         <th>Limite partecipanti</th>
-        <td>{{competition.competitorsLimit}} concorrenti</td>
+        <td>{{registration.competitorsLimit}} concorrenti</td>
       </tr>
       <tr>
         <th>Costo di iscrizione</th>
         <td>
-          <ng-container *ngIf="registration.registrationFree">Gratuito</ng-container>
-          <ng-container *ngIf="!registration.registrationFree">{{competition.registrationFee}}€</ng-container>
+          <ng-container *ngIf="!registration.isRegistrationPaid">Gratuito</ng-container>
+          <ng-container *ngIf="registration.isRegistrationPaid">{{registration.registrationFee}}€</ng-container>
         </td>
       </tr>
       <tr>
@@ -62,8 +62,8 @@
       <ul>
         <li>Per competere è necessario iscriversi. <a href="">In questa pagina</a> è spiegata la procedura.</li>
         <li>I partecipanti alla prima competizione devono portare un documento di riconoscimento.</li>
-        <li *ngIf="registration.maxGuestsNumber">I partecipanti dovrebbero portare al massimo
-          {{competition.maxGuestsNumber}}
+        <li *ngIf="registration.maxNumberOfGuests">I partecipanti dovrebbero portare al massimo
+          {{registration.maxNumberOfGuests}}
           accompagnatori.</li>
       </ul>
     </div>
@@ -72,37 +72,51 @@
       <h2>Come posso assistere?</h2>
       <ul>
         <li *ngIf="!registration.guestsPay">L'accesso per gli spettatori è gratuito.</li>
-        <li *ngIf="registration.guestsPay">L'accesso per gli spettatori ha un costo di {{competition.guestsFee}}€.</li>
-        <li *ngIf="!registration.guestsNeedToRegister">Gli spettatori non devono registrarsi.</li>
-        <li *ngIf="registration.guestsFeeInfo">{{competition.guestsFeeInfo}}</li>
+        <li *ngIf="registration.guestsPay">L'accesso per gli spettatori ha un costo di {{registration.guestsFee}}€.</li>
+        <li *ngIf="!registration.guestsNeedToRegister">Gli spettatori <strong>non</strong> devono registrarsi.</li>
+        <li *ngIf="registration.guestsNeedToRegister">Gli spettatori devono registrarsi.</li>
+        <li *ngIf="registration.guestsDetails">{{registration.guestsDetails}}</li>
       </ul>
     </div>
 
   </div>
-  <div fxLayout="column" fxFlex="50%">
+  <div fxLayout="column" fxFlex="49%">
 
     <div fxLayout fxLayoutAlign="center center">
       <img *ngIf="competition.logoURL" style="height: 250px;" src="{{competition.logoURL}}" />
       <img *ngIf="!competition.logoURL" style="height: 250px;" src="/assets/images/logo_condivisione_quadrato.png" />
     </div>
 
-    <div *ngIf="registration.isRegistrationOpen && !registration.isLimitReached">
-      <p class="regopen">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</p>
+
+    <div *ngIf="!isRegistrationOpen && !isRegistrationStarted">
+      <p class="regopen">Le iscrizioni apriranno il {{registration.registrationOpen |compDate}}!</p>
     </div>
-    <div *ngIf="registration.isRegistrationOpen && registration.isLimitReached">
-      <p class="regopen">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte. Clicca qui per scoprire
-        come essere aggiunto alla lista d'attesa!</p>
+    <div *ngIf="!isLimitReached && isRegistrationOpen && isRegistrationStarted">
+      <a class="regopen" mat-raised-button color="primary">Le iscrizioni sono aperte, clicca qui per scoprire come registrarti!</a>
     </div>
-    <div *ngIf="!registration.isRegistrationOpen">
+    <div *ngIf="isLimitReached && isRegistrationOpen && isRegistrationStarted">
+      <a class="regopen" mat-raised-button color="primary">Il limite partecipanti è stato raggiunto, ma le iscrizioni sono aperte.
+        Clicca qui per scoprire
+        come essere aggiunto alla lista d'attesa!</a>
+    </div>
+    <div *ngIf="!isRegistrationOpen && isRegistrationStarted">
       <p class="regopen">Le iscrizioni alla competizione sono chiuse e non è più possibile registrarsi</p>
     </div>
-
+    -->
     <div>
-      <p class="regulation">Ricordati di leggere il regolamento WCA, <a
-          href="https://www.worldcubeassociation.org/regulations/" target="black">clicca qui!</a></p>
+      <a mat-raised-button href="https://www.worldcubeassociation.org/regulations/" color="primary" target="blank"
+        class="regulation">Ricordati di leggere il regolamento WCA, clicca qui!</a>
     </div>
 
     <table *ngIf="competition.extraInformation">
+      <tr>
+        <th>Delegati WCA</th>
+        <td [innerHtml]="getPeople(true)"></td>
+      </tr>
+      <tr>
+        <th>Organizzatori</th>
+        <td [innerHtml]="getPeople(false)"></td>
+      </tr>
       <tr>
         <th>Informazioni aggiuntive</th>
         <td>{{competition.extraInformation}}</td>

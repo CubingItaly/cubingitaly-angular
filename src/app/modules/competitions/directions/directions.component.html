@@ -1,0 +1,4 @@
+<ng-container *ngFor="let d of directions">
+  <h2>{{d.mean.name}}</h2>
+  <html-viewer [content]="d.directions"></html-viewer>
+</ng-container>
