@@ -9,6 +9,7 @@ import { RegistrationModel } from 'src/app/models/competition/registration.model
 import { TravelMeanModel } from 'src/app/models/competition/travelmean.model';
 import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
 import { DirectionsModel } from 'src/app/models/competition/directions.model';
+import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,10 +60,22 @@ export class CompetitionService {
   }
 
   public updateDirections(direction: DirectionsModel, comp: string): Observable<DirectionsModel> {
-    return this.http.put<DirectionsModel>(this.apiBase + "/" + comp + "/directions/"+direction.id, { directions: direction }).pipe(map(res => Deserialize(res, DirectionsModel)));
+    return this.http.put<DirectionsModel>(this.apiBase + "/" + comp + "/directions/" + direction.id, { directions: direction }).pipe(map(res => Deserialize(res, DirectionsModel)));
   }
 
   public deleteDirections(direction: number, comp: string): Observable<void> {
     return this.http.delete<void>(this.apiBase + "/" + comp + "/directions/" + direction);
   }
+
+  public getSchedule(competition: string): Observable<ScheduleModel[]> {
+    return this.http.get<ScheduleModel[]>(`${this.apiBase}/${competition}/schedule`).pipe(map(res => Deserialize(res, ScheduleModel)));
+  }
+
+  public importSchedule(competition: string): void {
+    //console.log(window.location.protocol + "//" + window.location.host + `/api/v0/competitions/schedule/${competition}/wca`);
+    window.location.href = window.location.protocol + "//" + window.location.host +`/api/v0/competitions/schedule/${competition}/wca`;
+  }
+
 }
+
+

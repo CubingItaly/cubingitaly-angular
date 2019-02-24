@@ -22,9 +22,10 @@ import { EditRegistrationComponent } from './edit-registration/edit-registration
 import { EditDirectionsComponent } from './edit-directions/edit-directions.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
+import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent],
   imports: [
     PageModule,
     CommonModule,

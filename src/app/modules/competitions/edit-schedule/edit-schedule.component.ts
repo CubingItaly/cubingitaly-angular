@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WCAService } from 'src/app/services/wca.service';
+import { CompetitionService } from '../services/competition.service';
+import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 
 @Component({
   selector: 'edit-schedule-info',
@@ -8,9 +10,18 @@ import { WCAService } from 'src/app/services/wca.service';
 })
 export class EditScheduleComponent implements OnInit {
 
-  constructor() { }
+  @Input() competitionId: string;
+  constructor(private compSVC: CompetitionService) { }
+  schedule: ScheduleModel[];
 
   ngOnInit() {
+    this.compSVC.getSchedule(this.competitionId).subscribe((res: ScheduleModel[]) => {
+      this.schedule = res;
+    });
+  }
+
+  importSchedule() {
+    this.compSVC.importSchedule(this.competitionId);
   }
 
 }

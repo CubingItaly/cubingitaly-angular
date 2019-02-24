@@ -1,3 +1,8 @@
-<p>
-  edit-schedule works!
-</p>
+<h2>Schedule</h2>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <button mat-raised-button color="primary" (click)="importSchedule()">Importa la schedule dal sito WCA</button>
+    <span>L'operazione può richiedere un po' di tempo.</span>
+</div>
+<div *ngIf="schedule">
+    <schedule-viewer *ngFor="let s of schedule" [schedule]="s"></schedule-viewer>
+</div>

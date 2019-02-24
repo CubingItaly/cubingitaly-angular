@@ -1,0 +1,61 @@
+<div>
+  <h2>
+    {{capitalize(schedule.day.toLocaleDateString("it-it", { weekday:'long', day: "numeric", year: "numeric", month: "long" }))}}
+  </h2>
+
+
+
+
+  <div class="table-container">
+    <mat-table [dataSource]="schedule.rows">
+
+      <ng-container matColumnDef="start" sticky>
+        <mat-header-cell *matHeaderCellDef>Inizio</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.start.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="end">
+        <mat-header-cell *matHeaderCellDef>Fine</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.end.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Evento</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="round">
+        <mat-header-cell *matHeaderCellDef>Round</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.roundName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="format">
+        <mat-header-cell *matHeaderCellDef>Formato</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.roundFormat}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cutoff">
+        <mat-header-cell *matHeaderCellDef>Cutoff</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.cutoff}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="timelimit">
+        <mat-header-cell *matHeaderCellDef>Tempo limite</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.timeLimit}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="advance">
+        <mat-header-cell *matHeaderCellDef>Avanzano</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.advancementLevel}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['start','end','name','round','format','cutoff','timelimit','advance']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['start','end','name','round','format','cutoff','timelimit','advance']"></mat-row>
+
+    </mat-table>
+  </div>
+
+
+</div>
