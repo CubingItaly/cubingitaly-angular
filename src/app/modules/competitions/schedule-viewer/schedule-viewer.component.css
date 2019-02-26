@@ -13,12 +13,13 @@
 }
 
 .mat-column-round{
-    flex: 0 0 170px;
+    flex: 0 0 180px;
 }
 
 .mat-column-format{
     flex: 0 0 120px;
 }
+
 
 
 .mat-column-cutoff,.mat-column-advance, .mat-column-timelimit{

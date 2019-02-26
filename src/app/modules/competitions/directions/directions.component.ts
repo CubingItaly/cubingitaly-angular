@@ -13,7 +13,6 @@ export class DirectionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.directions);
   }
 
 }

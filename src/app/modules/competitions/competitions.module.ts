@@ -25,9 +25,10 @@ import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
 import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.component';
 import { DirectionsComponent } from './directions/directions.component';
 import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
+import { OfficialComponent } from './official/official.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent, DirectionsComponent],
+  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent, DirectionsComponent, OfficialComponent],
   imports: [
     PageModule,
     CommonModule,
@@ -51,7 +52,8 @@ import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
     MatSelectModule,
     MatListModule,
     CKEditorModule,
-    HtmlViewerModule
+    HtmlViewerModule,
+    MatListModule
   ],
   providers: [CompetitionService]
 })

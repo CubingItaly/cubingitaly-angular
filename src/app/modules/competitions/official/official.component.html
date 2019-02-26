@@ -1,0 +1,7 @@
+<div *ngIf="competitions$ | async as competitions">
+  <mat-list>
+    <mat-list-item *ngFor="let comp of competitions">
+      <a routerLink="./{{comp.id}}">{{comp.name}}</a>
+    </mat-list-item>
+  </mat-list>
+</div>

@@ -76,6 +76,9 @@ export class CompetitionService {
     window.location.href = window.location.protocol + "//" + window.location.host +`/api/v0/competitions/schedule/${competition}/wca`;
   }
 
+  public getOfficialCompetitions(): Observable<CompetitionModel[]>{
+    return this.http.get(this.apiBase+"/official").pipe(map(res=>Deserialize(res,CompetitionModel)));
+  }
 }
 
 
