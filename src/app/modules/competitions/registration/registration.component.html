@@ -1,65 +1,77 @@
-<h2>Registrazione e pagamento</h2>
-<h3>Limite partecipanti</h3>
-<p>È previsto un limite di {{registration.competitorsLimit}} concorrenti. Una volta raggiunto il limite sarà creata una
-    lista d'attesa.</p>
-<h3>Registrazioni</h3>
-<p>Le registrazioni online apriranno il {{registration.registrationOpen | compDate}} e chiuderanno il
-    {{registration.registrationClose | compDate}}.</p>
-<h3>Costo di registrazione</h3>
-<p *ngIf="registration.isRegistrationPaid">È previsto un costo di registrazione di {{registration.registrationFee}}€.
-</p>
-<p *ngIf="!registration.isRegistrationPaid">Non è previsto alcun costo di registrazione.</p>
-<p *ngIf="registration.isRegistrationPaid && registration.newcomerDiscount && registration.newcomerFee > 0">Per i
-    partecipanti alla prima gara è previsto un costo di registrazione scontato di {{registration.newcomerFee}}€.</p>
-<p *ngIf="registration.isRegistrationPaid && registration.newcomerDiscount && registration.newcomerFee === 0">Per i
-    partecipanti alla prima gara l'iscrizione è gratuita.</p>
-<p *ngIf="registration.isRegistrationPaid && registration.newcomerDiscount && registration.newcomerDetails">
-    {{registration.newcomerDetails}}</p>
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.lt-md="90%" fxLayout="column" class="regcontainer">
+    <h2>Registrazione e pagamento</h2>
+    <h3>Limite partecipanti</h3>
+    <p>È previsto un limite di {{registration.competitorsLimit}} concorrenti. Una volta raggiunto il limite sarà creata
+      una
+      lista d'attesa.</p>
+    <h3>Registrazioni</h3>
+    <p>Le registrazioni online apriranno il {{registration.registrationOpen | compDate}} e chiuderanno il
+      {{registration.registrationClose | compDate}}.</p>
+    <h3>Costo di registrazione</h3>
+    <p *ngIf="!registration.isRegistrationPaid">Non è previsto alcun costo di registrazione.</p>
+    <ng-container *ngIf="registration.isRegistrationPaid">
+      <p>È previsto un costo di registrazione di {{registration.registrationFee}}€.</p>
+      <ng-container *ngIf="registration.newcomerDiscount">
+        <p *ngIf="registration.newcomerFee > 0">Per i partecipanti alla prima gara è previsto un costo di registrazione
+          scontato di {{registration.newcomerFee}}€.</p>
+        <p *ngIf="registration.newcomerFee === 0">Per i partecipanti alla prima gara l'iscrizione è gratuita.</p>
+        <p *ngIf="registration.newcomerDetails">{{registration.newcomerDetails}}</p>
+      </ng-container>
+    </ng-container>
 
-<h3>Come iscriversi</h3>
-<ol>
-    <li>La registrazione deve essere effettuata sul <a
-            href="https://www.worldcubeassociation.org/competitions/{{competitionId}}/register">sito della World Cube
-            association</a>.</li>
-    <li *ngIf="isPaymentCash">Il pagamento dovrà essere effettuato in contanti direttamente il giorno della
+    <h3>Come iscriversi</h3>
+    <ol>
+      <li>La registrazione deve essere effettuata sul <a
+          href="https://www.worldcubeassociation.org/competitions/{{competitionId}}/register">sito della World Cube
+          association</a>.</li>
+      <li *ngIf="isPaymentCash">Il pagamento dovrà essere effettuato in contanti direttamente il giorno della
         competizione</li>
-    <li *ngIf="isPaymentPaypal && isPaymentCC">Il pagamento può essere effettuato sia tramite carta di credito che
+      <li *ngIf="isPaymentPaypal && isPaymentCC">Il pagamento può essere effettuato sia tramite carta di credito che
         tramite PayPal.</li>
-    <li *ngIf="isPaymentPaypal">Per effettuare il pagamento tramite Paypal, è sufficiente utilizzare <a
-            href="{{registration.paypalLink}}">questo link</a>.<br />
+      <li *ngIf="isPaymentPaypal">Per effettuare il pagamento tramite Paypal, è sufficiente utilizzare <a
+          href="{{registration.paypalLink}}">questo link</a>.<br />
         Durante il pagamento <strong>è importante ricordarsi di specificare nella causale il nome e il cognome del
-            partecipante</strong>, in modo da poter associare il pagamento alla registrazione.</li>
-    <li *ngIf="isPaymentCC">Per effettuare il pagamento tramite carta di credito, è sufficiente registrarsi alla
-        competizione sul sito della World Cube Association come indicato al punto #1 e successivamente premere il
+          partecipante</strong>, in modo da poter associare il pagamento alla registrazione.</li>
+      <li *ngIf="isPaymentCC">Per effettuare il pagamento tramite carta di credito, è sufficiente registrarsi alla
+        competizione sul sito della World Cube Association come indicato al punto nr. 1 e successivamente premere il
         bottone per pagare.</li>
-    <li>Una volta effettuata la registrazione è necessario attendere fino a 48h prima di vedere il proprio nome
+      <li>Una volta effettuata la registrazione è necessario attendere fino a 48h prima di vedere il proprio nome
         nell'elenco partecipanti in quanto <strong>l'accettazione della registrazione non è automatica</strong> ma deve
         essere effettuata manualmente.</li>
-</ol>
-<p><strong>Nota bene: in caso di esaurimento dei posti disponibili, per poter essere inseriti nella lista d'attesa è
+    </ol>
+    <p><strong>Nota bene: in caso di esaurimento dei posti disponibili, per poter essere inseriti nella lista d'attesa è
         comunque necessario effettuare il pagamento che, in caso di mancata partecipazione, sarà completamente
         rimborsato.</strong></p>
-<h3 *ngIf="registration.registrationExtraInfo">Informazioni aggiuntive</h3>
-<p *ngIf="registration.registrationExtraInfo">{{registration.registrationExtraInfo}}</p>
-<h3>Rimborso</h3>
-<p *ngIf="!registration.refundAvailable">In caso di mancata partecipazione o di annullamento dell'iscrizione non è
-    previsto alcun rimborso.</p>
-<p *ngIf="registration.refundAvailable">In caso di annullamento dell'iscrizione è previsto un rimborso della tassa di
-    registrazione:</p>
-<div *ngIf="registration.refundAvailable">
-    <ul>
-        <li *ngFor="let r of registration.refundPolicy">Fino al {{r.deadline | compDate}} in caso di cancellazione della
-            registrazione è previsto un rimborso del {{r.percentage}}%.</li>
-        <li>Oltre la scadenza non sarà emesso alcun rimborso.</li>
-    </ul>
-</div>
 
-<h3>Registrazioni in loco</h3>
-<p *ngIf="!registration.registrationAtTheVenue">Non sarà in alcun modo possibile iscriversi alla competizione
-    direttamente in loco.</p>
-<p *ngIf="registration.registrationAtTheVenue">Sono permesse le registrazioni in loco fino al raggiungimento del limite
-    partecipanti.</p>
-<p *ngIf="registration.registrationAtTheVenue && registration.atTheVenueFee >0">Le registrazioni in loco avranno un
-    costo di
-    {{registration.atTheVenueFee}}€.</p>
-<p *ngIf="registration.registrationAtTheVenue && registration.atTheVenueDetails">{{registration.atTheVenueDetails}}</p>
+    <ng-container *ngIf="registration.registrationExtraInfo">
+      <h3>Informazioni aggiuntive</h3>
+      <p>{{registration.registrationExtraInfo}}</p>
+    </ng-container>
+
+    <h3>Rimborso</h3>
+    <p *ngIf="!registration.refundAvailable">In caso di mancata partecipazione o di annullamento dell'iscrizione non è
+      previsto alcun rimborso.</p>
+    <ng-container *ngIf="registration.refundAvailable">
+      <p>In caso di annullamento dell'iscrizione è previsto un rimborso della tassa
+        di
+        registrazione:</p>
+      <ul>
+        <li *ngFor="let r of registration.refundPolicy">Fino al {{r.deadline | compDate}} in caso di cancellazione
+          della
+          registrazione è previsto un rimborso del {{r.percentage}}%.</li>
+        <li>Oltre la scadenza non sarà emesso alcun rimborso.</li>
+      </ul>
+    </ng-container>
+
+    <h3>Registrazioni in loco</h3>
+    <p *ngIf="!registration.registrationAtTheVenue">Non sarà in alcun modo possibile iscriversi alla competizione
+      direttamente in loco.</p>
+    <ng-container *ngIf="registration.registrationAtTheVenue">
+      <p>Sono permesse le registrazioni in loco fino al raggiungimento del limite partecipanti.</p>
+      <p *ngIf="registration.atTheVenueFee >0">Le registrazioni in loco avranno un costo di
+        {{registration.atTheVenueFee}}€.</p>
+      <p *ngIf="registration.atTheVenueDetails"> {{registration.atTheVenueDetails}}</p>
+    </ng-container>
+  </div>
+</div>

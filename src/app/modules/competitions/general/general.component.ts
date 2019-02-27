@@ -12,10 +12,10 @@ export class GeneralComponent implements OnInit {
 
   @Input() competition: CompetitionModel;
   @Input() registration: RegistrationModel;
-  currentDate: Date = new Date();
-
   isRegistrationOpen: boolean = false;;
   isRegistrationStarted: boolean = false;
+  isLimitReached: boolean;
+
   constructor() { }
 
   ngOnInit() {

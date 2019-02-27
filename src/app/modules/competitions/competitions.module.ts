@@ -8,10 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CompetitionComponent } from './competition/competition.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule, MatButtonModule, MatTabsModule, MatTableModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatChipsModule, MatAutocompleteModule, MatCheckboxModule, MatListModule, MatSelectModule } from '@angular/material';
-import { GeneralComponent } from './general/general.component';
-import { RegistrationComponent } from './registration/registration.component';
 import { CompDatePipe } from './comp-date.pipe';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { EditComponent } from './edit/edit.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { CompetitionService } from './services/competition.service';
@@ -22,13 +19,18 @@ import { EditRegistrationComponent } from './edit-registration/edit-registration
 import { EditDirectionsComponent } from './edit-directions/edit-directions.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
-import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.component';
-import { DirectionsComponent } from './directions/directions.component';
 import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
 import { OfficialComponent } from './official/official.component';
+import { ScheduleViewerComponent } from './schedule-viewer/schedule-viewer.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { GeneralComponent } from './general/general.component';
+import { DirectionsComponent } from './directions/directions.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
-  declarations: [CandidateComponent, CompetitionComponent, GeneralComponent, RegistrationComponent, CompDatePipe, ScheduleComponent, EditComponent, NewComponent, EditGeneralComponent, EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, ScheduleViewerComponent, DirectionsComponent, OfficialComponent],
+  declarations: [CandidateComponent, CompetitionComponent,
+    CompDatePipe, EditComponent, NewComponent, EditGeneralComponent,
+    EditRegistrationComponent, EditDirectionsComponent, EditScheduleComponent, OfficialComponent, ScheduleViewerComponent, RegistrationComponent, GeneralComponent, DirectionsComponent, ScheduleComponent],
   imports: [
     PageModule,
     CommonModule,

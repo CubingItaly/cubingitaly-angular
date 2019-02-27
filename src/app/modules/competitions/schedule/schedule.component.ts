@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CompetitionModel } from 'src/app/models/competition.model';
 import { ScheduleModel } from 'src/app/models/competition/schedule.model';
+import { CompetitionService } from '../services/competition.service';
 
 @Component({
   selector: 'schedule-info',
@@ -9,11 +9,14 @@ import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 })
 export class ScheduleComponent implements OnInit {
 
-  @Input() schedule: ScheduleModel[]
+  @Input() schedule: ScheduleModel[];
 
-  constructor() { }
+  constructor(private compSVC: CompetitionService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  capitalize(dateString: string) {
+    return dateString[0].toUpperCase() + dateString.substr(1);
   }
 
 }

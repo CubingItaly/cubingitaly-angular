@@ -1,7 +1,31 @@
-<h2>Programma della competizone</h2>
-<p>
-  Nota bene: il programma può subire modifiche fino all'inizio della competizione e gli orari sono solamente indicativi.
-</p>
-<ng-container *ngFor="let s of schedule">
-  <schedule-viewer [schedule]="s"></schedule-viewer>
-</ng-container>
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.lt-md="90%" fxLayout="column" *ngIf="schedule">
+    <ng-container *ngFor="let s of schedule">
+      <h2>
+        {{capitalize(s.day.toLocaleDateString("it-it", { weekday:'long', day: "numeric", year: "numeric", month: "long" }))}}
+      </h2>
+      <table> 
+        <tr>
+          <th>Inizio</th>
+          <th>Fine</th>
+          <th>Evento</th>
+          <th>Round</th>
+          <th>Formato</th>
+          <th>Cutoff</th>
+          <th>Time Limit</th>
+          <th>Avanzano</th>
+        </tr>
+        <tr *ngFor="let r of s.rows">
+          <td>{{r.start.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}</td>
+          <td>{{r.end.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}</td>
+          <td>{{r.name}}</td>
+          <td>{{r.roundName}}</td>
+          <td>{{r.roundFormat}}</td>
+          <td>{{r.cutoff}}</td>
+          <td>{{r.timeLimit}}</td>
+          <td>{{r.advance}}</td>
+        </tr>
+      </table>
+    </ng-container>
+  </div>
+</div>

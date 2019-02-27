@@ -18,16 +18,17 @@ export class CompetitionComponent implements OnInit {
   registration: RegistrationModel;
   directions: DirectionsModel[];
   schedule: ScheduleModel[];
+  compId: string
 
   constructor(private compSVC: CompetitionService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    let compId: string = this.route.snapshot.paramMap.get("id");
-    this.compSVC.getCompetition(compId).subscribe((res: CompetitionModel) => this.competition = res);
-    this.compSVC.getRegistration(compId).subscribe((res: RegistrationModel) => this.registration = res);
-    this.compSVC.getDirections(compId).subscribe((res: DirectionsModel[]) => this.directions = res);
-    this.compSVC.getSchedule(compId).subscribe((res: ScheduleModel[]) => this.schedule = res);
+    this.compId = this.route.snapshot.paramMap.get("id");
+    this.compSVC.getCompetition(this.compId).subscribe((res: CompetitionModel) => this.competition = res);
+    this.compSVC.getRegistration(this.compId).subscribe((res: RegistrationModel) => this.registration = res);
+    this.compSVC.getDirections(this.compId).subscribe((res: DirectionsModel[]) => this.directions = res);
+    this.compSVC.getSchedule(this.compId).subscribe((res: ScheduleModel[]) => this.schedule = res);
   }
 
 }

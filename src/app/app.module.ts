@@ -81,7 +81,7 @@ import { LoginModule } from './modules/login/login.module';
     LoginModule,
     MatIconModule,
     ContactModule,
-    ShareButtonsModule.forRoot()
+    ShareButtonsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true },

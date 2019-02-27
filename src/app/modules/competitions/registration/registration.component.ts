@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CompetitionModel } from 'src/app/models/competition.model';
 import { RegistrationModel } from 'src/app/models/competition/registration.model';
-import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
 import { RefundPolicyModel } from 'src/app/models/competition/refundpolicy.model';
+import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
 
 @Component({
   selector: 'registration-info',
@@ -16,6 +15,7 @@ export class RegistrationComponent implements OnInit {
   isPaymentCash: boolean = false;
   isPaymentPaypal: boolean = false;
   isPaymentCC: boolean = false;
+
   constructor() { }
 
   ngOnInit() {

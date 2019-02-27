@@ -1,19 +1,36 @@
-.general-container {
-    padding:20px 10px 10px 10px;
+p{
+    margin-bottom: 0px;
+    margin-top:7px;
+}
+
+h3{
+    margin-bottom: 0px;    
+}
+
+h2{
+    margin-bottom:0px;
+}
+
+li{
+    margin-top:5px;
+    margin-bottom: 0px;
+    text-align: justify;
+}
+
+ul{
+    margin-bottom:0px;
 }
 
 table{
     font-size: 16px;
 }
 
-p{
-    margin-bottom: 0px;
-    margin-top:7px;
+tr{
+    text-align: left;
 }
 
-tr{
+th{
     white-space: nowrap;
-    text-align: left;
 }
 
 td{
@@ -21,39 +38,43 @@ td{
     padding-left: 10px;
 }
 
-.regopen{
-    margin: 50px 0 15px 0;
-    font-size: 20px;
-    padding:15px;
-    font-weight: 600;
-    color:white;
-    width: 100%;
-    text-align: center;
-    background-color: #0b5ea6;
-    border-radius: 10px;
-}
-
-.regulation{
-    margin: 0px 0 15px 0;
-    font-size: 20px;
-    padding:15px;
-    font-weight: 600;
-    border-radius: 10px;
-    width: 100%;
-}
-
 .cubing-icon{
     font-size: 24px;
 }
 
-li{
-    font-size: 16px;
-}
-
-.extrainfo{
-    margin-bottom: 20px;
+.gencontainer{
+    padding-top:15px;
 }
 
 img{
-    margin-bottom: 10px;
+    margin-top:10px;
+    margin-bottom: 50px;
+}
+
+.regopen{
+    color:white;
+    background-color: #0b5ea6;
+    text-align: center;
+    border-radius:10px;
+    padding:15px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0 10px 0;
+}
+
+
+@media screen and (max-width: 959px){
+    th{
+        display:block;
+    }
+
+    td{
+        display:block;
+        padding-left: 0px;
+    }
+
+    img{
+        margin-top:20px;
+        margin-bottom: 20px;
+    }
 }

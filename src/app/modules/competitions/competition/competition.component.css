@@ -1,11 +1,9 @@
 h1{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom:0px;
+    margin-top:7px;
 }
 
-@media screen and (max-width:1100px){
-    .title{
-        padding-left: 5%;
-        padding-right: 5%;
-    }
+.h1xs{
+    margin-left: 5%;
+    margin-right: 5%;
 }
