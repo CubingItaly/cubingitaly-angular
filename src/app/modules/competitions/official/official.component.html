@@ -1,7 +1,7 @@
-<div *ngIf="competitions$ | async as competitions">
-  <mat-list>
-    <mat-list-item *ngFor="let comp of competitions">
-      <a routerLink="./{{comp.id}}">{{comp.name}}</a>
-    </mat-list-item>
-  </mat-list>
+<div fxLayout fxLayoutAlign="center" class="officialcontainer">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" *ngIf="competitions">
+    <div *ngFor="let c of competitions">
+      <a routerLink="./{{c.id}}">{{c.name}}</a>
+    </div>
+  </div>
 </div>

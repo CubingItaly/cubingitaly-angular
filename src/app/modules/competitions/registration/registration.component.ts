@@ -37,5 +37,4 @@ export class RegistrationComponent implements OnInit {
       this.isPaymentPaypal = true;
     }
   }
-
 }

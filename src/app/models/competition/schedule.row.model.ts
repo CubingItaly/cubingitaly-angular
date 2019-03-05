@@ -18,10 +18,10 @@ export class ScheduleRowModel {
     public eventId?: string;
 
     @autoserialize
-    public timeLimit: number;
+    public timeLimit: string;
 
     @autoserialize
-    public cutoff?: number;
+    public cutoff?: string;
 
     @autoserialize
     public advance: string;
@@ -29,9 +29,10 @@ export class ScheduleRowModel {
     @autoserialize
     public room: string;
 
-    @autoserializeAs(Date)
-    public start: Date;
+    @autoserialize
+    public start: string;
 
-    @autoserializeAs(Date)
-    public end: Date;
+    @autoserialize
+    public end: string;
+
 }

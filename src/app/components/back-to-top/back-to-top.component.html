@@ -1,5 +1,3 @@
-<div *ngIf="visible"  class="btt-container" fxLayout="row" fxLayoutAlign="center center">
-  <div fxFlex="80%" fxFlex.lt-md="90%" fxLayout="row" fxLayoutAlign="end center">
-      <a mat-button (click)="scrollToTop()"><fa-icon [icon]="['fas','arrow-up']"></fa-icon></a>
-  </div>
-</div>
+<a *ngIf="visible" ngClass.lt-md="axs" mat-button (click)="scrollToTop()">
+  <fa-icon [icon]="['fas','arrow-up']"></fa-icon>
+</a>

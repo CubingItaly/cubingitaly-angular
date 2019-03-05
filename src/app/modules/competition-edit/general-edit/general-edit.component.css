@@ -1,0 +1,27 @@
+.icon{
+    background: transparent;
+    border: none;
+    color: #c4c4c4;
+    padding:10px;
+    font-size: 32px;
+    cursor: pointer;
+    outline: none;
+}
+
+.selected-icon{
+    color: #000;
+}
+
+.icon :focus {outline:none;} ::-moz-focus-inner {border:0;}
+
+h3{
+    margin-bottom:0px;
+}
+
+.user-input{
+    width: 99%;
+}
+
+.general-container{
+    margin-top:20px;
+  }

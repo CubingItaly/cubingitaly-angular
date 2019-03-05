@@ -9,12 +9,16 @@ import { CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit, faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown, faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faTrophy, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit,
+  faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown,
+  faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faTrophy, faQuestion, faAngleDown, faAngleUp
+} from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper, faCopyright } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faTwitter, faTelegram, faYoutube, faTelegramPlane, faInstagram, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 library.add(faHome, faInfoCircle, faLink, faTelegramPlane, faPlusCircle, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
-  faFacebookF, faTwitter, faTelegram, faArrowCircleUp, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
+  faFacebookF, faTwitter, faTelegram, faAngleUp, faArrowCircleUp, faAngleDown, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
 
 
 import { registerLocaleData } from '@angular/common';

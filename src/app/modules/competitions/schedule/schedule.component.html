@@ -1,31 +1,37 @@
 <div fxLayout fxLayoutAlign="center">
-  <div fxFlex.lt-md="90%" fxLayout="column" *ngIf="schedule">
+  <div fxFlex.lt-md="90%" fxFlex.gt-sm="100%" fxLayout="column" *ngIf="schedule">
     <ng-container *ngFor="let s of schedule">
       <h2>
-        {{capitalize(s.day.toLocaleDateString("it-it", { weekday:'long', day: "numeric", year: "numeric", month: "long" }))}}
+        {{s.day |scheduleDay | titlecase}}
       </h2>
-      <table> 
-        <tr>
-          <th>Inizio</th>
-          <th>Fine</th>
+      <table fxHide.lt-md>
+        <thead>
+          <th class="hour">Inizio</th>
+          <th class="hour">Fine</th>
           <th>Evento</th>
           <th>Round</th>
-          <th>Formato</th>
-          <th>Cutoff</th>
-          <th>Time Limit</th>
-          <th>Avanzano</th>
-        </tr>
-        <tr *ngFor="let r of s.rows">
-          <td>{{r.start.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}</td>
-          <td>{{r.end.toLocaleTimeString("it-it",{hour:'numeric', minute:'2-digit'})}}</td>
+          <th class="format">Formato</th>
+          <th class="cutoff">Cutoff</th>
+          <th class="timelimit">Tempo Limite</th>
+          <th class="advance">Avanzano</th>
+        </thead>
+        <tr *ngFor="let r of s.rows; let i=index" [ngClass]="(i%2)===0?'even':'odd'">
+          <td class="hour">{{r.start }}</td>
+          <td class="hour">{{r.end }}</td>
           <td>{{r.name}}</td>
           <td>{{r.roundName}}</td>
-          <td>{{r.roundFormat}}</td>
-          <td>{{r.cutoff}}</td>
-          <td>{{r.timeLimit}}</td>
-          <td>{{r.advance}}</td>
+          <td class="format">{{r.roundFormat}}</td>
+          <td class="cutoff">{{r.cutoff}}</td>
+          <td class="timelimit">{{r.timeLimit}}</td>
+          <td class="advance">{{r.advance}}</td>
         </tr>
       </table>
+
+      <!-- mobile -->
+      <div fxHide.gt-sm>
+        <mobile-row *ngFor="let r of s.rows" [row]="r"></mobile-row>
+      </div>
+
     </ng-container>
   </div>
 </div>

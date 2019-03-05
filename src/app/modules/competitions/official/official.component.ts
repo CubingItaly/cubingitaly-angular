@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CompetitionService } from '../services/competition.service';
-import { Observable } from 'rxjs';
 import { CompetitionModel } from 'src/app/models/competition.model';
+import { CompetitionService } from '../services/competition.service';
 
 @Component({
   selector: 'app-official',
@@ -9,13 +8,13 @@ import { CompetitionModel } from 'src/app/models/competition.model';
   styleUrls: ['./official.component.css']
 })
 export class OfficialComponent implements OnInit {
- 
-  competitions$: Observable<CompetitionModel[]>
+
+  competitions: CompetitionModel[];
 
   constructor(private compSVC: CompetitionService) { }
 
   ngOnInit() {
-    this.competitions$= this.compSVC.getOfficialCompetitions();
+    this.compSVC.getOfficialCompetitions().subscribe((res: CompetitionModel[]) => this.competitions = res);
   }
 
 }

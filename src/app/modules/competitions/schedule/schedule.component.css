@@ -1,4 +1,74 @@
-table{
+p{
+    margin-bottom: 0px;
+    margin-top:7px;
+}
 
+h3{
+    margin-bottom: 0px;    
+}
+
+h2{
+    margin-bottom:0px;
+}
+
+td, th{
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left:10px;
+}
+
+th{
+    text-align: start;
+}
+
+.hour{
+    width: 50px;
+}
+
+.cutoff{
+    width:80px;
+}
+
+.advance{
+    min-width: 80px;
+    max-width: 90px;
+}
+
+.format{
+    min-width: 80px;
+    max-width:145px;
+    text-align: center;
+}
+
+.cutoff, .hour, .advance{
+    text-align: center;
+    padding-left: 0px;
+}
+
+table {
+    margin-top:10px;
+}
+
+table, tr, thead{
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+.odd,thead{
+    background-color: #fff;
+}
+
+.even{
+    background-color: #f2f2f2;
+}
+
+.even:hover,.odd:hover{
+    background-color:#d0d0d0;
+}
+
+.timelimit{
+    max-width: 200px;
+    text-align: center;
 }
 

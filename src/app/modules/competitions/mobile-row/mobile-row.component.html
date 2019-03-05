@@ -1,0 +1,44 @@
+<div fxLayout="column" class="mobile" (click)="clicked()">
+  <div fxLayout="row">
+    <div class="start">
+      <strong>Dalle</strong> {{row.start}}
+    </div>
+    <div fxFlex="grow">
+      <span class="cubing-icon event-{{row.eventId}}"></span>
+      <div class="event-name">
+        {{row.name}}
+      </div>
+    </div>
+    <div class="end">
+      <strong>Alle</strong> {{row.end}}
+    </div>
+  </div>
+  <div *ngIf="hidden && isEvent">
+    <fa-icon icon="angle-down"></fa-icon>
+  </div>
+
+
+  <ng-container *ngIf="!hidden">
+    <div fxLayout="row">
+      <span class="start">Round</span>
+      <span fxFlex="grow" class="end exp-imp">{{row.roundName}}</span>
+    </div>
+    <div fxLayout="row">
+      <span class="start">Formato</span>
+      <span fxFlex="grow" class="end exp-imp">{{row.roundFormat}}</span>
+    </div>
+    <div fxLayout="row" *ngIf="row.cutoff">
+      <span class="start">Cutoff</span>
+      <span fxFlex="grow" class="end exp-imp">{{row.cutoff}}</span>
+    </div>
+    <div fxLayout="row" *ngIf="row.timeLimit">
+      <span class="start">Tempo Limite</span>
+      <span fxFlex="grow" class="end exp-imp">{{row.timeLimit}}</span>
+    </div>
+    <div fxLayout="row" *ngIf="row.advance">
+      <span class="start">Al turno successivo</span>
+      <span fxFlex="grow" class="end exp-imp">{{row.advance}}</span>
+    </div>
+    <fa-icon icon="angle-up"></fa-icon>
+  </ng-container>
+</div>

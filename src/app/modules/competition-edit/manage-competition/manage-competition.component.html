@@ -1,0 +1,16 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px">
+    <mat-slide-toggle (change)="officialSlider($event)" [checked]="competition.isOfficial"
+      [disabled]="!competition.isOfficial && (!registration.isComplete || directions.length === 0 || schedule.length === 0)">
+      Competizione pubblica</mat-slide-toggle>
+    <span>Una competizione pubblica è visibile da chiunque abbia il link.</span>
+    <span>Per poter ufficializzare una competizione è necessario averla configurata completamente.</span>
+    <mat-slide-toggle (change)="hiddenSlider($event)" [checked]="competition.isHidden">Competizione invisibile</mat-slide-toggle>
+    <span>Una competizione invisibile non sarà pubblicata nell'elenco delle competizioni ufficiali, ma sarà comunque
+      accessibile tramite link da chi ha il permesso di vederla. Una competizione visibile, se pubblica, sarà visibile
+      nell'elenco delle competizioni ufficiali.</span>
+    <div>
+      <button mat-raised-button color="warn">Elimina Competizione</button>
+    </div>
+  </div>
+</div>
