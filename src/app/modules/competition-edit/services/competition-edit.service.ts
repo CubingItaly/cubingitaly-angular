@@ -43,12 +43,16 @@ export class CompetitionEditService {
     return this.http.post<CompetitionModel>(this.apiBase, { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
   }
 
+  public deleteCompetition(comp: string): Observable<void> {
+    return this.http.delete<void>(this.apiBase + "/" + comp);
+  }
+
   public updateCompetition(competition: CompetitionModel): Observable<CompetitionModel> {
     return this.http.put<CompetitionModel>(this.apiBase + "/" + competition.id, { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
   }
 
   public adminUpdateCompetition(competition: CompetitionModel): Observable<CompetitionModel> {
-    return this.http.put<CompetitionModel>(this.apiBase + "/" + competition.id+"/announce", { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
+    return this.http.put<CompetitionModel>(this.apiBase + "/" + competition.id + "/announce", { "competition": competition }).pipe(map(res => Deserialize(res, CompetitionModel)));
   }
 
   public getTravelMeans(): Observable<TravelMeanModel[]> {

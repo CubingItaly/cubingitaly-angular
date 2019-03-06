@@ -23,7 +23,7 @@
         </tr>
         <tr>
           <th>Indirizzo</th>
-          <td><a href="{{competition.addressURL}}">{{competition.address}}</a></td>
+          <td><a href="https://maps.google.com/?q={{competition.address}}">{{competition.address}}</a></td>
         </tr>
         <tr *ngIf="competition.locationDetails">
           <th>Dettagli</th>
@@ -62,7 +62,8 @@
       <div>
         <h2>Come posso partecipare?</h2>
         <ul>
-          <li>Per competere è necessario iscriversi. <a href="">In questa pagina</a> è spiegata la procedura.</li>
+          <li>Per competere è necessario iscriversi. <a [routerLink]="['./']" [queryParams]="{tab: '1'}">In questa
+              pagina</a> è spiegata la procedura.</li>
           <li>I partecipanti alla prima competizione devono portare un documento di riconoscimento.</li>
           <li *ngIf="registration.maxNumberOfGuests">I partecipanti dovrebbero portare al massimo
             {{registration.maxNumberOfGuests}}
@@ -94,9 +95,11 @@
         <a class="regopen" *ngIf="!isRegistrationOpen && !isRegistrationStarted">Le iscrizioni apriranno il
           {{registration.registrationOpen |compDate}}!</a>
         <ng-container *ngIf="isRegistrationOpen && isRegistrationStarted">
-          <a class="regopen" *ngIf="!registration.isLimitReached">Le iscrizioni sono aperte, clicca qui per scoprire
+          <a [routerLink]="['./']" [queryParams]="{tab: '1'}" class="regopen" *ngIf="!registration.isLimitReached">Le
+            iscrizioni sono aperte, clicca qui per scoprire
             come registrarti!</a>
-          <a class="regopen" *ngIf="registration.isLimitReached">Il limite partecipanti è stato raggiunto, ma le
+          <a [routerLink]="['./']" [queryParams]="{tab: '1'}" class="regopen" *ngIf="registration.isLimitReached">Il
+            limite partecipanti è stato raggiunto, ma le
             iscrizioni sono aperte.
             Clicca qui per scoprire come essere aggiunto alla lista d'attesa!</a>
         </ng-container>
@@ -106,7 +109,7 @@
           il regolamento WCA, clicca qui!</a>
       </div>
 
-      <table *ngIf="competition.extraInformation">
+      <table>
         <tr>
           <th>Delegati WCA</th>
           <td [innerHtml]="getPeople(true)"></td>
@@ -115,7 +118,7 @@
           <th>Organizzatori</th>
           <td [innerHtml]="getPeople(false)"></td>
         </tr>
-        <tr>
+        <tr *ngIf="competition.extraInformation">
           <th>Informazioni aggiuntive</th>
           <td>{{competition.extraInformation}}</td>
         </tr>

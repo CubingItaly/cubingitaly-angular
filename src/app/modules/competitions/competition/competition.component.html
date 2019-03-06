@@ -1,21 +1,21 @@
 <div fxLayout fxLayoutAlign="center">
-  <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration && schedule">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration && schedule && directions">
     <h1 ngClass.lt-md="h1xs" ngCLass.gt-sm="h1md">{{competition.name}}</h1>
-    <mat-tab-group>
-      <mat-tab label="Generale">
+    <mat-tab-group [selectedIndex]="currentIndex" (selectedIndexChange)="updateURL($event)">
+      <mat-tab label="Generale" >
         <ng-template matTabContent>
           <general-info [competition]="competition" [registration]="registration"></general-info>
         </ng-template>
       </mat-tab>
       <mat-tab label="Registrazione">
         <ng-template matTabContent>
-          <registration-info [registration]="registration"></registration-info>
+          <registration-info [registration]="registration" [competitionId]="competition.id"></registration-info>
         </ng-template>
       </mat-tab>
-      <mat-tab label="Programma" *ngIf="schedule">
-          <schedule-info [schedule]="schedule"></schedule-info>
+      <mat-tab label="Programma">
+        <schedule-info [schedule]="schedule"></schedule-info>
       </mat-tab>
-      <mat-tab label="Indicazioni" *ngIf="directions">
+      <mat-tab label="Indicazioni">
         <ng-template matTabContent>
           <directions-info [directions]="directions"></directions-info>
         </ng-template>

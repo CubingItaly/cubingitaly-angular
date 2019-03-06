@@ -111,8 +111,8 @@ export class NewComponent implements OnInit {
 
     if (this.newComp.valid && this.competition.organizers.length > 0 && this.competition.delegates.length > 0 && this.competition.events.length > 0) {
       this.compSVC.createCompetition(this.competition).subscribe((res: CompetitionModel) => {
-        let navigateTo: string = "/competizioni//edit/" + res.id + "?tab=1";
-        this.router.navigate([navigateTo]);
+        let navigateTo: string = "/competizioni/edit/" + res.id;
+        this.router.navigate([navigateTo], { queryParams: { 'tab': 1 } });
       });
     } else {
       throw new BadRequestError("Per poter creare una competizione è necessario tutti i dati richiesti, inclusi delegati, organizzatori ed eventi.");
