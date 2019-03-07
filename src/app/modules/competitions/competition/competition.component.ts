@@ -6,6 +6,8 @@ import { RegistrationModel } from 'src/app/models/competition/registration.model
 import { DirectionsModel } from 'src/app/models/competition/directions.model';
 import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 import { Subscription } from 'rxjs';
+import { TitleManagerService } from 'src/app/services/title-manager.service';
+import { MetaManagerService } from 'src/app/services/meta-manager.service';
 
 @Component({
   selector: 'app-competition',
@@ -22,11 +24,18 @@ export class CompetitionComponent implements OnInit, OnDestroy {
   private subscr: Subscription;
 
 
-  constructor(private compSVC: CompetitionService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private compSVC: CompetitionService, private router: Router, private activatedRoute: ActivatedRoute, private titleSVC: TitleManagerService, private metaSVC: MetaManagerService) { }
 
   ngOnInit() {
     let compId: string = this.activatedRoute.snapshot.paramMap.get("id");
-    this.compSVC.getCompetition(compId).subscribe((res: CompetitionModel) => this.competition = res);
+    this.compSVC.getCompetition(compId).subscribe((res: CompetitionModel) => {
+      this.competition = res;
+      this.titleSVC.setTitle(res.name);
+      this.metaSVC.updateMeta("title", res.name);
+      this.metaSVC.updateMeta("description", `Il ${res.name} si svolgerà a ${res.city} il ${res.getCompDate()}`);
+      this.metaSVC.updateMeta("og:title", res.name);
+      this.metaSVC.updateMeta("og:description", `Il ${res.name} si svolgerà a ${res.city} il ${res.getCompDate()}`);
+    });
     this.compSVC.getRegistration(compId).subscribe((res: RegistrationModel) => this.registration = res);
     this.compSVC.getDirections(compId).subscribe((res: DirectionsModel[]) => this.directions = res);
     this.compSVC.getSchedule(compId).subscribe((res: ScheduleModel[]) => this.schedule = res);
@@ -46,5 +55,6 @@ export class CompetitionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscr.unsubscribe();
+    this.metaSVC.resetMeta();
   }
 }

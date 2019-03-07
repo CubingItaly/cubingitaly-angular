@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { CompetitionModel } from 'src/app/models/competition.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { UserModel } from 'src/app/models/user.model';
@@ -9,13 +9,14 @@ import { debounceTime } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { CompetitionEditService } from '../services/competition-edit.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'edit-general-info',
   templateUrl: './general-edit.component.html',
   styleUrls: ['./general-edit.component.css']
 })
-export class GeneralEditComponent implements OnInit {
+export class GeneralEditComponent implements OnInit, OnDestroy {
 
   @Input() competition: CompetitionModel;
   @Output() competitionChange: EventEmitter<CompetitionModel> = new EventEmitter<CompetitionModel>();
@@ -34,6 +35,8 @@ export class GeneralEditComponent implements OnInit {
   foundOrganizers: UserModel[] = [];
   delegateControl: FormControl;
   organizerControl: FormControl;
+  private orgSub: Subscription;
+  private delSub: Subscription;
 
   constructor(private userSVC: UserService, private compSVC: CompetitionEditService) { }
 
@@ -42,16 +45,21 @@ export class GeneralEditComponent implements OnInit {
     this.organizerControl = new FormControl();
     this.delegateControl = new FormControl();
 
-    this.delegateControl.valueChanges.pipe(debounceTime(400))
+    this.delSub = this.delegateControl.valueChanges.pipe(debounceTime(400))
       .subscribe(name => {
         this.userSVC.searchDelegates(name).subscribe((u: UserModel[]) => this.foundDelegates = u.filter((del: UserModel) => this.competition.delegates.findIndex((t: UserModel) => t.id === del.id) < 0));
       });
 
-    this.organizerControl.valueChanges.pipe(debounceTime(400))
+    this.orgSub = this.organizerControl.valueChanges.pipe(debounceTime(400))
       .subscribe(name => {
         this.userSVC.searchUsers(name).subscribe((u: UserModel[]) => this.foundOrganizers = u.filter((org: UserModel) => this.competition.organizers.findIndex((t: UserModel) => t.id === org.id) < 0));
       });
 
+  }
+
+  ngOnDestroy() {
+    this.orgSub.unsubscribe();
+    this.delSub.unsubscribe();
   }
 
   setupEvents() {

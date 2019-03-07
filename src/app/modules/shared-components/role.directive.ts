@@ -73,8 +73,16 @@ export class RoleDirective {
         return (u.id !== undefined) && u.canEditPages();
       case "aFaq":
         return (u.id !== undefined) && u.canAdminFAQs();
-        case "eFaq":
-          return (u.id !== undefined) && u.canEditFAQs();
+      case "eFaq":
+        return (u.id !== undefined) && u.canEditFAQs();
+      case "eComp":
+        return (u.id !== undefined) && u.canEditCompetition(this.extraParam);
+      case "aComp":
+        return (u.id !== undefined) && u.canAdminCompetitions();
+      case "cComp":
+        return (u.id !== undefined) && u.canCreateCompetitions();
+      case "annComp":
+        return (u.id !== undefined) && u.canAnnounceCompetition(this.extraParam);
       default:
         return false;
     }

@@ -15,6 +15,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { ScheduleDayPipe } from './schedule-day.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileRowComponent } from './mobile-row/mobile-row.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent, CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent, ScheduleDayPipe, MobileRowComponent],
@@ -24,7 +25,9 @@ import { MobileRowComponent } from './mobile-row/mobile-row.component';
     FlexLayoutModule,
     MatTabsModule,
     HtmlViewerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedComponentsModule,
+    MatButtonModule
   ]
 })
 export class CompetitionsModule { }

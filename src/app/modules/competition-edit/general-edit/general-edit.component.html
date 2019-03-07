@@ -1,7 +1,7 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
     <form #newComp="ngForm" fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px" (ngSubmit)="onSubmit()">
       <mat-form-field>
-        <input type="text" matInput [(ngModel)]="competition.id" name="id" placeholder="ID della competizione" disabled>
+        <input type="text" matInput [ngModel]="competition.id" name="id" placeholder="ID della competizione" disabled>
       </mat-form-field>
   
       <mat-form-field>

@@ -14,6 +14,8 @@ import { DirectionsEditComponent } from './directions-edit/directions-edit.compo
 import { ScheduleEditComponent } from './schedule-edit/schedule-edit.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ManageCompetitionComponent } from './manage-competition/manage-competition.component';
+import { CompetitionEditService } from './services/competition-edit.service';
+import { CompEditGuardService } from './services/comp-edit-guard.service';
 
 @NgModule({
   declarations: [EditComponent, NewComponent, GeneralEditComponent, RegistrationEditComponent, DirectionsEditComponent, ScheduleEditComponent, ManageCompetitionComponent],
@@ -37,6 +39,7 @@ import { ManageCompetitionComponent } from './manage-competition/manage-competit
     MatTableModule,
     MatCheckboxModule,
     MatSlideToggleModule
-  ]
+  ],
+  providers: [CompetitionEditService, CompEditGuardService]
 })
 export class CompetitionEditModule { }

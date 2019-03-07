@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CompetitionModel } from 'src/app/models/competition.model';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 import { Deserialize } from 'cerialize';
 import { RegistrationModel } from 'src/app/models/competition/registration.model';
 import { DirectionsModel } from 'src/app/models/competition/directions.model';
@@ -17,10 +17,34 @@ import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
 export class CompetitionEditService {
 
   private apiBase: string = "/api/v0/competitions";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.cache = new Map();
+    this.observable = new Map();
+    this.cacheTime = new Map();
+  }
+  private cache: Map<string, CompetitionModel>;
+  private observable: Map<string, Observable<CompetitionModel>>;
+  private cacheTime: Map<string, number>;
+
 
   public getCompetition(id: string): Observable<CompetitionModel> {
-    return this.http.get<CompetitionModel>(this.apiBase + "/" + id).pipe(map(res => Deserialize(res, CompetitionModel)));
+    let now = new Date();
+
+    if (this.cache[id] && ((now.getTime() - this.cacheTime[id]) < 2000)) {
+      return of(this.cache[id]);
+    } else if (this.observable[id]) {
+      return this.observable[id];
+    } else {
+      this.observable[id] = this.http.get<CompetitionModel>(this.apiBase + "/" + id)
+        .pipe(share(), map(u => {
+          this.observable[id] = null;;
+          let tmp: CompetitionModel = Deserialize(u, CompetitionModel);
+          this.cache[id] = tmp;
+          return this.cache[id];
+        }));
+      this.cacheTime[id] = (new Date()).getTime();
+      return this.observable[id];
+    }
   }
 
   public getRegistration(comp: string): Observable<RegistrationModel> {

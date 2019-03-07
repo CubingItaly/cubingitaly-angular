@@ -2,7 +2,7 @@
   <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration && schedule && directions">
     <h1 ngClass.lt-md="h1xs" ngCLass.gt-sm="h1md">{{competition.name}}</h1>
     <mat-tab-group [selectedIndex]="currentIndex" (selectedIndexChange)="updateURL($event)">
-      <mat-tab label="Generale" >
+      <mat-tab label="Generale">
         <ng-template matTabContent>
           <general-info [competition]="competition" [registration]="registration"></general-info>
         </ng-template>
@@ -19,6 +19,15 @@
         <ng-template matTabContent>
           <directions-info [directions]="directions"></directions-info>
         </ng-template>
+      </mat-tab>
+      <mat-tab *ifRole="'eComp';ifParam:competition" label="Gestisci">
+        <div fxLayout fxLayoutAlign="center">
+          <div fxFlex.lt-md="90%" fxFlex.gt-xs="100%" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap-gt-sm="2%"
+            style="margin-top:20px" fxLayoutGap.gt-sm="2%">
+            <a mat-raised-button color="primary" routerLink="/competizioni/edit/{{competition.id}}">Modifica
+              informazioni</a>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
