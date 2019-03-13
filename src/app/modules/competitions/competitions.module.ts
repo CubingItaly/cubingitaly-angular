@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { routes } from './competition-routing.module';
 import { CompetitionComponent } from './competition/competition.component';
-import { MatTabsModule, MatExpansionModule, MatButtonModule } from '@angular/material';
+import { MatTabsModule, MatExpansionModule, MatButtonModule, MatListModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
 import { CompDatePipe } from './comp-date.pipe';
 import { RegistrationComponent } from './registration/registration.component';
@@ -16,9 +16,10 @@ import { ScheduleDayPipe } from './schedule-day.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileRowComponent } from './mobile-row/mobile-row.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { MobileRowOfficialComponent } from './mobile-row-official/mobile-row-official.component';
 
 @NgModule({
-  declarations: [OfficialComponent, CompetitionComponent, GeneralComponent, CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent, ScheduleDayPipe, MobileRowComponent],
+  declarations: [OfficialComponent, CompetitionComponent, GeneralComponent, CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent, ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -27,7 +28,8 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     HtmlViewerModule,
     FontAwesomeModule,
     SharedComponentsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule
   ]
 })
 export class CompetitionsModule { }

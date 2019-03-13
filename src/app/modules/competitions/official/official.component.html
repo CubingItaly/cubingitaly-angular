@@ -1,7 +1,69 @@
 <div fxLayout fxLayoutAlign="center" class="officialcontainer">
-  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" *ngIf="competitions">
-    <div *ngFor="let c of competitions">
-      <a routerLink="./{{c.id}}">{{c.name}}</a>
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="row">
+    <div fxFlex.lt-md="100%" fxFlex.gt-sm="70%">
+      <div *ngIf="inProgress && inProgress.length>0">
+        <h2>Competizioni in corso</h2>
+        <table fxHide.lt-md class="mat-elevation-z1">
+          <thead>
+            <th></th>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Città</th>
+          </thead>
+          <tr *ngFor="let c of inProgress; let i = index" [ngClass]="(i%2)===0?'even':'odd'">
+            <td class="wca"><a href="https://www.worldcubeassociation.org/competitions/{{c.id}}" target="blank"><img
+                  src="/assets/images/wca.svg" /></a></td>
+            <td class="date">{{c.getCompDate()}}</td>
+            <td class="name"><a routerLink="./{{c.id}}">{{c.name}}</a></td>
+            <td><strong>{{c.city}}</strong>, {{c.country}}<a class="location"
+                href="https://maps.google.com/?q={{c.address}}" target="blank">
+                <fa-icon icon="external-link-alt"></fa-icon>
+              </a></td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="upcoming && upcoming.length>0">
+        <h2>Competizioni future</h2>
+        <table fxHide.lt-md class="mat-elevation-z1">
+          <thead>
+            <th></th>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Città</th>
+          </thead>
+          <tr *ngFor="let c of upcoming; let i = index" [ngClass]="(i%2)===0?'even':'odd'">
+            <td class="wca"><a href="https://www.worldcubeassociation.org/competitions/{{c.id}}" target="blank"><img
+                  src="/assets/images/wca.svg" /></a></td>
+            <td class="date">{{c.getCompDate()}}</td>
+            <td class="name"><a routerLink="./{{c.id}}">{{c.name}}</a></td>
+            <td><strong>{{c.city}}</strong>, {{c.country}}<a class="location"
+                href="https://maps.google.com/?q={{c.address}}" target="blank">
+                <fa-icon icon="external-link-alt"></fa-icon>
+              </a></td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="past && past.length>0">
+        <h2>Competizioni passate</h2>
+        <table fxHide.lt-md class="mat-elevation-z1">
+          <thead>
+            <th></th>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Città</th>
+          </thead>
+          <tr *ngFor="let c of past; let i = index" [ngClass]="(i%2)===0?'even':'odd'">
+            <td class="wca"><a href="https://www.worldcubeassociation.org/competitions/{{c.id}}" target="blank"><img
+                  src="/assets/images/wca.svg" /></a></td>
+            <td class="date">{{c.getCompDate()}}</td>
+            <td class="name"><a routerLink="./{{c.id}}">{{c.name}}</a></td>
+            <td><strong>{{c.city}}</strong>, {{c.country}}<a class="location"
+                href="https://maps.google.com/?q={{c.address}}" target="blank">
+                <fa-icon icon="external-link-alt"></fa-icon>
+              </a></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

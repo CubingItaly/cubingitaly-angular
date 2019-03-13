@@ -39,7 +39,6 @@ export class GeneralComponent implements OnInit {
       if (i > 0) {
         res += ", ";
       }
-      console.log(staff[i]);
       if (staff[i].wca_id) {
         res += `<a href="https://www.worldcubeassociation.org/persons/${staff[i].wca_id}">${staff[i].name}</a>`;
       } else {
