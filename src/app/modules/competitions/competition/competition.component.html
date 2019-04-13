@@ -1,5 +1,5 @@
 <div fxLayout fxLayoutAlign="center">
-  <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration && schedule && directions">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration">
     <h1 ngClass.lt-md="h1xs" ngCLass.gt-sm="h1md">{{competition.name}}</h1>
     <mat-tab-group [selectedIndex]="currentIndex" (selectedIndexChange)="updateURL($event)">
       <mat-tab label="Generale">
@@ -12,10 +12,10 @@
           <registration-info [registration]="registration" [competitionId]="competition.id"></registration-info>
         </ng-template>
       </mat-tab>
-      <mat-tab label="Programma">
+      <mat-tab label="Programma" *ngIf="schedule && schedule.length > 0">
         <schedule-info [schedule]="schedule"></schedule-info>
       </mat-tab>
-      <mat-tab label="Indicazioni">
+      <mat-tab label="Indicazioni" *ngIf="directions && directions.length > 0">
         <ng-template matTabContent>
           <directions-info [directions]="directions"></directions-info>
         </ng-template>

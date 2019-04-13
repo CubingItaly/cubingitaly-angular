@@ -1,3 +1,8 @@
-<p>
-  mobile-row-official works!
-</p>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="mobile">
+      <a href="https://www.worldcubeassociation.org/competitions/{{competition.id}}" target="blank"><img
+                  src="/assets/images/wca.svg" /></a>
+      <div fxLayout="column">
+            <div class="date">{{competition.getCompDate()}}</div>
+            <div class="name"><a routerLink="./{{competition.id}}">{{competition.name}}</a></div>
+      </div>
+</div>

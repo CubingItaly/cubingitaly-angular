@@ -7,6 +7,7 @@ import { CompetitionsComponent } from './competitions/competitions.component';
 import { ArticleModule } from '../article/article.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SliderService } from './services/slider.service';
+import { CompetitionsService } from './services/competitions.service';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { SliderService } from './services/slider.service';
     FlexLayoutModule
   ],
   declarations: [HomepageComponent, WelcomeComponent, CompetitionsComponent],
-  providers: [SliderService],
+  providers: [SliderService, CompetitionsService],
   exports: [HomepageComponent]
 })
 export class HomepageModule { }

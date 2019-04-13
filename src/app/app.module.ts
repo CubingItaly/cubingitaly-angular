@@ -29,7 +29,6 @@ registerLocaleData(localeIt, 'it');
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { WCAService } from './services/wca.service';
 import { MetaManagerService } from './services/meta-manager.service';
 import { TitleManagerService } from './services/title-manager.service';
 import { ErrorHandlerService } from './services/error-handler.service';
@@ -93,7 +92,6 @@ import { LoginModule } from './modules/login/login.module';
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     AuthService,
     UserService,
-    WCAService,
     MetaManagerService,
     TitleManagerService,
     ErrorHandlerService

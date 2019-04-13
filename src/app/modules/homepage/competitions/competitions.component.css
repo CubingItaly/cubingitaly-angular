@@ -30,3 +30,16 @@ h3 a{
 .compdate{
     min-width: 50px;
 }
+
+p{
+    margin-top:5px;
+    margin-bottom: 0px;
+}
+
+.comp{
+    margin-bottom: 15px;
+}
+
+h2{
+    margin-bottom: 10px;
+}

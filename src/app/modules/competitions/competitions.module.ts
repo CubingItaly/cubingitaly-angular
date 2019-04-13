@@ -17,9 +17,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MobileRowComponent } from './mobile-row/mobile-row.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { MobileRowOfficialComponent } from './mobile-row-official/mobile-row-official.component';
+import { DesktopOfficialTableComponent } from './desktop-official-table/desktop-official-table.component';
 
 @NgModule({
-  declarations: [OfficialComponent, CompetitionComponent, GeneralComponent, CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent, ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent],
+  declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
+    CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
