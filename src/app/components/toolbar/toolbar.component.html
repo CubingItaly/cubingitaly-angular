@@ -1,14 +1,36 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row class="first" ngClass.lt-md="first-ld-md" ngClass.gt-sm="first-gt-sm" fxLayout="row" fxLayoutAlign="start center">
+    <mat-toolbar-row class="first" ngClass.lt-md="first-ld-md" ngClass.gt-sm="first-gt-sm" fxLayout="row"
+        fxLayoutAlign="start center">
         <button class="sidenav-button" fxFlex="noshrink" fxHide.gt-sm (click)="sideMenuButtonClicked()" mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
         <a href="https://www.cubingitaly.org"><img src="/assets/images/logo.png" fxFlex="noshrink" /></a>
         <span fxFlex="grow"></span>
+        <div *ngIf="!user?.id">
+            <a mat-button routerLink="/login" fxHide.lt-md>
+                <fa-icon icon="sign-in-alt"></fa-icon><span>Accedi</span>
+            </a>
+            <a mat-icon-button routerLink="/login" fxHide.gt-sm>
+                <fa-icon icon="sign-in-alt" class="login-icon"></fa-icon>
+            </a>
+        </div>
+        <div *ngIf="user?.id" fxFlex="noshrink">
+            <button mat-button [matMenuTriggerFor]="userMenu" fxHide.lt-md>
+                <fa-icon icon="user" class="login-icon"></fa-icon><span>{{user.name}}</span>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="userMenu" fxHide.gt-sm>
+                <fa-icon icon="user"></fa-icon>
+            </button>
+
+            <mat-menu #userMenu="matMenu" xPosition="after">
+                <a routerLink="/pannello" mat-menu-item>Pannello</a>
+                <button (click)="auth.logout()" mat-menu-item>Esci</button>
+            </mat-menu>
+        </div>
     </mat-toolbar-row>
     <mat-toolbar-row class="second" fxHide.lt-md>
         <ng-container *ngFor="let url of menuUrls">
-            <a routerLink="{{url.url}}" [ngClass]="{'a-selected': url.isSelected}" *ngIf="!url.login || (user$ | async)?.id">
+            <a routerLink="{{url.url}}" [ngClass]="{'a-selected': url.isSelected}" *ngIf="!url.login || user?.id">
                 <fa-icon [icon]="[url.iconPrefix,url.icon]"> </fa-icon> {{url.text | uppercase}}
             </a>
         </ng-container>

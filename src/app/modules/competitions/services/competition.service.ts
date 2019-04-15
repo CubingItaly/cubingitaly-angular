@@ -36,4 +36,16 @@ export class CompetitionService {
   public getOfficialCompetitions(): Observable<CompetitionModel[]> {
     return this.http.get(this.apiBase + "/official").pipe(map(res => Deserialize(res, CompetitionModel)));
   }
+
+  public getUpcomingCompetitions(): Observable<CompetitionModel[]> {
+    return this.http.get(this.apiBase + "/upcoming").pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
+
+  public getOnGoingCompetitions(): Observable<CompetitionModel[]> {
+    return this.http.get(this.apiBase + "/ongoing").pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
+
+  public getPastCompetitions(): Observable<CompetitionModel[]> {
+    return this.http.get(this.apiBase + "/past").pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
 }

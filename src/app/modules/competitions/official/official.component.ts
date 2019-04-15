@@ -17,27 +17,9 @@ export class OfficialComponent implements OnInit {
 
   ngOnInit() {
     let now: Date = new Date(new Date().toDateString());
-    this.compSVC.getOfficialCompetitions().subscribe((res: CompetitionModel[]) => {
-      this.inProgress = this.sortCompetitions(res.filter((c: CompetitionModel) => c.startDate <= now && c.endDate >= now));
-      this.upcoming = this.sortCompetitions(res.filter((c: CompetitionModel) => c.startDate > now));
-      this.past = this.sortCompetitions(res.filter((c: CompetitionModel) => c.endDate < now));
-    });
-
+    this.compSVC.getUpcomingCompetitions().subscribe((res: CompetitionModel[]) => this.upcoming = res);
+    this.compSVC.getPastCompetitions().subscribe((res: CompetitionModel[]) => this.past = res);
+    this.compSVC.getOnGoingCompetitions().subscribe((res: CompetitionModel[]) => this.inProgress = res);
   }
-
-  sortCompetitions(comps: CompetitionModel[]): CompetitionModel[] {
-    return comps.sort((a: CompetitionModel, b: CompetitionModel) => {
-      if (a.startDate > b.startDate)
-        return 11;
-      if (a.startDate < b.startDate)
-        return -1;
-      if (a.endDate > b.endDate)
-        return 1;
-      if (a.endDate < b.endDate)
-        return -1;
-      return 0;
-    })
-  }
-
 
 }

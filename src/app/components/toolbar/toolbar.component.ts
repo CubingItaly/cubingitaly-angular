@@ -14,12 +14,12 @@ export class ToolbarComponent implements OnInit {
   @Input('menu') menuUrls: any[];
   @Input() ngModel: boolean = false;
   @Output() ngModelChange = new EventEmitter<boolean>();
-  user$: Observable<UserModel>;
+  user: UserModel;
 
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.user$ = this.auth.user();
+    this.auth.user().subscribe((res: UserModel) => this.user = res);
   }
 
   sideMenuButtonClicked() {

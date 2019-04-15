@@ -37,9 +37,6 @@ export class AppComponent {
     },
     {
       id: "contact", text: "contatti", url: "/contatti", isSelected: false, iconPrefix: "fas", icon: "envelope", login: false
-    },
-    {
-      id: "panel", text: "pannello", url: "/pannello", isSelected: false, iconPrefix: "fas", icon: "lock", login: true
     }
   ];
 
