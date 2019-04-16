@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { routes } from './competition-routing.module';
 import { CompetitionComponent } from './competition/competition.component';
-import { MatTabsModule, MatExpansionModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatTabsModule, MatExpansionModule, MatButtonModule, MatListModule, MatCardModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
 import { CompDatePipe } from './comp-date.pipe';
 import { RegistrationComponent } from './registration/registration.component';
@@ -18,11 +18,12 @@ import { MobileRowComponent } from './mobile-row/mobile-row.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { MobileRowOfficialComponent } from './mobile-row-official/mobile-row-official.component';
 import { DesktopOfficialTableComponent } from './desktop-official-table/desktop-official-table.component';
+import { CompListInfoComponent } from './comp-list-info/comp-list-info.component';
 
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
     CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
-    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent],
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -32,7 +33,8 @@ import { DesktopOfficialTableComponent } from './desktop-official-table/desktop-
     FontAwesomeModule,
     SharedComponentsModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ]
 })
 export class CompetitionsModule { }

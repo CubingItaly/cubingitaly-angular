@@ -7,6 +7,9 @@ import { DirectionsModel } from 'src/app/models/competition/directions.model';
 import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 import { MetaManagerService } from 'src/app/services/meta-manager.service';
 import { TitleManagerService } from 'src/app/services/title-manager.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-edit',
@@ -19,15 +22,16 @@ export class EditComponent implements OnInit, OnDestroy {
   registration: RegistrationModel;
   directions: DirectionsModel[];
   schedule: ScheduleModel[];
-
   updated: boolean;
   initialTab: number = 0;
+  user$: Observable<UserModel>;
 
 
-  constructor(private router: Router, private compSVC: CompetitionEditService, private route: ActivatedRoute, private metaSVC: MetaManagerService, private titleSVC: TitleManagerService) { }
+  constructor(private router: Router, private authSVC: AuthService, private compSVC: CompetitionEditService, private route: ActivatedRoute, private metaSVC: MetaManagerService, private titleSVC: TitleManagerService) { }
 
   ngOnInit() {
     let compId: string = this.route.snapshot.paramMap.get("id");
+    this.user$ = this.authSVC.user();
     this.initialTab = Number(this.route.snapshot.queryParamMap.get("tab")) || 0;
     this.compSVC.getCompetition(compId).subscribe((res: CompetitionModel) => {
       this.competition = res;

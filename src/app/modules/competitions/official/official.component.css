@@ -3,3 +3,7 @@
 h2{
     margin-bottom: 0px;
 }
+
+fa-icon{
+    min-width: 25px;
+}
