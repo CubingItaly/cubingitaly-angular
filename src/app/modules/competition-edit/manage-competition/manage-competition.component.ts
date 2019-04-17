@@ -21,8 +21,6 @@ export class ManageCompetitionComponent implements OnInit, OnChanges {
   @Input() competition: CompetitionModel;
   @Output() competitionChange: EventEmitter<CompetitionModel> = new EventEmitter<CompetitionModel>();
   @Input() registration: RegistrationModel;
-  @Input() schedule: ScheduleModel[];
-  @Input() directions: DirectionsModel[];
   hiddenControl: FormControl;
   officialControl: FormControl
 
@@ -36,8 +34,11 @@ export class ManageCompetitionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    if (changes['competition'].previousValue !== undefined) {
+    if (changes['competition'] && changes['competition'].previousValue !== undefined) {
       this.compClone = Deserialize(Serialize(changes['competition'].currentValue), CompetitionModel);
+    }
+    if (changes['registration'] && this.compClone !== undefined) {
+      this.setControls();
     }
   }
 

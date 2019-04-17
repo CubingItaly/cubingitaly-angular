@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CompetitionEditService } from '../services/competition-edit.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
+import { Deserialize, Serialize } from 'cerialize';
 
 @Component({
   selector: 'edit-general-info',
@@ -146,7 +147,7 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     if (this.editForm.valid && this.organizers.length > 0 && this.delegates.length > 0 && events.length > 0) {
-      let updatedCompetition: CompetitionModel = new CompetitionModel();
+      let updatedCompetition: CompetitionModel = Deserialize(Serialize(this.competition), CompetitionModel);
       updatedCompetition.id = this.editForm.controls['id'].value;
       updatedCompetition.name = this.editForm.controls['name'].value;
       updatedCompetition.startDate = this.editForm.controls['startDate'].value;
@@ -165,10 +166,6 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
       updatedCompetition.organizers = [...this.organizers];
       updatedCompetition.delegates = [...this.delegates];
       updatedCompetition.events = events;
-      updatedCompetition.isHidden = this.competition.isHidden;
-      updatedCompetition.isOfficial = this.competition.isOfficial;
-      updatedCompetition.addressURL = this.competition.addressURL;
-      updatedCompetition.coordinates = this.competition.coordinates;
 
       this.compSVC.updateCompetition(updatedCompetition).subscribe((res: CompetitionModel) => {
         this.competition = res;

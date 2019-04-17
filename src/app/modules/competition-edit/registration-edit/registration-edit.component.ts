@@ -7,6 +7,7 @@ import { ValidatorFn, FormGroup, ValidationErrors, FormControl, Validators } fro
 import { isNumber } from 'util';
 import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
 import { CompetitionEditService } from '../services/competition-edit.service';
+import { Deserialize, Serialize } from 'cerialize';
 
 @Component({
   selector: 'edit-registration-info',
@@ -20,50 +21,67 @@ export class RegistrationEditComponent implements OnInit {
   @Output() registrationChange: EventEmitter<RegistrationModel> = new EventEmitter<RegistrationModel>();
 
   registrationForm: FormGroup;
-  creditCard: boolean = false;
+  card: boolean = false;
   cash: boolean = false;
   paypal: boolean = false;
   paymentMeans: PaymentMeanModel[];
+  selectedPaymenMeans: PaymentMeanModel[];
+  refund: RefundPolicyModel[];
   @Output() updated: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private compSVC: CompetitionEditService) { }
 
   ngOnInit() {
-    this.registrationForm = new FormGroup({
-      'competitorsLimit': new FormControl('', [Validators.min(20)]),
-      'registrationOpen': new FormControl(''),
-      'registrationClose': new FormControl(''),
-      'isRegistrationPaid': new FormControl(''),
-      'registrationFee': new FormControl(''),
-      'newcomerDiscount': new FormControl(''),
-      'newcomerFee': new FormControl(''),
-      'registrationAtTheVenue': new FormControl(''),
-      'atTheVenueFee': new FormControl(''),
-      'guestsPay': new FormControl(''),
-      'guestsFee': new FormControl(''),
-      'maxNumberOfGuests': new FormControl(''),
-      'paypal': new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0)),
-      'cash': new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0)),
-      'cc': new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cc") >= 0)),
-      'paypalLink': new FormControl(''),
-      'refundAvailable': new FormControl(''),
-      'newRefundPolicy': new FormGroup({
-        'percentage': new FormControl(),
-        'deadline': new FormControl()
-      })
-    },
-      { validators: [this.registrationFeeValidator(), this.newcomerFeeValidator(), this.atTheVenueFeeValidator(), this.guestsFeeValidator(), this.atLeastOnePaymentMethod(), this.paypalMeRequired()] });
-    this.sortPolicies(this.registration.refundPolicy);
+    this.setupFormGroup();
+    this.refund = [...this.registration.refundPolicy];
+    this.sortPolicies(this.refund);
     this.compSVC.getPaymentMeans().subscribe((res: PaymentMeanModel[]) => this.paymentMeans = res);
   }
+
+  setupFormGroup() {
+    this.registrationForm = new FormGroup({
+      competitorsLimit: new FormControl(this.registration.competitorsLimit, [Validators.required, Validators.min(20)]),
+      registrationOpen: new FormControl(this.registration.registrationOpen, Validators.required),
+      registrationClose: new FormControl(this.registration.registrationClose, Validators.required),
+      isRegistrationPaid: new FormControl(this.registration.isRegistrationPaid),
+      registrationFee: new FormControl(this.registration.registrationFee),
+      newcomerDiscount: new FormControl(this.registration.newcomerDiscount),
+      newcomerFee: new FormControl(this.registration.newcomerFee),
+      newcomerDetails: new FormControl(this.registration.newcomerDetails),
+      registrationAtTheVenue: new FormControl(this.registration.registrationAtTheVenue),
+      atTheVenueFee: new FormControl(this.registration.atTheVenueFee),
+      atTheVenueDetails: new FormControl(this.registration.atTheVenueDetails),
+      maxNumberOfGuests: new FormControl(this.registration.maxNumberOfGuests),
+      guestsNeedToRegister: new FormControl(this.registration.guestsNeedToRegister),
+      guestsPay: new FormControl(this.registration.guestsPay),
+      guestsFee: new FormControl(this.registration.guestsFee),
+      guestsDetails: new FormControl(this.registration.guestsDetails),
+      paypal: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0)),
+      cash: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0)),
+      card: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cc") >= 0)),
+      paypalLink: new FormControl(this.registration.paypalLink),
+      refundAvailable: new FormControl(this.registration.refundAvailable),
+      newRefundPolicy: new FormGroup({
+        percentage: new FormControl(),
+        deadline: new FormControl()
+      })
+    }, {
+        validators: [
+          this.atLeastOnePaymentMethod(), this.paypalMeRequired(), this.registrationFeeValidator(),
+          this.atTheVenueFeeValidator(), this.guestsFeeValidator(), this.newcomerFeeValidator()
+        ]
+      });
+
+  }
+
 
   atLeastOnePaymentMethod(): ValidatorFn {
     return (control: FormGroup): ValidationErrors | null => {
       const registrationPaid = control.get('isRegistrationPaid').value;
       const paypal = control.get('paypal').value;
-      const creditCard = control.get('cc').value;
+      const card = control.get('card').value;
       const cash = control.get('cash').value;
-      if (registrationPaid && (creditCard || paypal || cash)) {
+      if (registrationPaid && (card || paypal || cash)) {
         return null;
       } else if (!registrationPaid) {
         return null;
@@ -104,14 +122,14 @@ export class RegistrationEditComponent implements OnInit {
 
   refundPolicyValidator(): boolean {
 
-    const registrationPaid = this.registration.isRegistrationPaid;
-    const refund = this.registration.refundAvailable;
+    const registrationPaid = this.registrationForm.get('isRegistrationPaid').value;
+    const refund = this.registrationForm.get('refundAvailable').value;
     const paypal = this.registrationForm.get('paypal').value;
-    const creditCard = this.registrationForm.get('cc').value;
+    const card = this.registrationForm.get('card').value;
 
     if (registrationPaid) {
-      if (refund && (paypal || creditCard)) {
-        if (this.registration.refundPolicy.length === 0) {
+      if (refund && (paypal || card)) {
+        if (this.refund.length === 0) {
           return false;
         }
       }
@@ -169,11 +187,11 @@ export class RegistrationEditComponent implements OnInit {
   }
 
   setPaymentMeans() {
-    this.registration.paymentMeans = [];
+    this.selectedPaymenMeans = [];
     for (let p of this.paymentMeans) {
       let checkbox = this.registrationForm.get(p.id).value;
       if (checkbox) {
-        this.registration.paymentMeans.push(p);
+        this.selectedPaymenMeans.push(p);
       }
     }
   }
@@ -185,9 +203,9 @@ export class RegistrationEditComponent implements OnInit {
       let tempPolicy = new RefundPolicyModel();
       tempPolicy.deadline = deadline.value;
       tempPolicy.percentage = percentage.value;
-      this.registration.refundPolicy.push(tempPolicy);
-      this.registration.refundPolicy = this.sortPolicies(this.registration.refundPolicy);
-      this.registration.refundPolicy = [...this.registration.refundPolicy];
+      this.refund.push(tempPolicy);
+      this.refund = this.sortPolicies(this.refund);
+      this.refund = [...this.refund];
       deadline.setValue("");
       percentage.setValue("");
       deadline.reset();
@@ -198,7 +216,7 @@ export class RegistrationEditComponent implements OnInit {
   }
 
   removePolicy(percentage: number, deadline: Date) {
-    this.registration.refundPolicy = this.registration.refundPolicy.filter((p: RefundPolicyModel) => p.percentage !== percentage && p.deadline !== deadline);
+    this.refund = this.refund.filter((p: RefundPolicyModel) => p.percentage !== percentage && p.deadline !== deadline);
   }
 
 
@@ -216,11 +234,33 @@ export class RegistrationEditComponent implements OnInit {
   updateRegistration() {
     if (this.registrationForm.valid && this.refundPolicyValidator()) {
       this.setPaymentMeans();
-      this.compSVC.updateRegistration(this.competition.id, this.registration).subscribe((res: RegistrationModel) => {
+      let updatedRegistration: RegistrationModel = Deserialize(Serialize(this.registration), RegistrationModel);
+      updatedRegistration.competitorsLimit = this.registrationForm.get('competitorsLimit').value;
+      updatedRegistration.registrationOpen = this.registrationForm.get('registrationOpen').value;
+      updatedRegistration.registrationClose = this.registrationForm.get('registrationClose').value;
+      updatedRegistration.isRegistrationPaid = this.registrationForm.get('isRegistrationPaid').value;
+      updatedRegistration.registrationFee = this.registrationForm.get('registrationFee').value;
+      updatedRegistration.newcomerDiscount = this.registrationForm.get('newcomerDiscount').value;
+      updatedRegistration.newcomerFee = this.registrationForm.get('newcomerFee').value;
+      updatedRegistration.newcomerDetails = this.registrationForm.get('newcomerDetails').value;
+      updatedRegistration.registrationAtTheVenue = this.registrationForm.get('registrationAtTheVenue').value;
+      updatedRegistration.atTheVenueFee = this.registrationForm.get('atTheVenueFee').value;
+      updatedRegistration.atTheVenueDetails = this.registrationForm.get('atTheVenueDetails').value;
+      updatedRegistration.maxNumberOfGuests = this.registrationForm.get('maxNumberOfGuests').value;
+      updatedRegistration.guestsNeedToRegister = this.registrationForm.get('guestsNeedToRegister').value;
+      updatedRegistration.guestsPay = this.registrationForm.get('guestsPay').value;
+      updatedRegistration.guestsFee = this.registrationForm.get('guestsFee').value;
+      updatedRegistration.guestsDetails = this.registrationForm.get('guestsDetails').value;
+      updatedRegistration.paypalLink = this.registrationForm.get('paypalLink').value;
+      updatedRegistration.refundAvailable = this.registrationForm.get('refundAvailable').value;
+      updatedRegistration.refundPolicy = this.refund;
+      updatedRegistration.paymentMeans = this.selectedPaymenMeans;
+
+      this.compSVC.updateRegistration(this.competition.id, updatedRegistration).subscribe((res: RegistrationModel) => {
         this.registration = res;
-        this.registrationChange.emit(this.registration);
-        this.actionAfterUpdate()
-      });
+        this.registrationChange.emit(res);
+        this.actionAfterUpdate();
+      })
     } else {
       throw new BadRequestError("Per poter aggiornare la registrazione è necessario compilare tutti i campi richiesti");
     }

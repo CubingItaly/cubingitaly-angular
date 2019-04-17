@@ -111,4 +111,7 @@ export class CompetitionEditService {
     return this.http.get<PaymentMeanModel>(this.apiBase + "/paymentmeans").pipe(map(res => Deserialize(res, PaymentMeanModel)));
   }
 
+  public getIfExists(id: string): Observable<any> {
+    return this.http.get<any>(this.apiBase + "/" + id + "/exists");
+  }
 }

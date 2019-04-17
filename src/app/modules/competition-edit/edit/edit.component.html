@@ -6,10 +6,10 @@
       <mat-tab label="Generale">
         <edit-general-info (updated)="updated=$event" [(competition)]="competition"></edit-general-info>
       </mat-tab>
-      <!-- <mat-tab label="Registrazione">
+      <mat-tab label="Registrazione">
         <edit-registration-info (updated)="updated=$event" [(registration)]="registration" [competition]="competition">
         </edit-registration-info>
-      </mat-tab>-->
+      </mat-tab>
       <mat-tab label="Schedule" *ngIf="(user$ | async)?.isDelOrgOf(competition)">
         <edit-schedule-info [competitionId]="competition.id"></edit-schedule-info>
       </mat-tab>
@@ -18,8 +18,7 @@
         </edit-directions-info>
       </mat-tab>
       <mat-tab label="Gestione">
-        <manage-competition [(competition)]="competition" [registration]="registration" [directions]="directions"
-          [schedule]="schedule"></manage-competition>
+        <manage-competition [(competition)]="competition" [registration]="registration"></manage-competition>
       </mat-tab>
     </mat-tab-group>
   </div>
