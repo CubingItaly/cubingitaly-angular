@@ -18,7 +18,7 @@ export class CompetitionsService {
     }
 
     public getOnGoingCompetitions(): Observable<CompetitionModel[]> {
-        return this.http.get<CompetitionModel[]>("/api/v0/competitions/ongoing?date=2019-04-15").pipe(map(res => Deserialize(res, CompetitionModel)));
+        return this.http.get<CompetitionModel[]>("/api/v0/competitions/ongoing").pipe(map(res => Deserialize(res, CompetitionModel)));
     }
 
 }

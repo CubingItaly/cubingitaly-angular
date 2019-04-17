@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnDestroy, OnChanges, SimpleChange } from '@angular/core';
 import { CompetitionModel } from 'src/app/models/competition.model';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { UserModel } from 'src/app/models/user.model';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './general-edit.component.html',
   styleUrls: ['./general-edit.component.css']
 })
-export class GeneralEditComponent implements OnInit, OnDestroy {
+export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() competition: CompetitionModel;
   @Output() competitionChange: EventEmitter<CompetitionModel> = new EventEmitter<CompetitionModel>();
@@ -47,8 +47,6 @@ export class GeneralEditComponent implements OnInit, OnDestroy {
     this.compSVC.getEvents().subscribe((e: EventModel[]) => { this.eventsList = e; this.setupEvents() });
     this.organizerControl = new FormControl();
     this.delegateControl = new FormControl();
-    this.delegates = [... this.competition.delegates];
-    this.organizers = [... this.competition.organizers];
 
     this.delSub = this.delegateControl.valueChanges.pipe(debounceTime(400))
       .subscribe(name => {
@@ -64,6 +62,8 @@ export class GeneralEditComponent implements OnInit, OnDestroy {
   }
 
   setupFormControl(): void {
+    this.delegates = [... this.competition.delegates];
+    this.organizers = [... this.competition.organizers];
     this.editForm = new FormGroup({
       id: new FormControl({ value: this.competition.id, disabled: true }, Validators.required),
       name: new FormControl(this.competition.name, Validators.required),
@@ -87,6 +87,13 @@ export class GeneralEditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.orgSub.unsubscribe();
     this.delSub.unsubscribe();
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (changes['competition'].currentValue !== changes['competition'].previousValue && changes['competition'].previousValue !== undefined) {
+      this.setupEvents();
+      this.setupFormControl();
+    }
   }
 
   setupEvents() {
@@ -158,12 +165,15 @@ export class GeneralEditComponent implements OnInit, OnDestroy {
       updatedCompetition.organizers = [...this.organizers];
       updatedCompetition.delegates = [...this.delegates];
       updatedCompetition.events = events;
+      updatedCompetition.isHidden = this.competition.isHidden;
+      updatedCompetition.isOfficial = this.competition.isOfficial;
+      updatedCompetition.addressURL = this.competition.addressURL;
+      updatedCompetition.coordinates = this.competition.coordinates;
 
       this.compSVC.updateCompetition(updatedCompetition).subscribe((res: CompetitionModel) => {
         this.competition = res;
         this.competitionChange.emit(res);
         this.actionAfterUpdate();
-        this.setupFormControl();
       });
     } else {
       throw new BadRequestError("Per poter aggiornare una competizione è necessario tutti i dati richiesti, inclusi delegati, organizzatori ed eventi.");
@@ -172,6 +182,8 @@ export class GeneralEditComponent implements OnInit, OnDestroy {
 
 
   private actionAfterUpdate() {
+    this.setupEvents();
+    this.setupFormControl();
     const pageTitle = document.querySelector('h1') as HTMLElement;
     pageTitle.scrollIntoView();
     this.updated.emit(true);
