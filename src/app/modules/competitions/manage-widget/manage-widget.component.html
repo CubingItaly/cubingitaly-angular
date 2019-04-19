@@ -1,12 +1,12 @@
 <h2>Gestione competizioni</h2>
 <mat-list>
   <a routerLink="./mie" mat-list-item>
-    <fa-icon icon="list"></fa-icon>Tue competizioni
+    <fa-icon icon="list"></fa-icon>Le mie competizioni
   </a>
   <a routerLink="/competizioni/edit/new" mat-list-item *ifRole="'cComp'">
-    <fa-icon icon="plus-square"></fa-icon>Crea nuova
+    <fa-icon icon="plus-square"></fa-icon>Nuova competizione
   </a>
   <a routerLink="/competizioni/admin" mat-list-item *ifRole="'aComp'">
-    <fa-icon icon="wrench"></fa-icon>Amministra
+    <fa-icon icon="wrench"></fa-icon>Amministrazione
   </a>
 </mat-list>
