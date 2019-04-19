@@ -11,14 +11,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit,
-  faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown, faSignInAlt,
-  faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faTrophy, faQuestion, faAngleDown, faAngleUp, faExternalLinkAlt
+  faTrash, faPlusSquare, faEye, faList, faWrench, faBars, faLongArrowAltDown, faSignInAlt,
+  faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faHammer, faTrophy, faQuestion, faAngleDown, faAngleUp, faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper, faCopyright } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faTwitter, faTelegram, faYoutube, faTelegramPlane, faInstagram, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faHome, faInfoCircle, faLink, faTelegramPlane, faPlusCircle, faSignInAlt, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
-  faFacebookF, faTwitter, faTelegram, faAngleUp, faArrowCircleUp, faExternalLinkAlt, faAngleDown, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
+library.add(faHome, faInfoCircle, faLink, faWrench, faTelegramPlane, faPlusCircle, faSignInAlt, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
+  faFacebookF, faTwitter, faTelegram, faAngleUp, faHammer, faArrowCircleUp, faExternalLinkAlt, faAngleDown, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
 
 
 import { registerLocaleData } from '@angular/common';
@@ -53,7 +53,6 @@ import { HomepageModule } from './modules/homepage/homepage.module';
 import { AboutUsModule } from './modules/about-us/about-us.module';
 import { LoginModule } from './modules/login/login.module';
 import { MatMenuModule } from '@angular/material';
-
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
 <div class="general-container" fxLayout fxLayoutAlign="center">
-  <form [formGroup]="editForm" fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px"
+  <form [formGroup]="editForm" fxFlex="80%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px"
     (ngSubmit)="onSubmit()">
-
+    <h1>Nuova competizione</h1>
     <mat-form-field>
       <input type="text" matInput name="id" formControlName="id" placeholder="ID della competizione">
       <mat-hint>L'ID WCA della competizione, lo stesso assegnato dalla WCA. Non inserire spazi.</mat-hint>

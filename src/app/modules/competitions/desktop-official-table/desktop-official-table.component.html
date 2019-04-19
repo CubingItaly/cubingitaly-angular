@@ -3,15 +3,15 @@
     <th></th>
     <th>Data</th>
     <th>Nome</th>
-    <th>Città</th>
+    <th fxHide.lt-lg>Città</th>
   </thead>
   <tr *ngFor="let c of competitions; let i = index" [ngClass]="(i%2)===0?'even':'odd'">
     <td class="wca"><a href="https://www.worldcubeassociation.org/competitions/{{c.id}}" target="blank"><img
           src="/assets/images/wca.svg" /></a></td>
     <td class="date">{{ c | compDays}}</td>
     <td class="name"><a routerLink="./{{c.id}}">{{c.name}}</a></td>
-    <td><strong>{{c.city}}</strong>, {{c.country}}<a class="location" href="https://maps.google.com/?q={{c.address}}"
-        target="blank">
+    <td fxHide.lt-lg><strong>{{c.city}}</strong>, {{c.country}}<a class="location"
+        href="https://maps.google.com/?q={{c.address}}" target="blank">
         <fa-icon icon="external-link-alt"></fa-icon>
       </a></td>
   </tr>

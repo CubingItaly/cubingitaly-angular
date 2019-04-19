@@ -16,6 +16,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ManageCompetitionComponent } from './manage-competition/manage-competition.component';
 import { CompetitionEditService } from './services/competition-edit.service';
 import { CompEditGuardService } from './services/comp-edit-guard.service';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   declarations: [EditComponent, NewComponent, GeneralEditComponent, RegistrationEditComponent, DirectionsEditComponent, ScheduleEditComponent, ManageCompetitionComponent],
@@ -38,7 +39,8 @@ import { CompEditGuardService } from './services/comp-edit-guard.service';
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    SharedComponentsModule
   ],
   providers: [CompetitionEditService, CompEditGuardService]
 })

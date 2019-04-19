@@ -22,11 +22,18 @@ import { CompListInfoComponent } from './comp-list-info/comp-list-info.component
 import { MyCompetitionsComponent } from './my-competitions/my-competitions.component';
 import { MyDesktopTableComponent } from './my-desktop-table/my-desktop-table.component';
 import { CompDaysPipe } from './comp-days.pipe';
+import { MyMobileRowComponent } from './my-mobile-row/my-mobile-row.component';
+import { PageModule } from '../page/page.module';
+import { OrganizeWidgetComponent } from './organize-widget/organize-widget.component';
+import { KeepUpWidgetComponent } from './keep-up-widget/keep-up-widget.component';
+import { ManageWidgetComponent } from './manage-widget/manage-widget.component';
+import { CandidateComponent } from './candidate/candidate.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
     CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
-    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe],
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe, MyMobileRowComponent, OrganizeWidgetComponent, KeepUpWidgetComponent, ManageWidgetComponent, CandidateComponent, AdminComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -37,7 +44,8 @@ import { CompDaysPipe } from './comp-days.pipe';
     SharedComponentsModule,
     MatButtonModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    PageModule
   ]
 })
 export class CompetitionsModule { }

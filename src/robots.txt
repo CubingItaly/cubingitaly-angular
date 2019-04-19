@@ -13,3 +13,6 @@ disallow: /permesso-negato
 disallow: /faq/new
 disallow: /faq/admin
 disallow: /faq/edit
+disallow: /competizioni/edit
+disallow: /competizioni/mie
+disallow: /competizioni/admin

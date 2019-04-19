@@ -2,7 +2,7 @@
   <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="row" fxLayoutGap="20px">
     <div fxFlex.lt-md="100%" fxFlex.gt-sm="75%">
       <div *ngIf="competitions && competitions.length>0">
-        <h2>Competizioni organizzate o delegate</h2>
+        <h2>Competizioni</h2>
         <my-mobile-row fxHide.gt-sm *ngFor="let c of competitions" [competition]="c"></my-mobile-row>
         <my-desktop-table fxHide.lt-md [competitions]="competitions"></my-desktop-table>
       </div>

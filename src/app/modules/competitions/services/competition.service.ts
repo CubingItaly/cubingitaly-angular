@@ -52,4 +52,8 @@ export class CompetitionService {
   public getMyCompetitions(): Observable<CompetitionModel[]> {
     return this.http.get(this.apiBase + "/mine").pipe(map(res => Deserialize(res, CompetitionModel)));
   }
+
+  public getAdminCompetitions(): Observable<CompetitionModel[]> {
+    return this.http.get(this.apiBase + "/all").pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
 }

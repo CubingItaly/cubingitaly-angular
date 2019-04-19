@@ -8,10 +8,10 @@
         <span fxFlex="grow"></span>
         <div *ngIf="!user?.id">
             <a mat-button routerLink="/login" fxHide.lt-md>
-                <fa-icon icon="sign-in-alt"></fa-icon><span>Accedi</span>
+                <fa-icon icon="sign-in-alt" class="login-icon"></fa-icon><span>Accedi</span>
             </a>
             <a mat-icon-button routerLink="/login" fxHide.gt-sm>
-                <fa-icon icon="sign-in-alt" class="login-icon"></fa-icon>
+                <fa-icon icon="sign-in-alt"></fa-icon>
             </a>
         </div>
         <div *ngIf="user?.id" fxFlex="noshrink">

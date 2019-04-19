@@ -11,6 +11,8 @@ import { CompetitionEditService } from '../services/competition-edit.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { TitleManagerService } from 'src/app/services/title-manager.service';
+import { MetaManagerService } from 'src/app/services/meta-manager.service';
 
 @Component({
   selector: 'app-new',
@@ -42,7 +44,7 @@ export class NewComponent implements OnInit, OnDestroy {
 
   editForm: FormGroup;
 
-  constructor(private userSVC: UserService, private router: Router, private compSVC: CompetitionEditService) { }
+  constructor(private titleSVC: TitleManagerService, private metaSVC: MetaManagerService, private userSVC: UserService, private router: Router, private compSVC: CompetitionEditService) { }
 
   ngOnInit() {
     this.competition = new CompetitionModel();
@@ -63,7 +65,11 @@ export class NewComponent implements OnInit, OnDestroy {
       });
 
     this.setupFormControl();
+    this.titleSVC.setTitle(`Nuova Competizione`);
+    this.metaSVC.addMeta("robots", "noindex,nofollow");
   }
+
+
 
   setupFormControl(): void {
     this.editForm = new FormGroup({
@@ -95,6 +101,7 @@ export class NewComponent implements OnInit, OnDestroy {
     this.idSub.unsubscribe();
     this.orgSub.unsubscribe();
     this.delSub.unsubscribe();
+    this.metaSVC.removeMeta("robots");
   }
 
   setupEvents() {

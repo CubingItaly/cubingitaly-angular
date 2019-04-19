@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -7,11 +7,12 @@ import { tap } from 'rxjs/operators';
 @Directive({
   selector: '[ifRole]'
 })
-export class RoleDirective {
+export class RoleDirective implements OnChanges {
   @Input("ifRole") role: string;
   @Input("ifRoleIfParam") extraParam: any;
 
   user$: Subscription;
+  private user: UserModel;
 
   constructor(private auth: AuthService,
     private templateRef: TemplateRef<any>,
@@ -22,25 +23,37 @@ export class RoleDirective {
     this.user$ = this.auth.user().pipe(
       tap(() => this.viewContainer.clear()))
       .subscribe((u: UserModel) => {
-        let reverse: boolean = false;
-        let actualRole: string = this.role;
-        if (this.role.startsWith("!")) {
-          reverse = true;
-          actualRole = actualRole.substr(1);
-        }
-        let check: boolean = this.checkCondition(u, actualRole);
-        check = reverse ? !check : check;
-        if (check) {
-          this.viewContainer.createEmbeddedView(this.templateRef);
-        } else {
-          this.viewContainer.clear();
-        }
+        this.user = u;
+        this.managePermission();
       });
 
+  }
+  private managePermission() {
+    let reverse: boolean = false;
+    let actualRole: string = this.role;
+    if (this.role.startsWith("!")) {
+      reverse = true;
+      actualRole = actualRole.substr(1);
+    }
+    let check: boolean = this.checkCondition(this.user, actualRole);
+    check = reverse ? !check : check;
+    if (check) {
+      this.viewContainer.createEmbeddedView(this.templateRef);
+    } else {
+      this.viewContainer.clear();
+    }
   }
 
   ngOnDestroy() {
     this.user$.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.extraParam && changes.extraParam.currentValue) {
+      if (this.user) {
+        this.managePermission();
+      }
+    }
   }
 
   checkCondition(u: UserModel, role: string): boolean {
@@ -83,6 +96,8 @@ export class RoleDirective {
         return (u.id !== undefined) && u.canCreateCompetitions();
       case "annComp":
         return (u.id !== undefined) && u.canAnnounceCompetition(this.extraParam);
+      case "delOrgComp":
+        return (u.id !== undefined) && u.isDelOrgOf(this.extraParam);
       default:
         return false;
     }
