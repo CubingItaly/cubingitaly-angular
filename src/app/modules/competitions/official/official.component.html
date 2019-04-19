@@ -1,6 +1,6 @@
-<div fxLayout fxLayoutAlign="center" class="officialcontainer">
-  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout="row" fxLayoutGap="20px">
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="75%">
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="20px">
+    <div fxFlex.gt-sm="75%">
       <div *ngIf="inProgress && inProgress.length>0">
         <h2>Competizioni in corso</h2>
         <official-mobile-row fxHide.gt-sm *ngFor="let c of inProgress" [competition]="c"></official-mobile-row>
@@ -17,7 +17,7 @@
         <desktop-official-table fxHide.lt-md [competitions]="past"></desktop-official-table>
       </div>
     </div>
-    <div fxFlex="30%" fxLayout="column">
+    <div fxFlex.gt-sm="25%" fxLayout="column">
       <h2>Organizzare</h2>
       <mat-list>
         <a href="https://www.cubingitaly.org/tutorial/come-organizzare-una-competizione" mat-list-item>Organizzare una
@@ -25,7 +25,6 @@
         <a routerLink="/competizioni/proposte" mat-list-item>Competizioni proposte</a>
         <a href="https://www.worldcubeassociation.org/competitions" mat-list-item>Tutte le competizioni</a>
       </mat-list>
-
       <h2>Rimani aggiornato</h2>
       <mat-list>
         <a href="https://t.me/cubingitaly" mat-list-item>

@@ -8,12 +8,14 @@ import { ArticleModule } from '../article/article.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SliderService } from './services/slider.service';
 import { CompetitionsService } from './services/competitions.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     SlideshowModule,
     ArticleModule,
+    RouterModule,
     FlexLayoutModule
   ],
   declarations: [HomepageComponent, WelcomeComponent, CompetitionsComponent],

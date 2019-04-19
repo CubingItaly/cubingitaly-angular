@@ -19,11 +19,14 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { MobileRowOfficialComponent } from './mobile-row-official/mobile-row-official.component';
 import { DesktopOfficialTableComponent } from './desktop-official-table/desktop-official-table.component';
 import { CompListInfoComponent } from './comp-list-info/comp-list-info.component';
+import { MyCompetitionsComponent } from './my-competitions/my-competitions.component';
+import { MyDesktopTableComponent } from './my-desktop-table/my-desktop-table.component';
+import { CompDaysPipe } from './comp-days.pipe';
 
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
     CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
-    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent],
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -98,6 +98,7 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   setupEvents() {
+    this.selectedEvents = [];
     for (let e of this.eventsList) {
       let index = this.competition.events.findIndex((t: EventModel) => t.id === e.id);
       if (index < 0) {
