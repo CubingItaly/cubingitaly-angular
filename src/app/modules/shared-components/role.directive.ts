@@ -37,10 +37,9 @@ export class RoleDirective implements OnChanges {
     }
     let check: boolean = this.checkCondition(this.user, actualRole);
     check = reverse ? !check : check;
+    this.viewContainer.clear();
     if (check) {
       this.viewContainer.createEmbeddedView(this.templateRef);
-    } else {
-      this.viewContainer.clear();
     }
   }
 

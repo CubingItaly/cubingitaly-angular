@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
     if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0) {
       this.isPaymentCash = true;
     }
-    if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cc") >= 0) {
+    if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "card") >= 0) {
       this.isPaymentCC = true;
     }
     if (this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0) {

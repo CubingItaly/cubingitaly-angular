@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { CompetitionModel } from 'src/app/models/competition.model';
 import { RegistrationModel } from 'src/app/models/competition/registration.model';
-import { ScheduleModel } from 'src/app/models/competition/schedule.model';
-import { DirectionsModel } from 'src/app/models/competition/directions.model';
 import { MatSlideToggleChange, MatDialog } from '@angular/material';
 import { CompetitionEditService } from '../services/competition-edit.service';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
@@ -23,67 +21,68 @@ export class ManageCompetitionComponent implements OnInit, OnChanges {
   @Input() registration: RegistrationModel;
   hiddenControl: FormControl;
   officialControl: FormControl
-
-  private compClone: CompetitionModel;
+  initComplete: boolean = false;
 
   constructor(private compSVC: CompetitionEditService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
-    this.compClone = Deserialize(Serialize(this.competition), CompetitionModel);
+    this.officialControl = new FormControl();
+    this.hiddenControl = new FormControl();
+    this.initComplete = true;
     this.setControls();
   }
 
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    if (changes['competition'] && changes['competition'].previousValue !== undefined) {
-      this.compClone = Deserialize(Serialize(changes['competition'].currentValue), CompetitionModel);
-    }
-    if (changes['registration'] && this.compClone !== undefined) {
-      this.setControls();
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.initComplete) {
+      if (changes.competition || changes.registration) {
+        this.setControls();
+      }
     }
   }
 
   setControls() {
-    this.officialControl = new FormControl({ value: this.compClone.isOfficial, disabled: (!this.compClone.isOfficial && !this.registration.isComplete) });
-    this.hiddenControl = new FormControl({ value: this.compClone.isHidden, disabled: !this.registration.isComplete });
+    this.officialControl.setValue(this.competition.isOfficial);
+    this.hiddenControl.setValue(this.competition.isHidden);
+    this.registration.isComplete ? this.officialControl.enable() : this.officialControl.disable();
+    this.competition.isOfficial ? this.hiddenControl.enable() : this.hiddenControl.disable();
+
+  }
+
+  officialChange() {
+    let message = this.competition.isOfficial ? "Sei sicuro di voler annullare la pubblicazione della competizione?" : "Sei sicuro di voler pubblicare la competizione?";
+    let obs = this.createDialog(message);
+    obs.subscribe((result: boolean) => {
+      if (result) {
+        let compClone: CompetitionModel = Deserialize(Serialize(this.competition), CompetitionModel);
+        compClone.isOfficial = !compClone.isOfficial;
+        this.compSVC.adminUpdateCompetition(compClone).subscribe((res: CompetitionModel) => this.competitionChange.emit(res));
+      } else {
+        this.officialControl.setValue(!this.officialControl.value);
+      }
+    });
+  }
+
+  hiddenChange() {
+    let message = this.competition.isHidden ? "Sei sicuro di voler rendere visibile la competizione?" : "Sei sicuro di voler nascondere la competizione?";
+    let obs = this.createDialog(message);
+    obs.subscribe((result: boolean) => {
+      if (result) {
+        let compClone: CompetitionModel = Deserialize(Serialize(this.competition), CompetitionModel);
+        compClone.isHidden = !compClone.isHidden;
+        this.compSVC.adminUpdateCompetition(compClone).subscribe((res: CompetitionModel) => this.competitionChange.emit(res));
+      } else {
+        this.hiddenControl.setValue(!this.hiddenControl.value);
+      }
+    });
   }
 
   deleteCompetition() {
     let obs = this.createDialog("Sei sicuro di voler cancellare la competizione? l'azione non è reversibile");
     obs.subscribe((result: boolean) => {
       if (result) {
-        this.compSVC.deleteCompetition(this.compClone.id).subscribe(() => this.router.navigate(['/']));
+        this.compSVC.deleteCompetition(this.competition.id).subscribe(() => this.router.navigate(['/competizioni']));
       }
     });
-  }
-
-  officialSlider(event: MatSlideToggleChange) {
-    let message = this.compClone.isOfficial ? "Sei sicuro di voler annullare la pubblicazione della competizione?" : "Sei sicuro di voler pubblicare la competizione?";
-    let obs = this.createDialog(message);
-    obs.subscribe((result: boolean) => {
-      if (result) {
-        this.compClone.isOfficial = event.checked;
-        this.adminUpdateCompetition();
-      } else {
-        this.officialControl.setValue(!event.checked);
-      }
-    });
-  }
-
-  hiddenSlider(event: MatSlideToggleChange) {
-    let message = this.compClone.isHidden ? "Sei sicuro di voler rendere visibile la competizione?" : "Sei sicuro di voler nascondere la competizione?";
-    let obs = this.createDialog(message);
-    obs.subscribe((result: boolean) => {
-      if (result) {
-        this.compClone.isHidden = event.checked;
-        this.adminUpdateCompetition();
-      } else {
-        this.hiddenControl.setValue(!event.checked);
-      }
-    });
-  }
-
-  private adminUpdateCompetition() {
-    this.compSVC.adminUpdateCompetition(this.compClone).subscribe((res: CompetitionModel) => this.competitionChange.emit(res));
   }
 
   private createDialog(message: string): Observable<any> {
