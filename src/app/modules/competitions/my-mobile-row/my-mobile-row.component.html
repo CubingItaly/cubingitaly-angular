@@ -3,9 +3,9 @@
       src="/assets/images/wca.svg" /></a>
   <div fxLayout="column" fxFlex="grow">
     <div class="date">{{competition | compDays}}</div>
-    <div class="name"><a routerLink="./{{competition.id}}">{{competition.name}}</a></div>
+    <div class="name"><a routerLink="/competizioni/{{competition.id}}">{{competition.name}}</a></div>
   </div>
-  <a routerLink="../{{competition.id}}">
+  <a routerLink="/competizioni/{{competition.id}}">
     <fa-icon icon="eye"></fa-icon>
   </a>
   <a routerLink="/competizioni/edit/{{competition.id}}">
