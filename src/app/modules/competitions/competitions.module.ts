@@ -7,7 +7,7 @@ import { routes } from './competition-routing.module';
 import { CompetitionComponent } from './competition/competition.component';
 import { MatTabsModule, MatExpansionModule, MatButtonModule, MatListModule, MatCardModule } from '@angular/material';
 import { GeneralComponent } from './general/general.component';
-import { CompDatePipe } from './comp-date.pipe';
+import { CompDatePipe } from './pipes/comp-date.pipe';
 import { RegistrationComponent } from './registration/registration.component';
 import { DirectionsComponent } from './directions/directions.component';
 import { HtmlViewerModule } from '../html-viewer/html-viewer.module';
@@ -18,10 +18,9 @@ import { MobileRowComponent } from './mobile-row/mobile-row.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { MobileRowOfficialComponent } from './mobile-row-official/mobile-row-official.component';
 import { DesktopOfficialTableComponent } from './desktop-official-table/desktop-official-table.component';
-import { CompListInfoComponent } from './comp-list-info/comp-list-info.component';
 import { MyCompetitionsComponent } from './my-competitions/my-competitions.component';
 import { MyDesktopTableComponent } from './my-desktop-table/my-desktop-table.component';
-import { CompDaysPipe } from './comp-days.pipe';
+import { CompDaysPipe } from './pipes/comp-days.pipe';
 import { MyMobileRowComponent } from './my-mobile-row/my-mobile-row.component';
 import { PageModule } from '../page/page.module';
 import { OrganizeWidgetComponent } from './organize-widget/organize-widget.component';
@@ -33,7 +32,7 @@ import { AdminComponent } from './admin/admin.component';
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
     CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
-    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, CompListInfoComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe, MyMobileRowComponent, OrganizeWidgetComponent, KeepUpWidgetComponent, ManageWidgetComponent, CandidateComponent, AdminComponent],
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe, MyMobileRowComponent, OrganizeWidgetComponent, KeepUpWidgetComponent, ManageWidgetComponent, CandidateComponent, AdminComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

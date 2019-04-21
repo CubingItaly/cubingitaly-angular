@@ -53,6 +53,7 @@ import { HomepageModule } from './modules/homepage/homepage.module';
 import { AboutUsModule } from './modules/about-us/about-us.module';
 import { LoginModule } from './modules/login/login.module';
 import { MatMenuModule } from '@angular/material';
+import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { MatMenuModule } from '@angular/material';
     MatIconModule,
     ContactModule,
     ShareButtonsModule,
-    MatMenuModule
+    MatMenuModule,
+    SharedComponentsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true },

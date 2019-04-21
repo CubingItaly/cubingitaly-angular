@@ -33,6 +33,7 @@ export class GeneralComponent implements OnInit {
   }
 
   getPeople(delegates: boolean): string {
+    console.log("call");
     let res: string = "";
     let staff: UserModel[] = delegates ? this.competition.delegates : this.competition.organizers;
     for (let i = 0; i < staff.length; i++) {

@@ -112,20 +112,27 @@
       <table>
         <tr>
           <th>Delegati WCA</th>
-          <td [innerHtml]="getPeople(true)"></td>
+          <td>
+            <ng-container *ngFor="let d of competition.delegates; let l=last">
+              <a href="https://www.worldcubeassociation.org/persons/{{d.wca_id}}" *ngIf="d.wca_id">{{d.name}}</a>
+              <span *ngIf="!d.wca_id">{{d.name}}</span>{{l?"":", "}}
+            </ng-container>
+          </td>
         </tr>
         <tr>
           <th>Organizzatori</th>
-          <td [innerHtml]="getPeople(false)"></td>
+          <td>
+            <ng-container *ngFor="let o of competition.organizers; let l=last">
+              <a *ngIf="o.wca_id" href="https://www.worldcubeassociation.org/persons/{{o.wca_id}}">{{o.name}}</a>
+              <span *ngIf="!o.wca_id">{{o.name}}</span>{{l?"":", "}}
+            </ng-container>
+          </td>
         </tr>
         <tr *ngIf="competition.extraInformation">
           <th>Informazioni aggiuntive</th>
           <td>{{competition.extraInformation}}</td>
         </tr>
       </table>
-
-
-
     </div>
   </div>
 </div>

@@ -4,9 +4,10 @@
       <div fxLayout="column" fxLayoutGap="10px">
         <a mat-button style="height: 0px"></a>
         <ng-container *ngFor="let url of menuUrls">
-          <a mat-button routerLink="{{url.url}}" (click)="sidenav.close()" [ngClass]="{'a-selected': url.isSelected}"
-            *ngIf="!url.login || (user$ | async)?.id"><fa-icon [icon]="[url.iconPrefix,url.icon]"></fa-icon>{{url.text |
-            uppercase}}</a>
+          <a mat-button routerLink="{{url.url}}" (click)="sidenav.close()" [ngClass]="{'a-selected': url.isSelected}">
+            <fa-icon [icon]="[url.iconPrefix,url.icon]"></fa-icon>{{url.text |
+            uppercase}}
+          </a>
         </ng-container>
       </div>
 

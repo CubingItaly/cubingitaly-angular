@@ -27,20 +27,21 @@
           association</a>.</li>
       <li *ngIf="isPaymentCash">Il pagamento dovrà essere effettuato in contanti direttamente il giorno della
         competizione</li>
-      <li *ngIf="isPaymentPaypal && isPaymentCC">Il pagamento può essere effettuato sia tramite carta di credito che
+      <li *ngIf="isPaymentPaypal && isPaymentCC">Il pagamento può essere effettuato sia tramite carta che
         tramite PayPal.</li>
       <li *ngIf="isPaymentPaypal">Per effettuare il pagamento tramite Paypal, è sufficiente utilizzare <a
           href="{{registration.paypalLink}}">questo link</a>.<br />
         Durante il pagamento <strong>è importante ricordarsi di specificare nella causale il nome e il cognome del
           partecipante</strong>, in modo da poter associare il pagamento alla registrazione.</li>
-      <li *ngIf="isPaymentCC">Per effettuare il pagamento tramite carta di credito, è sufficiente registrarsi alla
+      <li *ngIf="isPaymentCC">Per effettuare il pagamento tramite carta, è sufficiente registrarsi alla
         competizione sul sito della World Cube Association come indicato al punto nr. 1 e successivamente premere il
         bottone per pagare.</li>
       <li>Una volta effettuata la registrazione è necessario attendere fino a 48h prima di vedere il proprio nome
         nell'elenco partecipanti in quanto <strong>l'accettazione della registrazione non è automatica</strong> ma deve
         essere effettuata manualmente.</li>
     </ol>
-    <p><strong>Nota bene: in caso di esaurimento dei posti disponibili, per poter essere inseriti nella lista d'attesa è
+    <p *ngIf="isPaymentPaypal || isPaymentCC"><strong>Nota bene: in caso di esaurimento dei posti disponibili, per poter
+        essere inseriti nella lista d'attesa è
         comunque necessario effettuare il pagamento che, in caso di mancata partecipazione, sarà completamente
         rimborsato.</strong></p>
 

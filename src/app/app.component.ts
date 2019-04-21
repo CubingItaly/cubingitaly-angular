@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   isSidebarOpened: boolean = false;
-  user$: Observable<UserModel>;
   @ViewChild("sidenav") sidenav: MatSidenav;
 
   menuUrls: { id: string, text: string, url: string, isSelected: boolean, iconPrefix: string, icon: string, login: boolean }[] = [
@@ -42,7 +41,6 @@ export class AppComponent {
 
   constructor(public auth: AuthService, private router: Router) { }
   ngOnInit() {
-    this.user$ = this.auth.user();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let slashIndex = event.url.indexOf("/", 1);

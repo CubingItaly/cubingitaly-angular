@@ -6,7 +6,7 @@
         </button>
         <a href="https://www.cubingitaly.org"><img src="/assets/images/logo.png" fxFlex="noshrink" /></a>
         <span fxFlex="grow"></span>
-        <div *ngIf="!user?.id">
+        <div *ifRole="'guest'">
             <a mat-button routerLink="/login" fxHide.lt-md>
                 <fa-icon icon="sign-in-alt" class="login-icon"></fa-icon><span>Accedi</span>
             </a>
@@ -14,7 +14,7 @@
                 <fa-icon icon="sign-in-alt"></fa-icon>
             </a>
         </div>
-        <div *ngIf="user?.id" fxFlex="noshrink">
+        <div *ifRole="'user'" fxFlex="noshrink">
             <button mat-button [matMenuTriggerFor]="userMenu" fxHide.lt-md>
                 <fa-icon icon="user" class="login-icon"></fa-icon><span>{{user.name}}</span>
             </button>
@@ -23,6 +23,7 @@
             </button>
 
             <mat-menu #userMenu="matMenu" xPosition="after">
+                <button mat-menu-item fxHide.gt-sm><span>{{user.name}}</span></button>
                 <a routerLink="/pannello" mat-menu-item>Pannello</a>
                 <button (click)="auth.logout()" mat-menu-item>Esci</button>
             </mat-menu>
@@ -30,7 +31,7 @@
     </mat-toolbar-row>
     <mat-toolbar-row class="second" fxHide.lt-md>
         <ng-container *ngFor="let url of menuUrls">
-            <a routerLink="{{url.url}}" [ngClass]="{'a-selected': url.isSelected}" *ngIf="!url.login || user?.id">
+            <a routerLink="{{url.url}}" [ngClass]="{'a-selected': url.isSelected}">
                 <fa-icon [icon]="[url.iconPrefix,url.icon]"> </fa-icon> {{url.text | uppercase}}
             </a>
         </ng-container>
