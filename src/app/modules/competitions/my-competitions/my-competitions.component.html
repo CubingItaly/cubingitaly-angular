@@ -7,7 +7,9 @@
         <my-desktop-table fxHide.lt-md [competitions]="competitions"></my-desktop-table>
       </div>
       <div *ngIf="!competitions || competitions.length === 0">
-        <div fxLayout fxLayoutAlign="center center">
+
+        <h2 style="text-align: center">Non sei organizzatore o delegato di nessuna competitione.</h2>
+        <div fxLayout="row" fxLayoutAlign="center center">
           <img fxFlex="40%" fxFlex.xs="70%" src="/assets/images/error.png">
         </div>
       </div>
