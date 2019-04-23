@@ -10,7 +10,8 @@
       <mat-tab label="Registrazione">
         <ng-template matTabContent>
           <registration-info [registration]="registration" [competitionId]="competition.id"
-            [contactEmail]="competition.contactEmail"></registration-info>
+            [contactEmail]="competition.contactEmail" [isMultiLocation]="competition.isMultiLocation">
+          </registration-info>
         </ng-template>
       </mat-tab>
       <mat-tab label="Programma" *ngIf="schedule && schedule.length > 0">

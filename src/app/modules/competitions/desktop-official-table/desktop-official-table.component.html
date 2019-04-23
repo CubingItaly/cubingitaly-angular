@@ -11,7 +11,7 @@
     <td class="date">{{ c | compDays}}</td>
     <td class="name"><a routerLink="/competizioni/{{c.id}}">{{c.name}}</a></td>
     <td fxHide.lt-lg><strong>{{c.city}}</strong>, {{c.country}}<a class="location"
-        href="https://maps.google.com/?q={{c.address}}" target="blank">
+        href="https://maps.google.com/?q={{c.address}}" target="blank" *ngIf="!c.isMultiLocation">
         <fa-icon icon="external-link-alt"></fa-icon>
       </a></td>
   </tr>

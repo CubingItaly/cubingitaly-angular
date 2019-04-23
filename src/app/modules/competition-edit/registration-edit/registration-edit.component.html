@@ -6,7 +6,9 @@
 
     <mat-form-field>
       <input matInput formControlName="competitorsLimit" placeholder="Limite partecipanti" type="number" [min]="2">
-      <mat-hint>Numero massimo di partecipanti.</mat-hint>
+      <mat-hint *ngIf="!competition.isMultiLocation">Numero massimo di partecipanti.</mat-hint>
+      <mat-hint *ngIf="competition.isMultiLocation">Numero massimo di partecipanti <strong>combinato fra le varie
+          location</strong>.</mat-hint>
       <mat-error>È necessario inserire un numero maggiore di 2.</mat-error>
     </mat-form-field>
 

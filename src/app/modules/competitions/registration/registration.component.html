@@ -43,6 +43,8 @@
 
     <h3>Limite partecipanti e lista d'attesa</h3>
     <p>È previsto un limite di {{registration.competitorsLimit}} concorrenti.</p>
+    <p *ngIf="isMultiLocation">Il limite partecipanti è ottenuto dalla somma dei singoli limite delle varie location.
+      Per vedere la distribuzione del limite fra le varie città, visitare il sito della competizione in inglese.</p>
     <p *ngIf="!registration.isThereWaitingList">
       Una volta raggiunto il limite <strong>non verrà creata</strong> alcuna lista d'attesa e non sarà più possibile
       registrarsi.</p>

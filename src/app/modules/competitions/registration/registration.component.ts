@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
   @Input() registration: RegistrationModel;
   @Input() competitionId: string;
   @Input() contactEmail: string;
+  @Input() isMultiLocation: boolean;
   isPaymentCash: boolean = false;
   isPaymentPaypal: boolean = false;
   isPaymentCC: boolean = false;

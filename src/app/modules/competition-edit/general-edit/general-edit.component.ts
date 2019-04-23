@@ -71,8 +71,8 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
       country: new FormControl(this.competition.country, Validators.required),
       province: new FormControl(this.competition.province),
       city: new FormControl(this.competition.city, Validators.required),
-      address: new FormControl(this.competition.address, Validators.required),
-      location: new FormControl(this.competition.location, Validators.required),
+      address: new FormControl(this.competition.address),
+      location: new FormControl(this.competition.location),
       locationURL: new FormControl(this.competition.locationURL),
       locationDetails: new FormControl(this.competition.locationDetails),
       logoURL: new FormControl(this.competition.logoURL),
@@ -80,9 +80,20 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
       contactEmail: new FormControl(this.competition.contactEmail, [Validators.required, Validators.email]),
       extraInformation: new FormControl(this.competition.extraInformation),
       startDate: new FormControl(this.competition.startDate, Validators.required),
-      endDate: new FormControl(this.competition.endDate, Validators.required)
+      endDate: new FormControl(this.competition.endDate, Validators.required),
+      isMultiLocation: new FormControl(this.competition.isMultiLocation)
     });
+    this.manageLocationvalidators();
+  }
 
+  manageLocationvalidators() {
+    if (!this.editForm.controls['isMultiLocation'].value) {
+      this.editForm.get('address').setValidators([]);
+      this.editForm.get('location').setValidators([]);
+    } else {
+      this.editForm.get('location').setValidators(Validators.required);
+      this.editForm.get('address').setValidators(Validators.required);
+    }
   }
 
   ngOnDestroy() {
@@ -164,6 +175,7 @@ export class GeneralEditComponent implements OnInit, OnDestroy, OnChanges {
       updatedCompetition.contactName = this.editForm.controls['contactName'].value;
       updatedCompetition.contactEmail = this.editForm.controls['contactEmail'].value;
       updatedCompetition.logoURL = this.editForm.controls['logoURL'].value;
+      updatedCompetition.isMultiLocation = this.editForm.controls['isMultiLocation'].value;
       updatedCompetition.organizers = [...this.organizers];
       updatedCompetition.delegates = [...this.delegates];
       updatedCompetition.events = events;
