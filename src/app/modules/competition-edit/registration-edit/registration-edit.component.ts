@@ -40,7 +40,7 @@ export class RegistrationEditComponent implements OnInit {
 
   setupFormGroup() {
     this.registrationForm = new FormGroup({
-      competitorsLimit: new FormControl(this.registration.competitorsLimit, [Validators.required, Validators.min(20)]),
+      competitorsLimit: new FormControl(this.registration.competitorsLimit, [Validators.required, Validators.min(2)]),
       registrationOpen: new FormControl(this.registration.registrationOpen, Validators.required),
       registrationClose: new FormControl(this.registration.registrationClose, Validators.required),
       isRegistrationPaid: new FormControl(this.registration.isRegistrationPaid),
