@@ -31,22 +31,4 @@ export class GeneralComponent implements OnInit {
       this.isRegistrationStarted = true;
     }
   }
-
-  getPeople(delegates: boolean): string {
-    console.log("call");
-    let res: string = "";
-    let staff: UserModel[] = delegates ? this.competition.delegates : this.competition.organizers;
-    for (let i = 0; i < staff.length; i++) {
-      if (i > 0) {
-        res += ", ";
-      }
-      if (staff[i].wca_id) {
-        res += `<a href="https://www.worldcubeassociation.org/persons/${staff[i].wca_id}">${staff[i].name}</a>`;
-      } else {
-        res += staff[i].name;
-      }
-    }
-    return res;
-  }
-
 }

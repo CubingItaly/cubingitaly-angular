@@ -31,6 +31,10 @@
       </mat-form-field>
     </div>
 
+    <mat-checkbox formControlName="isThereWaitingList">
+      È prevista una lista d'attesa
+    </mat-checkbox>
+
     <mat-checkbox formControlName="isRegistrationPaid">
       Registrazione a pagamento</mat-checkbox>
 
@@ -121,7 +125,8 @@
 
     </ng-container>
 
-    <ng-container *ngIf="(registrationForm.get('paypal').value || registrationForm.get('card').value)">
+    <ng-container
+      *ngIf="registrationForm.get('isRegistrationPaid').value && (registrationForm.get('paypal').value || registrationForm.get('card').value)">
       <h2>Rimborso</h2>
       <mat-checkbox formControlName="refundAvailable">
         È disponibile il rimborso

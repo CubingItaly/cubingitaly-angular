@@ -56,6 +56,7 @@ export class RegistrationEditComponent implements OnInit {
       guestsPay: new FormControl(this.registration.guestsPay),
       guestsFee: new FormControl(this.registration.guestsFee),
       guestsDetails: new FormControl(this.registration.guestsDetails),
+      isThereWaitingList: new FormControl(this.registration.isThereWaitingList),
       paypal: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "paypal") >= 0)),
       cash: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "cash") >= 0)),
       card: new FormControl((this.registration.paymentMeans.findIndex((p: PaymentMeanModel) => p.id === "card") >= 0)),
@@ -253,6 +254,7 @@ export class RegistrationEditComponent implements OnInit {
       updatedRegistration.guestsDetails = this.registrationForm.get('guestsDetails').value;
       updatedRegistration.paypalLink = this.registrationForm.get('paypalLink').value;
       updatedRegistration.refundAvailable = this.registrationForm.get('refundAvailable').value;
+      updatedRegistration.isThereWaitingList = this.registrationForm.get('isThereWaitingList').value;
       updatedRegistration.refundPolicy = this.refund;
       updatedRegistration.paymentMeans = this.selectedPaymenMeans;
 
