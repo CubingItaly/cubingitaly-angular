@@ -78,3 +78,13 @@ img{
         margin-bottom: 20px;
     }
 }
+
+img{
+    width:300px;
+}
+
+@media screen and (max-width: 330px){
+    img{
+        max-width: 100%;
+    }
+}
