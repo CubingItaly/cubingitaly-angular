@@ -22,6 +22,11 @@
           <directions-info [directions]="directions"></directions-info>
         </ng-template>
       </mat-tab>
+      <mat-tab *ngFor="let tab of tabs" label="{{tab.name}}">
+        <ng-template matTabContent>
+          <extra-tab [tab]="tab"></extra-tab>
+        </ng-template>
+      </mat-tab>
       <mat-tab label="Disclaimer">
         <ng-template matTabContent>
           <disclaimer-info></disclaimer-info>

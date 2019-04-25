@@ -8,6 +8,7 @@ import { RegistrationModel } from 'src/app/models/competition/registration.model
 import { EventModel } from 'src/app/models/competition/event.model';
 import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 import { DirectionsModel } from 'src/app/models/competition/directions.model';
+import { ExtraTabModel } from 'src/app/models/competition/extratab.model';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,9 @@ export class CompetitionService {
 
   public getAdminCompetitions(): Observable<CompetitionModel[]> {
     return this.http.get(this.apiBase + "/all").pipe(map(res => Deserialize(res, CompetitionModel)));
+  }
+
+  public getCompetitionExtraTabs(competition: string): Observable<ExtraTabModel[]> {
+    return this.http.get(this.apiBase + "/" + competition + "/tabs").pipe(map(res => Deserialize(res, ExtraTabModel)));
   }
 }

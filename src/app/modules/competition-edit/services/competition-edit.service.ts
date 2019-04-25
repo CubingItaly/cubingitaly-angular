@@ -10,6 +10,7 @@ import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 import { EventModel } from 'src/app/models/competition/event.model';
 import { TravelMeanModel } from 'src/app/models/competition/travelmean.model';
 import { PaymentMeanModel } from 'src/app/models/competition/paymentmean.model';
+import { ExtraTabModel } from 'src/app/models/competition/extratab.model';
 
 @Injectable({
   providedIn: 'root'
@@ -113,5 +114,9 @@ export class CompetitionEditService {
 
   public getIfExists(id: string): Observable<any> {
     return this.http.get<any>(this.apiBase + "/" + id + "/exists");
+  }
+
+  public getCompetitionExtraTabs(competition: string): Observable<ExtraTabModel[]> {
+    return this.http.get(this.apiBase + "/" + competition + "/tabs").pipe(map(res => Deserialize(res, ExtraTabModel)));
   }
 }

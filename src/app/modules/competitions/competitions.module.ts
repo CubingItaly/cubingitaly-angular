@@ -29,11 +29,12 @@ import { ManageWidgetComponent } from './manage-widget/manage-widget.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { AdminComponent } from './admin/admin.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { ExtraTabComponent } from './extra-tab/extra-tab.component';
 
 @NgModule({
   declarations: [OfficialComponent, CompetitionComponent, GeneralComponent,
     CompDatePipe, RegistrationComponent, DirectionsComponent, ScheduleComponent,
-    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe, MyMobileRowComponent, OrganizeWidgetComponent, KeepUpWidgetComponent, ManageWidgetComponent, CandidateComponent, AdminComponent, DisclaimerComponent],
+    ScheduleDayPipe, MobileRowComponent, MobileRowOfficialComponent, DesktopOfficialTableComponent, MyCompetitionsComponent, MyDesktopTableComponent, CompDaysPipe, MyMobileRowComponent, OrganizeWidgetComponent, KeepUpWidgetComponent, ManageWidgetComponent, CandidateComponent, AdminComponent, DisclaimerComponent, ExtraTabComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

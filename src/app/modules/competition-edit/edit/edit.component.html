@@ -17,6 +17,9 @@
         <edit-directions-info (updated)="updated=$event" [(directions)]="directions" [competition]="competition">
         </edit-directions-info>
       </mat-tab>
+      <mat-tab label="Tab Extra">
+        <extra-tab-edit [competitionId]="competition.id"></extra-tab-edit>
+      </mat-tab>
       <mat-tab label="Gestione">
         <manage-competition [(competition)]="competition" [registration]="registration"></manage-competition>
       </mat-tab>

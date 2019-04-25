@@ -17,9 +17,10 @@ import { ManageCompetitionComponent } from './manage-competition/manage-competit
 import { CompetitionEditService } from './services/competition-edit.service';
 import { CompEditGuardService } from './services/comp-edit-guard.service';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { ExtraTabEditComponent } from './extra-tab-edit/extra-tab-edit.component';
 
 @NgModule({
-  declarations: [EditComponent, NewComponent, GeneralEditComponent, RegistrationEditComponent, DirectionsEditComponent, ScheduleEditComponent, ManageCompetitionComponent],
+  declarations: [EditComponent, NewComponent, GeneralEditComponent, RegistrationEditComponent, DirectionsEditComponent, ScheduleEditComponent, ManageCompetitionComponent, ExtraTabEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

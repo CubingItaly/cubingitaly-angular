@@ -1,0 +1,16 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px">
+
+    <h2>Schede extra</h2>
+    <p>Utilizzare queste schede per personalizzare ulteriormente le pagine delle competizioni. Contenuti ideali per
+      queste schede sono: sponsor, hotel, convenzioni, pranzo, ecc.</p>
+
+    <h2>Schede</h2>
+    <ul>
+      <li *ngFor="let tab of tabs">
+        {{tab.name}}
+      </li>
+    </ul>
+
+  </div>
+</div>

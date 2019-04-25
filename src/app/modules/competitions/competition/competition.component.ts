@@ -8,6 +8,7 @@ import { ScheduleModel } from 'src/app/models/competition/schedule.model';
 import { Subscription } from 'rxjs';
 import { TitleManagerService } from 'src/app/services/title-manager.service';
 import { MetaManagerService } from 'src/app/services/meta-manager.service';
+import { ExtraTabModel } from 'src/app/models/competition/extratab.model';
 
 @Component({
   selector: 'app-competition',
@@ -20,6 +21,7 @@ export class CompetitionComponent implements OnInit, OnDestroy {
   registration: RegistrationModel;
   directions: DirectionsModel[];
   schedule: ScheduleModel[];
+  tabs: ExtraTabModel[];
   currentIndex: number = 0;
   private subscr: Subscription;
 
@@ -39,6 +41,7 @@ export class CompetitionComponent implements OnInit, OnDestroy {
     this.compSVC.getRegistration(compId).subscribe((res: RegistrationModel) => this.registration = res);
     this.compSVC.getDirections(compId).subscribe((res: DirectionsModel[]) => this.directions = res);
     this.compSVC.getSchedule(compId).subscribe((res: ScheduleModel[]) => this.schedule = res);
+    this.compSVC.getCompetitionExtraTabs(compId).subscribe((res: ExtraTabModel[]) => this.tabs = res);
     this.currentIndex = Number(this.activatedRoute.snapshot.queryParamMap.get("tab")) || 0;
     this.subscr = this.activatedRoute.queryParams.subscribe(queryParams => {
       this.currentIndex = Number(queryParams['tab']) || 0;
