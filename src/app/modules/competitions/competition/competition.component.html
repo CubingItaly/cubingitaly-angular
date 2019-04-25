@@ -22,6 +22,12 @@
           <directions-info [directions]="directions"></directions-info>
         </ng-template>
       </mat-tab>
+      <mat-tab label="Disclaimer">
+        <ng-template matTabContent>
+          <disclaimer-info></disclaimer-info>
+        </ng-template>
+      </mat-tab>
+
       <mat-tab *ifRole="'eComp';ifParam:competition" label="Gestisci">
         <div fxLayout fxLayoutAlign="center">
           <div fxFlex.lt-md="90%" fxFlex.gt-xs="100%" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap-gt-sm="2%"

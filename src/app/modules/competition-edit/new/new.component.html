@@ -40,38 +40,48 @@
       <mat-error>È necessario inserire la nazione in cui si svolgerà la competizione.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput name="province" formControlName="province" placeholder="Provincia">
-      <mat-hint>La provincia in cui si svolge la competizione (se diversa dalla città), per esteso.</mat-hint>
-    </mat-form-field>
+    <mat-checkbox formControlName="isMultiLocation" (click)="manageLocationvalidators()">
+      La gara si svolge in più città
+    </mat-checkbox>
 
     <mat-form-field>
       <input type="text" matInput name="city" formControlName="city" placeholder="Città">
-      <mat-hint>La città in cui si svolgerà la competizione.</mat-hint>
+      <mat-hint *ngIf="!editForm.controls['isMultiLocation'].value">La città in cui si svolgerà la
+        competizione.</mat-hint>
+      <mat-hint *ngIf="editForm.controls['isMultiLocation'].value">Le città in cui si svolgerà la
+        competizione. </mat-hint>
       <mat-error>È necessario inserire la città in cui si svolgerà la competizione.</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput name="address" formControlName="address" placeholder="Indirizzo">
-      <mat-hint>L'indirizzo a cui si svolgerà la competizione, con inclusi CAP, città e provincia.</mat-hint>
-      <mat-error>È necessario inserire l'indirizzo della competizione.</mat-error>
-    </mat-form-field>
+    <ng-container *ngIf="!editForm.controls['isMultiLocation'].value">
+      <mat-form-field>
+        <input type="text" matInput name="province" formControlName="province" placeholder="Provincia">
+        <mat-hint>La provincia in cui si svolge la competizione (se diversa dalla città), per esteso.</mat-hint>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput name="location" formControlName="location" placeholder="Venue">
-      <mat-hint>Il nome della sede in cui si svolgerà la competizione.</mat-hint>
-      <mat-error>È necessario inserire la location della competizione.</mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput name="address" formControlName="address" placeholder="Indirizzo">
+        <mat-hint>L'indirizzo a cui si svolgerà la competizione, con inclusi CAP, città e provincia.</mat-hint>
+        <mat-error>È necessario inserire l'indirizzo della competizione.</mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput name="locationURL" formControlName="locationURL" placeholder="Sito web della venue">
-      <mat-hint>Il sito web della location (se presente).</mat-hint>
-    </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput name="location" formControlName="location" placeholder="Venue">
+        <mat-hint>Il nome della sede in cui si svolgerà la competizione.</mat-hint>
+        <mat-error>È necessario inserire la location della competizione.</mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" matInput name="locationDetails" formControlName="locationDetails" placeholder="Dettagli">
-      <mat-hint>Eventuali dettagli necessari per la location.</mat-hint>
-    </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput name="locationURL" formControlName="locationURL" placeholder="Sito web della venue">
+        <mat-hint>Il sito web della location (se presente).</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput name="locationDetails" formControlName="locationDetails" placeholder="Dettagli">
+        <mat-hint>Eventuali dettagli necessari per la location.</mat-hint>
+      </mat-form-field>
+    </ng-container>
+
 
     <mat-form-field>
       <input type="text" matInput name="logoURL" formControlName="logoURL" placeholder="Logo">
@@ -143,6 +153,7 @@
         <mat-option *ngFor="let org of foundOrganizers" [value]="org.id">{{org.name}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
+
 
 
     <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px">
