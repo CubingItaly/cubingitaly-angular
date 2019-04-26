@@ -119,4 +119,20 @@ export class CompetitionEditService {
   public getCompetitionExtraTabs(competition: string): Observable<ExtraTabModel[]> {
     return this.http.get(this.apiBase + "/" + competition + "/tabs").pipe(map(res => Deserialize(res, ExtraTabModel)));
   }
+
+  public deleteTab(cid: string, tid: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiBase}/${cid}/tabs/${tid}`);
+  }
+
+  public moveTab(cid: string, tid: string, delta: number): Observable<ExtraTabModel[]> {
+    return this.http.put<ExtraTabModel[]>(`${this.apiBase}/${cid}/tabs/${tid}/move`, { delta: delta }).pipe(map(res => Deserialize(res, ExtraTabModel)));
+  }
+
+  public updateTab(cid: string, tab: ExtraTabModel): Observable<ExtraTabModel[]> {
+    return this.http.put<ExtraTabModel>(`${this.apiBase}/${cid}/tabs/${tab.id}`, { tab: tab }).pipe(map(res => Deserialize(res, ExtraTabModel)));;
+  }
+
+  public newTab(cid: string, tab: ExtraTabModel): Observable<ExtraTabModel[]> {
+    return this.http.post<ExtraTabModel>(`${this.apiBase}/${cid}/tabs`, { tab: tab }).pipe(map(res => Deserialize(res, ExtraTabModel)));;
+  }
 }
