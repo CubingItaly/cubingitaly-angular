@@ -65,6 +65,7 @@ export class ExtraTabEditComponent implements OnInit {
   private cleanForm() {
     this.tabForm.get("name").setValue("");
     this.tabForm.get("content").setValue("");
+    this.tabForm.clearValidators();
   }
 
   saveTab() {
@@ -81,5 +82,6 @@ export class ExtraTabEditComponent implements OnInit {
         this.compSVC.updateTab(this.competitionId, tab).subscribe(() => this.getTabs());
       }
     }
+    this.cleanForm();
   }
 }

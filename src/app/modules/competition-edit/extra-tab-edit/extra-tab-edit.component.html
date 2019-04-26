@@ -32,7 +32,7 @@
 
       <ng-container matColumnDef="up">
         <mat-cell *matCellDef="let tab">
-          <button mat-icon-button (click)="moveTab(tab.id,-1)">
+          <button mat-icon-button (click)="moveTab(tab.id,-1)" *ngIf="tab.indexInComp>0">
             <fa-icon icon="arrow-circle-up"></fa-icon>
           </button>
         </mat-cell>
@@ -40,7 +40,7 @@
 
       <ng-container matColumnDef="down">
         <mat-cell *matCellDef="let tab">
-          <button mat-icon-button (click)="moveTab(tab.id,1)">
+          <button mat-icon-button (click)="moveTab(tab.id,1)" *ngIf="tab.indexInComp< tabs.length-1">
             <fa-icon icon="arrow-circle-down"></fa-icon>
           </button>
         </mat-cell>
