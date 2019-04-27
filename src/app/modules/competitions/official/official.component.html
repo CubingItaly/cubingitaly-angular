@@ -1,0 +1,26 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="20px">
+    <div fxFlex.gt-sm="75%">
+      <div *ngIf="inProgress && inProgress.length>0">
+        <h2>Competizioni in corso</h2>
+        <official-mobile-row fxHide.gt-sm *ngFor="let c of inProgress" [competition]="c"></official-mobile-row>
+        <desktop-official-table fxHide.lt-md [competitions]="inProgress"></desktop-official-table>
+      </div>
+      <div *ngIf="upcoming && upcoming.length>0">
+        <h2>Competizioni future</h2>
+        <official-mobile-row fxHide.gt-sm *ngFor="let c of upcoming" [competition]="c"></official-mobile-row>
+        <desktop-official-table fxHide.lt-md [competitions]="upcoming"></desktop-official-table>
+      </div>
+      <div *ngIf="past && past.length>0">
+        <h2>Competizioni passate</h2>
+        <official-mobile-row fxHide.gt-sm *ngFor="let c of past" [competition]="c"></official-mobile-row>
+        <desktop-official-table fxHide.lt-md [competitions]="past"></desktop-official-table>
+      </div>
+    </div>
+    <div fxFlex.gt-sm="25%" fxLayout="column">
+      <organize-widget></organize-widget>
+      <keep-up-widget></keep-up-widget>
+      <manage-widget *ifRole="'user'"></manage-widget>
+    </div>
+  </div>
+</div>

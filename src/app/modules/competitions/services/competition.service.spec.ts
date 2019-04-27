@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WCAService } from './wca.service';
+import { CompetitionService } from './competition.service';
 
-describe('WCAService', () => {
+describe('CompetitionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: WCAService = TestBed.get(WCAService);
+    const service: CompetitionService = TestBed.get(CompetitionService);
     expect(service).toBeTruthy();
   });
 });

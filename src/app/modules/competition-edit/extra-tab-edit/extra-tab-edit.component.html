@@ -1,0 +1,68 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px">
+
+    <h2>Schede extra</h2>
+    <p>Utilizzare queste schede per personalizzare ulteriormente le pagine delle competizioni. Contenuti ideali per
+      queste schede sono: sponsor, hotel, convenzioni, pranzo, ecc.</p>
+
+    <h2>Schede</h2>
+    <mat-table [dataSource]="tabs" class="mat-elevation-z1">
+
+      <ng-container matColumnDef="title">
+        <mat-cell *matCellDef="let tab">
+          {{tab.name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-cell *matCellDef="let tab">
+          <button mat-icon-button (click)="editTab(tab.id)">
+            <fa-icon icon="edit"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-cell *matCellDef="let tab">
+          <button mat-icon-button (click)="deleteTab(tab.id)">
+            <fa-icon icon="times-circle"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="up">
+        <mat-cell *matCellDef="let tab">
+          <button mat-icon-button (click)="moveTab(tab.id,-1)" *ngIf="tab.indexInComp>0">
+            <fa-icon icon="arrow-circle-up"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="down">
+        <mat-cell *matCellDef="let tab">
+          <button mat-icon-button (click)="moveTab(tab.id,1)" *ngIf="tab.indexInComp< tabs.length-1">
+            <fa-icon icon="arrow-circle-down"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-row fxFlexAlign="center" *matRowDef="let row; columns: ['title','edit','delete','up','down']"></mat-row>
+    </mat-table>
+    <div>
+      <button mat-raised-button color="primary" (click)="newTab()">Nuova Tab</button>
+    </div>
+
+    <form [formGroup]="tabForm" *ngIf="editing" fxLayout="column" fxLayoutGap="30px" (submit)="saveTab()">
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" placeholder="Nome" />
+        <mat-hint>Il nome della tab, comparirà nel menu.</mat-hint>
+        <mat-error>È obbligatorio inserire il nome della tab</mat-error>
+      </mat-form-field>
+      <ckeditor [editor]="editor" formControlName="content"></ckeditor>
+      <div>
+        <button mat-raised-button color="primary" type="submit">Salva</button>
+      </div>
+    </form>
+
+  </div>
+</div>

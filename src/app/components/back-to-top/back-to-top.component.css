@@ -1,18 +1,10 @@
-.btt-container{
+a{
     position:fixed;
     bottom:40px;
-    width: 100%;
-    z-index: 999999;
-}
-
-
-a{
     cursor: pointer;
     color: white;
     background-color: #073C65;
     font-size: 18px;
-}
-
-.mat-button{
-    min-width: 1%;
+    z-index: 999999;
+    right:5%
 }

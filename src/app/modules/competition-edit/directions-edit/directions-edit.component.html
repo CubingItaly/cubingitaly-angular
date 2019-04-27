@@ -1,0 +1,50 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px"
+    *ngIf="filteredMeans && travelMeans && directions">
+
+    <h2>Modifica indicazioni</h2>
+
+    <mat-table [dataSource]="directions">
+      <ng-container matColumnDef="mean">
+        <mat-header-cell *matHeaderCellDef>Mezzo di trasporto</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.mean.name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef>Opzioni</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button (click)="updateMean(row)" mat-icon-button>
+            <fa-icon icon="edit"></fa-icon>
+          </button>
+          <button (click)="deleteMean(row.id)" mat-icon-button>
+            <fa-icon icon="trash"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['mean','options']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['mean','options']"></mat-row>
+
+    </mat-table>
+
+    <div class="addForm" *ngIf="filteredMeans.length>0">
+      <mat-form-field>
+        <mat-select placeholder="Aggiungi indicazioni" [formControl]="newDirection">
+          <mat-option *ngFor="let mean of filteredMeans" [value]="mean">{{mean.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button (click)="addMean()">
+        <fa-icon [icon]="['fas','plus-square']"></fa-icon>
+      </button>
+    </div>
+
+    <div *ngIf="editing" fxLayout="column" fxLayoutGap="20px">
+      <h3>Modifica indicazioni {{editingDirection.mean.name}}</h3>
+      <ckeditor [editor]="editor" [(ngModel)]="editingDirection.directions"></ckeditor>
+      <div>
+        <button mat-raised-button color="primary" (click)="saveMean()">Aggiorna Indicazioni</button>
+      </div>
+    </div>
+
+  </div>
+</div>

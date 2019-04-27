@@ -67,7 +67,7 @@ export class ArticleService {
 
 
   public getCategories(): Observable<ArticleCategoryModel[]> {
-    return this.http.get<ArticleCategoryModel[]>("/api/v0/categories").pipe(map(result => result.map(c => Deserialize(c, ArticleCategoryModel))));
+    return this.http.get<ArticleCategoryModel[]>("/api/v0/categories").pipe(map(res => Deserialize(res, ArticleCategoryModel)));
   }
 
 }

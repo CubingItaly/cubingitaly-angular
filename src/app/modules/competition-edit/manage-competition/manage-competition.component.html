@@ -1,0 +1,23 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" fxLayoutGap="20px">
+    <ng-container *ifRole="'annComp';ifParam:competition">
+      <mat-slide-toggle (change)="officialChange()" [formControl]="officialControl">
+        Competizione pubblica</mat-slide-toggle>
+      <span>Una competizione pubblica è visibile da chiunque abbia il link.</span>
+      <span>Per poter ufficializzare una competizione è necessario aver configurato la registrazione.</span>
+
+
+      <mat-slide-toggle (change)="hiddenChange()" [formControl]="hiddenControl">Competizione invisibile
+      </mat-slide-toggle>
+      <span>Una competizione invisibile non sarà pubblicata nell'elenco delle competizioni ufficiali, ma sarà comunque
+        accessibile tramite link da chi ha il permesso di vederla. Una competizione visibile, se pubblica, sarà visibile
+        nell'elenco delle competizioni ufficiali.</span>
+    </ng-container>
+    <div *ifRole="'aComp'">
+      <button mat-raised-button color="warn" (click)="deleteCompetition()">Elimina Competizione</button>
+    </div>
+    <div>
+      <a mat-raised-button color="accent" routerLink="/competizioni/{{competition.id}}">Visualizza Competizione</a>
+    </div>
+  </div>
+</div>

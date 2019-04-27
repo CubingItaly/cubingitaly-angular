@@ -1,19 +1,23 @@
 <div fxLayout fxLayoutAlign="center">
-    <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.lt-md="column" fxLayoutGap="20px">
-      <div fxFlex.gt-sm="70%">
-        <div class="no-articles" *ngIf="articlesNumber === 0">
-            <p>Non sono presenti articoli in questa categoria</p>
-            <div fxLayout fxLayoutAlign="center center">
-              <img fxFlex="40%" fxFlex.xs="70%" src="/assets/images/error.png">
-            </div>
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="90%" fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div fxFlex.gt-sm="70%">
+      <div class="no-articles" *ngIf="articlesNumber === 0">
+        <p>Non sono presenti articoli in questa categoria</p>
+        <div fxLayout fxLayoutAlign="center center">
+          <img fxFlex="40%" fxFlex.xs="70%" src="/assets/images/error.png">
         </div>
-        <article-list-viewer *ngIf="category" [take]="articlesPerPage" [page]="page-1" [category]="category"></article-list-viewer>
-        <mat-paginator *ngIf="articlesNumber>articlesPerPage" [pageIndex]="page-1" [hidePageSize]="true" [pageSize]="articlesPerPage" [length]="articlesNumber" [pageSizeOptions]="[articlesPerPage]" (page)="pageChange($event)"></mat-paginator>
       </div>
-      <div fxFlex.gt-sm="30%" fxLayoutGap="30px">
-        <article-category-widget *ngIf="category" [selected]="category" (change)="categoryChange($event)"></article-category-widget>
-        <facebook-widget></facebook-widget>
-        <article-editor-quick-actions *ifRole="'eArticles'"></article-editor-quick-actions>
-      </div>
+      <article-list-viewer *ngIf="category" [take]="articlesPerPage" [page]="page-1" [category]="category">
+      </article-list-viewer>
+      <mat-paginator *ngIf="articlesNumber>articlesPerPage" [pageIndex]="page-1" [hidePageSize]="true"
+        [pageSize]="articlesPerPage" [length]="articlesNumber" [pageSizeOptions]="[articlesPerPage]"
+        (page)="pageChange($event)"></mat-paginator>
+    </div>
+    <div fxFlex.gt-sm="30%" fxLayoutGap="30px">
+      <article-category-widget *ngIf="category" [selected]="category" (change)="categoryChange($event)">
+      </article-category-widget>
+      <facebook-widget></facebook-widget>
+      <article-editor-quick-actions *ifRole="'eArticles'"></article-editor-quick-actions>
     </div>
   </div>
+</div>

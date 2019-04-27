@@ -1,0 +1,11 @@
+h2{
+    margin-bottom: 0px;
+}
+
+fa-icon{
+    min-width: 25px;
+}
+
+.mat-list-item:hover{
+    background-color: #e4e4e4;
+}

@@ -1,0 +1,40 @@
+/*
+*
+* Mobile table
+*
+*
+*/
+
+.cubing-icon{
+    font-size: 32px;
+}
+
+
+.mobile{
+    border-bottom:2px solid #ddd;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.event-name{
+    font-weight: 600;
+}
+
+.start, .end{
+    min-width: 60px;
+}
+
+.start{
+    text-align: start;
+}
+.end{
+    text-align: end;
+}
+
+.exp-imp{
+    font-weight: 600;
+}
+
+span{
+    white-space: nowrap;
+}

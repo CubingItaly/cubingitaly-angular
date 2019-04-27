@@ -1,0 +1,197 @@
+<div class="general-container" fxLayout fxLayoutAlign="center">
+  <form fxFlex="100%" fxFlex.lt-md="90%" fxLayout="column" [formGroup]="registrationForm" fxLayoutGap="20px"
+    *ngIf="registration">
+
+    <h2>Registrazione e pagamento</h2>
+
+    <mat-form-field>
+      <input matInput formControlName="competitorsLimit" placeholder="Limite partecipanti" type="number" [min]="2">
+      <mat-hint *ngIf="!competition.isMultiLocation">Numero massimo di partecipanti.</mat-hint>
+      <mat-hint *ngIf="competition.isMultiLocation">Numero massimo di partecipanti <strong>combinato fra le varie
+          location</strong>.</mat-hint>
+      <mat-error>È necessario inserire un numero maggiore di 2.</mat-error>
+    </mat-form-field>
+
+    <div fxLayout=" row" fxLayout.xs="column" fxLayoutGap.xs="20px" fxLayoutGap.gt-xs="2%">
+
+      <mat-form-field fxFlex.gt-xs="49%">
+        <input matInput [matDatepicker]="startPicker" [max]="competition.startDate" placeholder="Apertura iscrizioni"
+          formControlName="registrationOpen">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+        <mat-hint>La data di apertura delle iscrizioni alla competizione.</mat-hint>
+        <mat-error>È necessario inserire una data valida.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex.gt-xs="49%">
+        <input matInput [matDatepicker]="endPicker" [min]="registrationForm.controls['registrationOpen'].value"
+          [max]="competition.startDate" placeholder="Chiusura iscrizioni" formControlName="registrationClose">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker [startAt]="registrationForm.controls['registrationOpen'].value" #endPicker></mat-datepicker>
+        <mat-hint>La data di chiusura delle iscrizioni alla competizione.</mat-hint>
+        <mat-error>È necessario inserire una data valida.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-checkbox formControlName="isThereWaitingList">
+      È prevista una lista d'attesa
+    </mat-checkbox>
+
+    <mat-checkbox formControlName="isRegistrationPaid">
+      Registrazione a pagamento</mat-checkbox>
+
+    <ng-container *ngIf="registrationForm.controls['isRegistrationPaid'].value">
+
+      <mat-form-field>
+        <input matInput formControlName="registrationFee" placeholder="Costo di iscrizione" type="number" [min]="0">
+        <mat-hint>Costo di registrazione in Euro.</mat-hint>
+        <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="newcomerDiscount">
+        Sconto per i newcomer</mat-checkbox>
+
+      <ng-container *ngIf="registrationForm.controls['newcomerDiscount'].value">
+        <mat-form-field>
+          <input matInput formControlName="newcomerFee" placeholder="Costo di iscrizione per i nuovi partecipanti"
+            type="number">
+          <mat-hint>Costo di registrazione in Euro per i nuovi partecipanti.</mat-hint>
+          <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="newcomerDetails" placeholder="Istruzioni per i newcomer" type="text">
+          <mat-hint>Eventuali istruzioni riguardo lo sconto per i newcomer.</mat-hint>
+        </mat-form-field>
+
+      </ng-container>
+    </ng-container>
+
+    <mat-checkbox formControlName="registrationAtTheVenue">
+      Registrazione in loco</mat-checkbox>
+
+    <ng-container *ngIf="registrationForm.controls['registrationAtTheVenue'].value">
+      <mat-form-field>
+        <input matInput formControlName="atTheVenueFee" placeholder="Costo di iscrizione in loco" [min]="0"
+          type="number">
+        <mat-hint>Costo di registrazione in Euro per le iscrizioni effettuate in loco.</mat-hint>
+        <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="atTheVenueDetails" placeholder="Istruzioni in loco" type="text">
+        <mat-hint>Eventuali istruzioni riguardo le iscrizioni in loco.</mat-hint>
+      </mat-form-field>
+
+    </ng-container>
+
+
+    <mat-form-field>
+      <input matInput formControlName="maxNumberOfGuests" placeholder="Numero massimo di accompagnatori" type="number">
+      <mat-hint>Il numero massimo di accompagnatori che ogni partecipante può portare.</mat-hint>
+      <mat-error>È necessario inserire un numero maggiore o uguale a 0.</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="guestsNeedToRegister">
+      Gli spettatori devono registrarsi</mat-checkbox>
+
+    <mat-checkbox formControlName="guestsPay">
+      Gli spettatori pagano</mat-checkbox>
+
+
+    <ng-container *ngIf="registrationForm.controls['guestsPay'].value">
+      <mat-form-field>
+        <input matInput formControlName="guestsFee" placeholder="Costo di ingresso per gli spettatori" [min]="0"
+          type="number">
+        <mat-hint>Costo di registrazione in Euro per accompagnatori e spettatori.</mat-hint>
+        <mat-error>È necessario inserire un numero maggiore di 0.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="guestsDetails" placeholder="Istruzioni per gli spettatori" type="text">
+        <mat-hint>Eventuali istruzioni riguardo l'ingresso degli spettatori e degli accompagnatori'.</mat-hint>
+      </mat-form-field>
+
+    </ng-container>
+
+    <ng-container *ngIf="registrationForm.controls['isRegistrationPaid'].value">
+      <h2>Metodi di pagamento</h2>
+      <mat-checkbox formControlName="card">Carta (Stripe)</mat-checkbox>
+      <mat-checkbox formControlName="cash">Contanti</mat-checkbox>
+      <mat-checkbox formControlName="paypal">PayPal</mat-checkbox>
+
+      <mat-form-field *ngIf="registrationForm.get('paypal').value">
+        <input matInput formControlName="paypalLink" placeholder="Paypal.me" type="text">
+        <mat-hint>Inserisci il link Paypal.me da usare per il pagamento con PayPal.</mat-hint>
+      </mat-form-field>
+
+    </ng-container>
+
+    <ng-container
+      *ngIf="registrationForm.get('isRegistrationPaid').value && (registrationForm.get('paypal').value || registrationForm.get('card').value)">
+      <h2>Rimborso</h2>
+      <mat-checkbox formControlName="refundAvailable">
+        È disponibile il rimborso
+      </mat-checkbox>
+
+      <ng-container *ngIf="registrationForm.controls['refundAvailable'].value">
+        <mat-table [dataSource]="refund">
+          <ng-container matColumnDef="percentage">
+            <mat-header-cell *matHeaderCellDef>Rimborso</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.percentage}}%</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="deadline">
+            <mat-header-cell *matHeaderCellDef>Scadenza</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              {{row.deadline.toLocaleDateString("it-it", { day: "numeric", year: "numeric", month: "long" })}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="options">
+            <mat-header-cell *matHeaderCellDef>Opzioni</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="removePolicy(row.percentage, row.deadline)">
+                <fa-icon icon="trash"></fa-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="['percentage','deadline','options']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['percentage','deadline','options']"></mat-row>
+        </mat-table>
+
+        <form formGroupName="newRefundPolicy">
+          <h3>Nuova Policy</h3>
+          <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutAlign.gt-sm="start center">
+            <mat-form-field>
+              <input matInput placeholder="Percentuale" formControlName="percentage" type="number" [min]="0"
+                [max]="100">
+              <mat-hint>La percentuale di rimborso</mat-hint>
+            </mat-form-field>
+            <mat-form-field fxFlex.gt-sm="49%">
+              <input matInput [matDatepicker]="refundPicker" formControlName="deadline" [max]="competition.startDate"
+                [min]="registrationForm.controls['registrationOpen'].value" placeholder="Scadenza">
+              <mat-datepicker-toggle matSuffix [for]="refundPicker"></mat-datepicker-toggle>
+              <mat-datepicker #refundPicker [startAt]="registrationForm.controls['registrationOpen'].value">
+              </mat-datepicker>
+              <mat-hint>La data entro la quale viene fornita questa percentuale di rimborso</mat-hint>
+            </mat-form-field>
+            <button fxHide.gt-sm mat-raised-button color="primary" (click)="addPolicy()">
+              Aggiungi Rimborso
+            </button>
+            <button fxHide.lt-md mat-icon-button (click)="addPolicy()">
+              <fa-icon [icon]="['fas','plus-square']"></fa-icon>
+            </button>
+          </div>
+        </form>
+      </ng-container>
+    </ng-container>
+
+
+    <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px">
+      <button mat-raised-button color="primary" (click)="updateRegistration()">Aggiorna registrazione</button>
+    </div>
+
+  </form>
+</div>

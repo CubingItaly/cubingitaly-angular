@@ -1,0 +1,144 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.lt-md="90%" fxFlex.gt-xs="100%" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap-gt-sm="2%"
+    class="gencontainer" fxLayoutGap.gt-sm="2%">
+    <div fxFlex.gt-sm="49%">
+      <table>
+        <tr>
+          <th>Data</th>
+          <td>{{competition | compDays }}</td>
+        </tr>
+        <tr>
+          <th>Città</th>
+          <td>{{competition.city}} <ng-container *ngIf="competition.province && !competition.isMultiLocation">
+              ({{competition.province}})</ng-container>
+          </td>
+        </tr>
+        <tr *ngIf="competition.country !== 'Italia'">
+          <th>Nazione</th>
+          <td>{{competition.country}}</td>
+        </tr>
+
+        <ng-container *ngIf="!competition.isMultiLocation">
+          <tr>
+            <th>Location</th>
+            <td *ngIf="competition.locationURL"><a href="{{competition.locationURL}}">{{competition.location}}</a></td>
+            <td *ngIf="!competition.locationURL">{{competition.location}}</td>
+          </tr>
+          <tr>
+            <th>Indirizzo</th>
+            <td><a href="https://maps.google.com/?q={{competition.address}}">{{competition.address}}</a></td>
+          </tr>
+          <tr *ngIf="competition.locationDetails">
+            <th>Dettagli</th>
+            <td>{{competition.locationDetails}}</td>
+          </tr>
+        </ng-container>
+        <tr>
+          <th>Contatti</th>
+          <td><a href="mailto:{{competition.contactEmail}}">{{competition.contactName}}</a>
+          </td>
+        </tr>
+        <tr>
+          <th>Limite partecipanti</th>
+          <td>{{registration.competitorsLimit}} concorrenti <span *ngIf="competition.isMultiLocation">in totale,
+              sommando i limiti per location</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Costo di iscrizione</th>
+          <td>
+            <ng-container *ngIf="!registration.isRegistrationPaid">Gratuito</ng-container>
+            <ng-container *ngIf="registration.isRegistrationPaid">{{registration.registrationFee}}€</ng-container>
+          </td>
+        </tr>
+        <tr>
+          <th>Pagina WCA</th>
+          <td><a href="https://worldcubeassociation.org/competitions/{{competition.id}}"
+              target="blank">{{competition.name}}</a></td>
+        </tr>
+        <tr>
+          <th>Eventi</th>
+          <td>
+            <ng-container *ngFor="let e of competition.events"><span class="cubing-icon event-{{e.id}}"></span>&nbsp;
+            </ng-container>
+          </td>
+        </tr>
+      </table>
+
+      <div>
+        <h2>Come posso partecipare?</h2>
+        <ul>
+          <li>Per competere è necessario iscriversi. <a [routerLink]="['./']" [queryParams]="{tab: '1'}">In questa
+              pagina</a> è spiegata la procedura.</li>
+          <li>I partecipanti alla prima competizione devono portare un documento di riconoscimento.</li>
+          <li *ngIf="registration.maxNumberOfGuests">I partecipanti dovrebbero portare al massimo
+            {{registration.maxNumberOfGuests}}
+            accompagnatori.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Come posso assistere?</h2>
+        <ul>
+          <li *ngIf="!registration.guestsPay">L'accesso per gli spettatori è gratuito.</li>
+          <li *ngIf="registration.guestsPay">L'accesso per gli spettatori ha un costo di {{registration.guestsFee}}€.
+          </li>
+          <li *ngIf="!registration.guestsNeedToRegister">Gli spettatori <strong>non</strong> devono registrarsi.</li>
+          <li *ngIf="registration.guestsNeedToRegister">Gli spettatori devono registrarsi.</li>
+          <li *ngIf="registration.guestsDetails">{{registration.guestsDetails}}</li>
+        </ul>
+      </div>
+
+
+    </div>
+    <div fxFlex.gt-sm="49%">
+      <div fxLayout fxLayoutAlign="center center">
+        <img *ngIf="competition.logoURL" src="{{competition.logoURL}}" />
+        <img *ngIf="!competition.logoURL" src="/assets/images/logo_condivisione_quadrato.png" />
+      </div>
+
+      <div fxLayout="column">
+        <a class="regopen" *ngIf="!isRegistrationOpen && !isRegistrationStarted">Le iscrizioni apriranno il
+          {{registration.registrationOpen |compDate}}!</a>
+        <ng-container *ngIf="isRegistrationOpen && isRegistrationStarted">
+          <a [routerLink]="['./']" [queryParams]="{tab: '1'}" class="regopen" *ngIf="!registration.isLimitReached">Le
+            iscrizioni sono aperte, clicca qui per scoprire
+            come registrarti!</a>
+          <a [routerLink]="['./']" [queryParams]="{tab: '1'}" class="regopen" *ngIf="registration.isLimitReached">Il
+            limite partecipanti è stato raggiunto, ma le
+            iscrizioni sono aperte.
+            Clicca qui per scoprire come essere aggiunto alla lista d'attesa!</a>
+        </ng-container>
+        <a class="regopen" *ngIf="!isRegistrationOpen && isRegistrationStarted">Le iscrizioni alla competizione sono
+          chiuse e non è più possibile registrarsi.</a>
+        <a class="regopen" href="https://www.worldcubeassociation.org/regulations/" target="blank">Ricordati di leggere
+          il regolamento WCA, clicca qui!</a>
+      </div>
+
+      <table>
+        <tr>
+          <th>Delegati WCA</th>
+          <td>
+            <ng-container *ngFor="let d of competition.delegates; let l=last">
+              <a href="https://www.worldcubeassociation.org/persons/{{d.wca_id}}" *ngIf="d.wca_id">{{d.name}}</a>
+              <span *ngIf="!d.wca_id">{{d.name}}</span>{{l?"":", "}}
+            </ng-container>
+          </td>
+        </tr>
+        <tr>
+          <th>Organizzatori</th>
+          <td>
+            <ng-container *ngFor="let o of competition.organizers; let l=last">
+              <a *ngIf="o.wca_id" href="https://www.worldcubeassociation.org/persons/{{o.wca_id}}">{{o.name}}</a>
+              <span *ngIf="!o.wca_id">{{o.name}}</span>{{l?"":", "}}
+            </ng-container>
+          </td>
+        </tr>
+        <tr *ngIf="competition.extraInformation">
+          <th>Informazioni aggiuntive</th>
+          <td>{{competition.extraInformation}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.icon{
+    background: transparent;
+    border: none;
+    color: #c4c4c4;
+    padding:10px;
+    font-size: 32px;
+    cursor: pointer;
+    outline: none;
+}
+
+.selected-icon{
+    color: #000;
+}
+
+.icon :focus {outline:none;} ::-moz-focus-inner {border:0;}
+
+h3{
+    margin-bottom:0px;
+}
+
+h1{
+    margin-bottom:0px;
+    margin-top:7px;
+}
+
+.h1xs{
+    margin-left: 5%;
+    margin-right: 5%;
+}

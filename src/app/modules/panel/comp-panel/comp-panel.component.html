@@ -1,0 +1,11 @@
+<div fxLayout="column">
+  <h2>Competizioni</h2>
+  <mat-list class="mat-elevation-z1">
+    <a routerLink="/competizioni/admin" mat-list-item *ifRole="'aComp'">Amministra
+    </a>
+    <a routerLink="/competizioni/mie" mat-list-item>Le mie competizioni
+    </a>
+    <a routerLink="/competizioni/edit/new" mat-list-item *ifRole="'cComp'">Nuova competizione
+    </a>
+  </mat-list>
+</div>

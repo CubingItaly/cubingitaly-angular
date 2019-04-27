@@ -1,0 +1,25 @@
+p{
+    margin-bottom: 0px;
+    margin-top:7px;
+}
+
+h3{
+    margin-bottom: 0px;    
+}
+
+h2{
+    margin-bottom:0px;
+}
+
+li{
+    margin-top:5px;
+    margin-bottom: 0px;
+}
+
+ul{
+    margin-bottom:0px;
+}
+
+.regcontainer p,li{
+    text-align: justify;
+}

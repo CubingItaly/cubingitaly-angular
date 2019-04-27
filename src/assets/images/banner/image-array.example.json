@@ -1,17 +1,32 @@
 {
     "xs": [
-        ""
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxs%2F540-1_44494563805_o.png?alt=media&token=d1c3cac9-2f83-43ca-acda-07c56e148dee",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxs%2F540-2_43592534840_o.png?alt=media&token=16d58a44-7408-4968-a99d-0f5347415b38",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxs%2F540-3_45409356361_o.png?alt=media&token=c357ef55-bd74-4fad-a2c0-c1f7e30beddb",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxs%2F540-4_43592532970_o.png?alt=media&token=072f411a-7f41-49e1-abf3-6b05d672427f"
     ],
     "sm": [
-        ""
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannersm%2F717-1_45409486131_o.png?alt=media&token=0aaec8dc-cdc8-4160-ad08-bbf88970ac71",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannersm%2F717-2_43592613720_o.png?alt=media&token=f7a790d5-2b3f-4766-833d-6f6f04b8fda6",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannersm%2F717-3_45409482011_o.png?alt=media&token=974e02f5-dc56-428b-acbd-f9ef3c83fe80",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannersm%2F717-4_44494637115_o.png?alt=media&token=ca8244df-1e2f-4c2c-bac8-f89e99e44ed6"
     ],
     "md": [
-        ""
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannermd%2F864-1_44684506124_o.png?alt=media&token=3f523599-0df4-4fc7-b563-7e65498a2d1c",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannermd%2F864-2_30468963367_o.png?alt=media&token=a5281950-4a6c-4876-99ef-b9b8c997edb3",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannermd%2F864-3_44684502154_o.png?alt=media&token=800fef55-deb0-47f2-ae89-e2d573feae96",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannermd%2F864-4_30468959457_o.png?alt=media&token=057e315a-2d3e-4a60-b669-26aea50093e8"
     ],
     "lg": [
-        ""
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerlg%2F1075-1_43592646540_o.png?alt=media&token=c0860a6d-b390-49c7-828f-1e6c6f26f06a",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerlg%2F1075-2_45409503761_o.png?alt=media&token=4b9b6b91-4fe6-4443-986a-1fdcc99e4602",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerlg%2F1075-3_43592637980_o.png?alt=media&token=12647766-a6db-419b-aa2c-390e5a6d62f0",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerlg%2F1075-4_45409498711_o.png?alt=media&token=89f023a4-f18f-4ba2-9e4d-2581661d2078"
     ],
     "xl": [
-        ""
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxl%2Fclaudio_45261047482_o.png?alt=media&token=811ed361-0826-4a7c-b9d2-0c740c741616",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxl%2Fdisy_31435523128_o.png?alt=media&token=f3d932bc-2c4f-4718-8de3-37296e77bb96",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxl%2Fcubob_44397439435_o.png?alt=media&token=b5f2ba46-c43a-4ac7-8198-da48567c4ab9",
+        "https://firebasestorage.googleapis.com/v0/b/cubing-italy.appspot.com/o/banner%2Fbannerxl%2Fcanes_31435523348_o.png?alt=media&token=44bf492d-894b-46b7-aaa4-aa354634afb9"
     ]
 }

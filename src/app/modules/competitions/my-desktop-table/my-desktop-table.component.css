@@ -1,0 +1,52 @@
+table {
+    width:100%;
+    margin-top:10px;
+}
+
+table, tr, thead{
+    border-collapse: collapse;
+}
+
+.odd,thead{
+    background-color: #fff;
+}
+
+.even{
+    background-color: #f2f2f2;
+}
+
+.even:hover,.odd:hover{
+    background-color:#d0d0d0;
+}
+
+td, th{
+    text-align: left;
+    padding-top:15px;
+    padding-bottom: 15px;
+    padding-left:15px;
+}
+
+.date{
+    width:170px;
+}
+
+
+img{
+    vertical-align: middle;
+    width: 25px;
+}
+
+.wca{
+    width: 35px;
+    align-content: center;
+}
+
+.name{
+    flex-grow: 1;
+}
+
+fa-icon{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #000;
+}

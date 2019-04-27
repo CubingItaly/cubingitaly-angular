@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WCAService } from 'src/app/services/wca.service';
-import { CompWidgetModel } from 'src/app/models/comp.widget.model';
 import { Observable } from 'rxjs';
+import { CompetitionModel } from 'src/app/models/competition.model';
+import { CompetitionsService } from '../services/competitions.service';
 
 @Component({
   selector: 'competitions-widget',
@@ -10,14 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class CompetitionsComponent implements OnInit {
 
-  ongoing$: Observable<CompWidgetModel[]>;
-  comp$: Observable<CompWidgetModel[]>;
+  ongoing$: Observable<CompetitionModel[]>;
+  comp$: Observable<CompetitionModel[]>;
 
-  constructor(private wcaSVC: WCAService) { }
+  constructor(private compSVC: CompetitionsService) { }
 
   ngOnInit() {
-    this.ongoing$ = this.wcaSVC.fetchOngoingCompetitions();
-    this.comp$ = this.wcaSVC.fetchUpcomingCompetitions();
+    this.ongoing$ = this.compSVC.getOnGoingCompetitions();
+    this.comp$ = this.compSVC.getUpcomingCompetitions();
   }
-
 }

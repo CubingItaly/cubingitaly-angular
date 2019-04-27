@@ -1,0 +1,8 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="mobile">
+      <a href="https://www.worldcubeassociation.org/competitions/{{competition.id}}" target="blank"><img
+                  src="/assets/images/wca.svg" /></a>
+      <div fxLayout="column" fxFlex="grow">
+            <div class="date">{{competition | compDays}}</div>
+            <div class="name"><a routerLink="/competizioni/{{competition.id}}">{{competition.name}}</a></div>
+      </div>
+</div>

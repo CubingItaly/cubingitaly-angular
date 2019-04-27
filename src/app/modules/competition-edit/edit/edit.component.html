@@ -1,0 +1,28 @@
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex.gt-sm="80%" fxFlex.lt-md="100%" *ngIf="competition && registration && directions && schedule">
+    <h1 ngClass.lt-md="h1xs">{{competition.name}} <fa-icon icon="check" style="color:green" *ngIf="updated"></fa-icon>
+    </h1>
+    <mat-tab-group [selectedIndex]="initialTab" (selectedIndexChange)="updateURL($event)">
+      <mat-tab label="Generale">
+        <edit-general-info (updated)="updated=$event" [(competition)]="competition"></edit-general-info>
+      </mat-tab>
+      <mat-tab label="Registrazione">
+        <edit-registration-info (updated)="updated=$event" [(registration)]="registration" [competition]="competition">
+        </edit-registration-info>
+      </mat-tab>
+      <mat-tab label="Schedule" *ifRole="'delOrgComp';ifParam:competition">
+        <edit-schedule-info [competitionId]="competition.id"></edit-schedule-info>
+      </mat-tab>
+      <mat-tab label="Indicazioni">
+        <edit-directions-info (updated)="updated=$event" [(directions)]="directions" [competition]="competition">
+        </edit-directions-info>
+      </mat-tab>
+      <mat-tab label="Tab Extra">
+        <extra-tab-edit [competitionId]="competition.id"></extra-tab-edit>
+      </mat-tab>
+      <mat-tab label="Gestione">
+        <manage-competition [(competition)]="competition" [registration]="registration"></manage-competition>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

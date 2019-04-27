@@ -9,12 +9,16 @@ import { CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit, faTrash, faPlusSquare, faEye, faList, faBars, faLongArrowAltDown, faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faTrophy, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome, faLink, faPlusCircle, faTimesCircle, faArrowCircleUp, faArrowCircleDown, faInfoCircle, faBook, faEnvelope, faLock, faCheck, faEdit,
+  faTrash, faPlusSquare, faEye, faList, faWrench, faBars, faLongArrowAltDown, faSignInAlt,
+  faArrowUp, faLongArrowAltUp, faUserSlash, faUserPlus, faUser, faHammer, faTrophy, faQuestion, faAngleDown, faAngleUp, faExternalLinkAlt
+} from '@fortawesome/free-solid-svg-icons';
 import { faNewspaper, faCopyright } from '@fortawesome/free-regular-svg-icons';
 import { faFacebookF, faTwitter, faTelegram, faYoutube, faTelegramPlane, faInstagram, faGithub, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faHome, faInfoCircle, faLink, faTelegramPlane, faPlusCircle, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
-  faFacebookF, faTwitter, faTelegram, faArrowCircleUp, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
+library.add(faHome, faInfoCircle, faLink, faWrench, faTelegramPlane, faPlusCircle, faSignInAlt, faTimesCircle, faNewspaper, faBook, faEnvelope, faWhatsapp, faLock, faTrash, faCopyright, faArrowUp, faPlusSquare, faEye, faList,
+  faFacebookF, faTwitter, faTelegram, faAngleUp, faHammer, faArrowCircleUp, faExternalLinkAlt, faAngleDown, faArrowCircleDown, faYoutube, faInstagram, faGithub, faCheck, faEdit, faUser, faBars, faLongArrowAltDown, faLongArrowAltUp, faUserSlash, faUserPlus, faTrophy, faQuestion);
 
 
 import { registerLocaleData } from '@angular/common';
@@ -25,7 +29,6 @@ registerLocaleData(localeIt, 'it');
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { WCAService } from './services/wca.service';
 import { MetaManagerService } from './services/meta-manager.service';
 import { TitleManagerService } from './services/title-manager.service';
 import { ErrorHandlerService } from './services/error-handler.service';
@@ -49,7 +52,8 @@ import { ContactModule } from './modules/contact/contact.module';
 import { HomepageModule } from './modules/homepage/homepage.module';
 import { AboutUsModule } from './modules/about-us/about-us.module';
 import { LoginModule } from './modules/login/login.module';
-
+import { MatMenuModule } from '@angular/material';
+import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -81,7 +85,9 @@ import { LoginModule } from './modules/login/login.module';
     LoginModule,
     MatIconModule,
     ContactModule,
-    ShareButtonsModule.forRoot()
+    ShareButtonsModule,
+    MatMenuModule,
+    SharedComponentsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true },
@@ -89,7 +95,6 @@ import { LoginModule } from './modules/login/login.module';
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     AuthService,
     UserService,
-    WCAService,
     MetaManagerService,
     TitleManagerService,
     ErrorHandlerService
